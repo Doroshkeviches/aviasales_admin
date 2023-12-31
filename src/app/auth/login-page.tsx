@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { signout } from 'src/utils/signout';
 import * as Yup from 'yup';
+import uuid from 'react-uuid';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 
 export default function LoginPage() {
@@ -32,8 +33,17 @@ export default function LoginPage() {
         },
         validationSchema: SigninSchema,
         onSubmit: async (value) => {
-            const { payload } = await dispatch(signin(value))
+            let device_id = localStorage.getItem('device_id')
+            if (!device_id) {
+                device_id = uuid()
+            }
+            const { payload } = await dispatch(signin(
+                {
+                    ...value,
+                    device_id
+                }))
             if (payload) {
+                localStorage.setItem('device_id', device_id)
                 navigate('/store/catalog')
             }
         },
