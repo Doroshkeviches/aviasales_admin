@@ -10,16 +10,15 @@ const Suspended: FC<PropsWithChildren & { element: any }> = ({ element: Element 
 };
 
 // ======= pages ======= //
-const LoginPage = React.lazy(() => import("./login-page"))
+const OrdersPage = React.lazy(() => import("./orders-page"))
 
 
-
-const AuthRoutes: FC = () => {
+const OrdersRoutes: FC = () => {
   return (
     <Routes>
-      <Route path={"/signin"} element={<Suspended element={LoginPage} />} />
+      <Route path={""} element={<Suspended element={OrdersPage} />} />
     </Routes>
   );
 };
 
-export default AuthRoutes;
+export default OrdersRoutes;
