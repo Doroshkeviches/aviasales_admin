@@ -70,6 +70,12 @@ declare module "@mui/material/Typography" {
 		t6: true;
 	}
 }
+declare module '@mui/material' {
+	interface StackPropsVariantOverrides {
+		row: true,
+		className: true
+	}
+}
 
 export const colors = {
 	primary: "#041492", //Bright Midnight/600
@@ -511,42 +517,44 @@ export const theme = createTheme({
 				},
 			],
 		},
-		MuiTableCell: {
+		MuiStack: {
 			styleOverrides: {
 				root: {
-					"&.metric-cell": {
-						borderTop: "none",
-						borderColor: colors.defaultDisabled,
-						fontSize: 12,
-						lineHeight: "20px",
-						fontStyle: "normal",
-						fontWeight: "400",
-						color: colors.grey,
-						fontFamily: "Source Sans 3",
-						borderBottom: `1px solid ${colors.defaultDisabled}`,
+					"&.flights-stack": {
+						justifyContent: 'space-between',
+						margin: '10px',
+						border: '1px solid black',
+
 					},
-				},
+					"&.paths-stack": {
+						justifyContent: 'center',
+						alignItems: 'center',
+						width: '100%'
+					},
+					"&.plane-icon-stack": {
+						justifyContent: 'space-between',
+						alignItems: ' flex-end',
+						width: '10%',
+						minWidth: '200px'
+					},
+				}
 			},
 		},
 		MuiCard: {
-			variants: [
-				{
-					props: { className: 'catalog-card' },
-					style: {
-						width: 400,
-						height: 450,
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'space-between'
-					}
-				},
-				{
-					props: { className: 'cart-card' },
-					style: {
-						display: 'flex',
-					}
+			styleOverrides: {
+				root: {
+					"&.flight-card": {
+						backgroundColor: 'white'
+					},
 				}
-			]
+			}
 		},
+		MuiTooltip: {
+			styleOverrides: {
+				tooltip: {
+					padding: 0
+				}
+			}
+		}
 	}
 });

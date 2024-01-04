@@ -50,7 +50,7 @@ repository.interceptors.response.use((response) => {
     }
   } else {
     console.log(error.response.data)
-    return error.response.data.message
+    return Promise.reject(error);
   }
 
 });
