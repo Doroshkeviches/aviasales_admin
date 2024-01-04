@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getCities, getFlights } from "./flghts.action";
 import { Flight } from "../types/Flight.type";
 import { City } from "../types/City.type";
+import { Paths } from "../types/Paths.type";
 
 interface AuthState {
-    flights: Array<Flight[]>,
+    flights: Paths[],
     cities: string[]
     pending: {
         flights: boolean

@@ -524,6 +524,7 @@ export const theme = createTheme({
 						justifyContent: 'space-between',
 						margin: '10px',
 						border: '1px solid black',
+						padding: 10
 
 					},
 					"&.paths-stack": {
@@ -536,6 +537,12 @@ export const theme = createTheme({
 						alignItems: ' flex-end',
 						width: '10%',
 						minWidth: '200px'
+					},
+					"&.price-stack": {
+						padding: 10
+					},
+					"&.path-stack": {
+						alignItems: 'center'
 					},
 				}
 			},
