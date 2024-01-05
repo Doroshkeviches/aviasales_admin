@@ -31,7 +31,7 @@ const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
 const AuthRoutes = React.lazy(() => import("./app/auth/index"))
 const TicketRoutes = React.lazy(() => import("./app/tickets/index"))
 const UsersRoutes = React.lazy(() => import("./app/users/index"))
-
+const FlightsRoutes = React.lazy(() => import("./app/flights/flights.routes"))
 
 
 
@@ -41,8 +41,7 @@ const AppRoutes = () => {
       <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
       <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
       <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
-
-
+      <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
 
       <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} />
     </Routes>
