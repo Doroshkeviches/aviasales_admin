@@ -11,7 +11,6 @@ export default function PathsList() {
     if (pending_flights) {
         return <CircularProgress />
     }
-    console.log(errors_flights, pending_flights, flights)
     return (
         <>
             <Stack direction='column' className='paths-stack'>

@@ -7,7 +7,6 @@ export default function TicketPage() {
     const tickets = useAppSelector(ticketsSelector)
     const errors = useAppSelector(ticketsErrorsSelector)
     const pending = useAppSelector(ticketsPendingSelector)
-    console.log(tickets, errors, pending)
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(getTickets())

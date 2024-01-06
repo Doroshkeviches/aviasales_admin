@@ -11,7 +11,6 @@ import { Ticket } from "../types/ticket.type";
 export const getTickets = createAsyncThunk<Ticket[]>("Get/tickets", async (_, { rejectWithValue }) => {
     try {
         const response = await repository.get("/ticket");
-        console.log(response)
         return response.data
     } catch (error: any) {
         return rejectWithValue(error);

@@ -1,12 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import repository from "src/repository";
 import { User } from "../types/User.type";
+import UpdateUser from "../types/UpdateUser.type";
 
 
 export const getUsers = createAsyncThunk<User[], number>("Get/users", async (page, { rejectWithValue }) => {
     try {
         const response = await repository.get(`/user?page=${page}`);
-        console.log(response)
+        return response.data
+    } catch (error: any) {
+        return rejectWithValue(error);
+    }
+});
+
+export const getUsersBySearch = createAsyncThunk<User[], string>("Get/search_users", async (searchString, { rejectWithValue }) => {
+    try {
+        const response = await repository.get(`/user/search?q=${searchString}`);
         return response.data
     } catch (error: any) {
         return rejectWithValue(error);
@@ -15,8 +24,16 @@ export const getUsers = createAsyncThunk<User[], number>("Get/users", async (pag
 
 export const getUser = createAsyncThunk<User, string>("Get/user", async (id, { rejectWithValue }) => {
     try {
-        const response = await repository.get(`/user/${id}`);
-        console.log(response)
+        const response = await repository.get(`/user/current/${id}`);
+        return response.data
+    } catch (error: any) {
+        return rejectWithValue(error);
+    }
+});
+
+export const updateUser = createAsyncThunk<User, UpdateUser>("Pust/updateUser", async (body, { rejectWithValue }) => {
+    try {
+        const response = await repository.post(`/user`, body);
         return response.data
     } catch (error: any) {
         return rejectWithValue(error);

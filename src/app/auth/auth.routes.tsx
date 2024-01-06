@@ -11,13 +11,18 @@ const Suspended: FC<PropsWithChildren & { element: any }> = ({ element: Element 
 
 // ======= pages ======= //
 const LoginPage = React.lazy(() => import("./login-page"))
+const ForgotPasswordPage = React.lazy(() => import("./forgot-password-page"))
+const ResetPasswordPage = React.lazy(() => import("./reset-password-page"))
+
+
 
 
 const AuthRoutes: FC = () => {
   return (
     <Routes>
       <Route path={"/signin"} element={<Suspended element={LoginPage} />} />
-
+      <Route path={"/forgot-password"} element={<Suspended element={ForgotPasswordPage} />} />
+      <Route path={"/reset-password"} element={<Suspended element={ResetPasswordPage} />} />
     </Routes>
   );
 };
