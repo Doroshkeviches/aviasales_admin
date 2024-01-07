@@ -1,6 +1,6 @@
-import { City } from "src/app/flights/types/City.type";
 import { Ticket } from "./Ticket.type";
 import { Plane } from "./Plane.type";
+import { City } from "./City.type";
 
 export interface Flight {
     id: string,

@@ -45,7 +45,7 @@ export default function LoginPage() {
         onSubmit: async (value) => {
             const result = await dispatch(signin(value)).unwrap()
             if (result) {
-                navigate('/store/catalog')
+                navigate('/admin/flights')
             }
         },
     });

@@ -14,12 +14,12 @@ export default function UserTicketsComponent({ ticket }: Props) {
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
 
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
-  const [selectItem, setSelectItem] = useState(ticket.status)
+  const [selectItem, setSelectItem] = useState<string>(ticket.status)
   const [isLoading, errors, data, fetchData] = useRepository()
 
   const handleSubmit = async () => {
     const body = { id: ticket.id, status: selectItem }
-    const tickets = await fetchData('http://localhost:4000/ticket/updateStatus', 'put', body)
+    const tickets = await fetchData('/ticket/updateStatus', 'put', body)
     setTicketItem(data)
     setIsDisabled(true)
   }

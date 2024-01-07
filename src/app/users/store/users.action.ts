@@ -31,7 +31,7 @@ export const getUser = createAsyncThunk<User, string>("Get/user", async (id, { r
     }
 });
 
-export const updateUser = createAsyncThunk<User, UpdateUser>("Pust/updateUser", async (body, { rejectWithValue }) => {
+export const updateUser = createAsyncThunk<User, UpdateUser>("Post/updateUser", async (body, { rejectWithValue }) => {
     try {
         const response = await repository.post(`/user`, body);
         return response.data
