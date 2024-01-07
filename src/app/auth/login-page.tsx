@@ -1,18 +1,22 @@
-import { Alert, Button, CircularProgress, Stack, TextField } from '@mui/material'
+import { Alert, Button, CircularProgress, IconButton, Stack, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
-import { authSelector } from './store/auth.selector';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { signout } from 'src/utils/signout';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
+import { Link } from 'react-router-dom';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { signout } from 'src/utils/signout';
 
 export default function LoginPage() {
     const dispatch = useAppDispatch()
-    const { errors, pending, session } = useAppSelector(authSelector)
+    const errors = useAppSelector(sessionErrorsSelector)
+    const pending = useAppSelector(sessionPendingSelector)
+    const session = useAppSelector(sessionSelector)
     const navigate = useNavigate();
-
+    const [showPassword, setShowPassword] = useState<boolean>()
     useEffect(() => {
         if (session) {
             signout(dispatch)
@@ -20,8 +24,15 @@ export default function LoginPage() {
     }, [])
 
     const SigninSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required('Required'),
-        password: Yup.string().required('No password provided.').min(8, 'Password is too short - should be 8 chars minimum.')
+        email: Yup.string()
+            .email('Invalid email')
+            .required('Required'),
+        password: Yup.string()
+            .required('No password provided.')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+            ),
 
     });
 
@@ -32,13 +43,16 @@ export default function LoginPage() {
         },
         validationSchema: SigninSchema,
         onSubmit: async (value) => {
-            const { payload } = await dispatch(signin(value))
-            if (payload) {
-                navigate('/store/catalog')
+            const result = await dispatch(signin(value)).unwrap()
+            if (result) {
+                navigate('/admin/flights')
             }
         },
     });
 
+    const handleShowPassword = () => {
+        setShowPassword(prev => !prev)
+    }
     return (
         <Stack spacing={{ xs: 2 }} direction="column" sx={{ width: 300 }} useFlexGap flexWrap="nowrap">
             <form onSubmit={formik.handleSubmit}>
@@ -57,18 +71,28 @@ export default function LoginPage() {
                     fullWidth
                     id="password"
                     name="password"
-                    label="Password"
-                    type="password"
+                    label="password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleShowPassword}
+                            edge="end"
+                        >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>,
+                    }}
                 />
                 <Button color="primary" variant="contained" fullWidth type="submit">
                     {pending ? <CircularProgress /> : 'Login'}
                 </Button>
             </form>
+            <Link to={'/admin/auth/forgot-password'}>forgot password ?</Link>
             {errors ? <Alert severity="error">{errors}</Alert> : null}
 
         </Stack>

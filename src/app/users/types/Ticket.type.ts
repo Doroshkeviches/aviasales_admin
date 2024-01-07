@@ -1,6 +1,6 @@
 import { Flight } from "./Flight.type";
 
-export interface Ticket {
+export interface Ticket  {
     id: string,
     holder_first_name: string,
     holder_last_name: string,

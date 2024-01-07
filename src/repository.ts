@@ -3,7 +3,6 @@ import { baseUrl } from "./constants";
 const { REACT_APP_API_URL } = process.env;
 const repository = axios.create({
   baseURL: REACT_APP_API_URL,
-  withCredentials: true,
 });
 
 repository.interceptors.request.use(
@@ -49,7 +48,6 @@ repository.interceptors.response.use((response) => {
       return Promise.reject(refreshError);
     }
   } else {
-    console.log(error.response.data)
     return Promise.reject(error);
   }
 

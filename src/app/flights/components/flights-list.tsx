@@ -12,7 +12,6 @@ interface Props {
 
 export default function FlightsList({ flightList }: Props) {
     const [start_date, start_time, end_date, end_time] = transformDate(flightList)
-    console.log(start_date, start_time, end_date, end_time)
     return (
         <>
 
