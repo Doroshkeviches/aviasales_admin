@@ -4,9 +4,10 @@ import axios from "axios";
 import { baseUrl } from "src/constants";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import { forgotPassword, resetPassword, signin } from "./auth.actions";
+import { DecodedUser } from "../types/DecodedUser.type";
 
 interface AuthState {
-  session: JwtPayload | null
+  session: DecodedUser | null
   reset_token: string | null
   pending: {
     session: boolean
@@ -20,7 +21,7 @@ interface AuthState {
 
 function decode_user_from_token(token: string | null) {
   if (!token) return null
-  const decoded = jwtDecode(token);
+  const decoded = jwtDecode(token) as DecodedUser;
   return decoded
 }
 

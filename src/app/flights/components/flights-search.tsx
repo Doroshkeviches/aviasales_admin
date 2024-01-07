@@ -1,6 +1,6 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Autocomplete, TextField, Button, Checkbox, FormControlLabel, FormControl } from '@mui/material'
+import { Autocomplete, TextField, Button, Checkbox, FormControlLabel, FormControl, CircularProgress } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
@@ -27,6 +27,9 @@ export default function FlightsSearch() {
     useEffect(() => {
         dispatch(getCities())
     }, [])
+    if(pending_city) {
+        return <CircularProgress/>
+    }
     const validateSeatch = () => { // кастомная валидация , сомнительно но окей
         setValidationErrors(null)
         if (!startDate) {

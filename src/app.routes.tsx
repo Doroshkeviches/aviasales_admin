@@ -2,10 +2,12 @@ import React, { FC, Suspense, useEffect } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import PageHeaderComp from "./components/page-header.comp";
 import { useAppDispatch, useAppSelector } from "src/storeTypes";
+import { sessionSelector } from "./app/auth/store/auth.selector";
 
 // ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
-  return true ? (
+  const session = useAppSelector(sessionSelector)
+  return session?.role_type === "Admin" ? (
     <>
       <PageHeaderComp />
       <Suspense fallback={<div />}>
@@ -39,9 +41,9 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-      <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
-      <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
+      <Route path='/admin/tickets/*' element={<PublicRoute element={TicketRoutes} />} />
       <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
+      <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
 
       <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} />
     </Routes>

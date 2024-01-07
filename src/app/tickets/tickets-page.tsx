@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getTickets } from './store/tickets.action'
 import { ticketsErrorsSelector, ticketsPendingSelector, ticketsSelector } from './store/tickets.selector'
+import TicketComponent from './components/ticket.component'
 
 export default function TicketPage() {
     const tickets = useAppSelector(ticketsSelector)
@@ -11,7 +12,12 @@ export default function TicketPage() {
     useEffect(() => {
         dispatch(getTickets())
     }, [])
+    console.log(tickets)
     return (
-        <div>TicketPage</div>
+        <>
+            {tickets.map(ticket => {
+                return <TicketComponent ticket={ticket} />
+            })}
+        </>
     )
 }

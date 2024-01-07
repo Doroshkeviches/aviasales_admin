@@ -1,11 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { SithUpForm } from "src/app/auth/types/SignUpForm";
-import { baseUrl } from "src/constants";
-import { LogIn } from "src/app/auth/types/LogInForm";
-import { tokens } from "src/app/auth/types/tokens.type";
 import repository from "src/repository";
-import { Ticket } from "../types/ticket.type";
+import { Ticket } from "../types/Ticket.type";
 
 
 export const getTickets = createAsyncThunk<Ticket[]>("Get/tickets", async (_, { rejectWithValue }) => {

@@ -6,22 +6,19 @@ const PageHeaderComp: FC = () => {
   return (
     <header style={{ display: 'flex' }}>
       <MenuItem >
-        <Link to={'/store/catalog'}>
-          <Typography textAlign="center">Store</Typography>
+        <Link to={'/admin/flights'}>
+          <Typography textAlign="center">Flights</Typography>
         </Link>
-
       </MenuItem>
       <MenuItem >
-        <Link to={'/cart'}>
-          <Typography textAlign="center">Cart</Typography>
+        <Link to={'/admin/users'}>
+          <Typography textAlign="center">Users</Typography>
         </Link>
-
       </MenuItem>
       <MenuItem >
-        <Link to={'/order'}>
-          <Typography textAlign="center">My orders</Typography>
+        <Link to={'/admin/tickets'}>
+          <Typography textAlign="center">Tickets</Typography>
         </Link>
-
       </MenuItem>
     </header>
   );

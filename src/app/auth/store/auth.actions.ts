@@ -7,7 +7,7 @@ import { ResetToken } from "../types/ResetToken.type";
 import { ForgotPassword } from "../types/ForgotPassword.type";
 import { ResetPassword } from "../types/ResetPassword.type";
 
-const baseUrl = process.env.BASE_URL
+const baseUrl = process.env.REACT_APP_API_URL
 export const signin = createAsyncThunk<tokens, LogIn>("POST/signin", async (body, { rejectWithValue }) => {
   try {
     const device_id = localStorage.getItem('device_id')

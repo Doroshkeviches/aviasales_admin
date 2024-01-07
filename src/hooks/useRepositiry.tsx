@@ -5,7 +5,7 @@ export default function useRepository() {
     const [isLoading, setIsLoading] = useState(false)
     const [errors, setErrors] = useState(null)
     const [data, setData] = useState<any>()
-    const baseUrl = process.env.BASE_URL
+    const baseUrl = process.env.REACT_APP_API_URL
     const fetchData = async (url: string, method: string = "get", body = null) => {
         try {
             setIsLoading(true)
