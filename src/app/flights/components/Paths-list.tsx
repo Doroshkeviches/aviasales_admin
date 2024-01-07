@@ -14,8 +14,8 @@ export default function PathsList() {
     return (
         <>
             <Stack direction='column' className='paths-stack'>
-                {flights.map((flightList, index) => {
-                    return <FlightList key={index} flightList={flightList} />
+                {flights.map((flightList) => {
+                    return <FlightList key={flightList.id} flightList={flightList} />
                 })}
             </Stack>
         </>
