@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getTickets } from "./tickets.action";
-import { Ticket } from "../types/ticket.type";
+import { Ticket } from "../types/Ticket.type";
 
 interface AuthState {
     tickets: Ticket[]

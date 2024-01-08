@@ -11,12 +11,11 @@ export default function PathsList() {
     if (pending_flights) {
         return <CircularProgress />
     }
-    console.log(errors_flights, pending_flights, flights)
     return (
         <>
             <Stack direction='column' className='paths-stack'>
-                {flights.map((flightList, index) => {
-                    return <FlightList key={index} flightList={flightList} />
+                {flights.map((flightList) => {
+                    return <FlightList key={flightList.id} flightList={flightList} />
                 })}
             </Stack>
         </>

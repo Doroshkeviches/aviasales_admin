@@ -1,11 +1,13 @@
 import React, { FC, Suspense } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import PageHeaderComp from "./components/page-header.comp";
-// import { useAppDispatch, useAppSelector } from "src/storeTypes";
+import { useAppDispatch, useAppSelector } from "src/storeTypes";
+import { sessionSelector } from "./app/auth/store/auth.selector";
 
 // ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
-  return true ? (
+  const session = useAppSelector(sessionSelector)
+  return session?.role_type === "Admin" ? (
     <>
       <PageHeaderComp />
       <Suspense fallback={<div />}>

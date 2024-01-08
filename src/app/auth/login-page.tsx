@@ -1,20 +1,24 @@
-import { Alert, Box, Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { Alert, Box, Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
-import { authSelector } from './store/auth.selector';
+import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { signout } from 'src/utils/signout';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
+import { Link } from 'react-router-dom';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { signout } from 'src/utils/signout';
 // @ts-ignore
 import image from './plane1.png';
 
 export default function LoginPage() {
     const dispatch = useAppDispatch()
-    const { errors, pending, session } = useAppSelector(authSelector)
+    const errors = useAppSelector(sessionErrorsSelector)
+    const pending = useAppSelector(sessionPendingSelector)
+    const session = useAppSelector(sessionSelector)
     const navigate = useNavigate();
-
+    const [showPassword, setShowPassword] = useState<boolean>()
     useEffect(() => {
         if (session) {
             signout(dispatch)
@@ -22,8 +26,15 @@ export default function LoginPage() {
     }, [])
 
     const SigninSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required('Required'),
-        password: Yup.string().required('No password provided.').min(8, 'Password is too short - should be 8 chars minimum.')
+        email: Yup.string()
+            .email('Invalid email')
+            .required('Required'),
+        password: Yup.string()
+            .required('No password provided.')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+            ),
 
     });
 
@@ -34,13 +45,16 @@ export default function LoginPage() {
         },
         validationSchema: SigninSchema,
         onSubmit: async (value) => {
-            const { payload } = await dispatch(signin(value))
-            if (payload) {
-                navigate('/store/catalog')
+            const result = await dispatch(signin(value)).unwrap()
+            if (result) {
+                navigate('/admin/flights')
             }
         },
     });
 
+    const handleShowPassword = () => {
+        setShowPassword(prev => !prev)
+    }
     return (
         <Container sx={{
             display: 'flex',

@@ -3,15 +3,13 @@ import { Flight } from "../types/Flight.type";
 import repository from "src/repository";
 import { City } from "../types/City.type";
 import { Paths } from "../types/Paths.type";
+import { GetFlights } from "../types/GetFlights.type";
 
-export const getFlights = createAsyncThunk<Paths[], { from_city: string | null, to_city: string | null, date: Date | null }>("GET/flights", async (body, { rejectWithValue }) => {
+export const getFlights = createAsyncThunk<Paths[], GetFlights>("GET/flights", async (body, { rejectWithValue }) => {
     try {
-        console.log(body, 'body')
-        const response = await repository.get(`/flights?from_city=${body.from_city}&to_city=${body.to_city}&date=${body.date}`);
-        console.log(response, 'response')
+        const response = await repository.get(`/flights?from_city=${body.from_city}&to_city=${body.to_city}&date=${body.start_flight_date}&isReturn=${body.isReturn}&returnDate=${body.return_flight_date}`);
         return response.data
     } catch (error: any) {
-        console.log(error, 'error action')
         return rejectWithValue(error);
     }
 });

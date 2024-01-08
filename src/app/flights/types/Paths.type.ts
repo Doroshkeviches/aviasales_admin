@@ -1,6 +1,7 @@
 import { Flight } from "./Flight.type";
 
 export interface Paths {
+    id: string,
     totalPrice: number,
     from_city: string,
     to_city: string,
