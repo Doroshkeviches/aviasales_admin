@@ -1,12 +1,14 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Autocomplete, TextField, Button } from '@mui/material'
+import { Autocomplete, TextField, Button, Box, Container } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getCities, getFlights } from '../store/flghts.action'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
+// @ts-ignore
+import image from '../plane3.jpg';
 
 export default function FlightsSearch() {
     const [startDate, setStartDate] = useState<Date | null>(null)
@@ -42,38 +44,45 @@ export default function FlightsSearch() {
         dispatch(getFlights({ from_city: city1, to_city: city2, date: startDate! }))
     }
     return (
-        <>
-            <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={cities}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="City" />}
-                value={city1}
-                onChange={(event: any, newValue: string | null) => {
-                    setCity1(newValue);
-                }}
-            />
-            <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={cities}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="City" />}
-                value={city2}
-                onChange={(event: any, newValue: string | null) => {
-                    setCity2(newValue);
-                }}
-            />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={['DatePicker']}>
-                    <DatePicker label="start date picker"
-                        value={startDate}
-                        onChange={(newValue: Date | null) => setStartDate(newValue)} />
-                </DemoContainer>
-            </LocalizationProvider>
-            <Button onClick={handleGetPath}>CLICK</Button>
-            {errors_flights}
-        </>
+        <Container sx={{
+            minHeight: '100vh',
+            minWidth: '100vw',
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        }}>
+            <Box display={'flex'} alignItems={'center'} justifyContent={'center'} paddingTop={'30px'} >
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={cities}
+                    sx={{ width: 250 }}
+                    renderInput={(params) => <TextField {...params} label="City" />}
+                    value={city1}
+                    onChange={(event: any, newValue: string | null) => {
+                        setCity1(newValue);
+                    }}
+                />
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={cities}
+                    sx={{ width: 250 }}
+                    renderInput={(params) => <TextField {...params} label="City" />}
+                    value={city2}
+                    onChange={(event: any, newValue: string | null) => {
+                        setCity2(newValue);
+                    }}
+                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={['DatePicker']} sx={{ paddingTop: '0px', overflow: 'unset' }}>
+                        <DatePicker label="Start Date Picker"
+                            // sx={{ minWidth: '200px' }}
+                            value={startDate}
+                            onChange={(newValue: Date | null) => setStartDate(newValue)} />
+                    </DemoContainer>
+                </LocalizationProvider>
+                <Button onClick={handleGetPath} variant='contained' color='default' size='medium'>SEARCH</Button>
+                {errors_flights}
+            </Box>
+        </Container >
     )
 }

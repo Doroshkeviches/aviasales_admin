@@ -1,7 +1,7 @@
-import React, { FC, Suspense, useEffect } from "react";
+import React, { FC, Suspense } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import PageHeaderComp from "./components/page-header.comp";
-import { useAppDispatch, useAppSelector } from "src/storeTypes";
+// import { useAppDispatch, useAppSelector } from "src/storeTypes";
 
 // ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
@@ -20,7 +20,7 @@ const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
 // ======= public route ======= //
 const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
   <>
-    <PageHeaderComp />
+    {/* <PageHeaderComp /> */}
     <Suspense fallback={<div />}>
       <Element />
     </Suspense>
@@ -33,17 +33,22 @@ const TicketRoutes = React.lazy(() => import("./app/tickets/index"))
 const UsersRoutes = React.lazy(() => import("./app/users/index"))
 const FlightsRoutes = React.lazy(() => import("./app/flights/flights.routes"))
 
-
-
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* PUBLIC */}
       <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-      <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
-      <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
+      {/* PUBLIC */}
       <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
 
-      <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} />
+      {/* PRIVATE */}
+      <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
+      {/* PRIVATE */}
+      <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
+
+      {/* DEFAULT */}
+      {/* <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} /> */}
+      <Route path='/*' element={<Navigate to="/admin/flights" />} />
     </Routes>
   );
 };
