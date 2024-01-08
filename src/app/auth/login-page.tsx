@@ -56,26 +56,19 @@ export default function LoginPage() {
         setShowPassword(prev => !prev)
     }
     return (
-        <Container sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '100vh'
-        }}>
+        <Container>
             <Box sx={{
                 borderRadius: '24px',
                 backgroundImage: `url(${image})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 minWidth: 500,
-                // maxWidth: 600,
                 minHeight: 650,
-                // maxHeight: 800,
             }}
                 display={'flex'}
                 justifyContent={'center'}
             >
-                <Stack direction="column" sx={{ width: 400 }} useFlexGap flexWrap="nowrap">
+                <Stack direction="column" sx={{ width: 400 }} useFlexGap flexWrap="nowrap" gap={2}>
                     <form onSubmit={formik.handleSubmit}
                         style={{
                             display: 'flex',
@@ -87,7 +80,7 @@ export default function LoginPage() {
                             textAlign: 'center',
                             gap: '10px'
                         }}>
-                        <Typography variant='h1' color='whitesmoke'>SIGN IN TO CONTINUE </Typography>
+                        <Typography variant='h1' color='whitesmoke'>SIGN IN TO CONTINUE</Typography>
                         <TextField
                             variant='outlined'
                             fullWidth

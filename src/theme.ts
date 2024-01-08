@@ -1,11 +1,9 @@
 import { PaletteColorOptions, createTheme } from '@mui/material';
-
 declare module '@mui/material' {
   interface Color {
     main: string;
   }
 }
-
 declare module '@mui/material' {
   interface CustomPalette {
     ['white']?: PaletteColorOptions;
@@ -24,7 +22,6 @@ declare module '@mui/material' {
     default: true;
   }
 }
-
 declare module '@mui/material' {
   interface ButtonPropsColorOverrides {
     default: true;
@@ -58,8 +55,6 @@ declare module '@mui/material/styles' {
     t6?: React.CSSProperties;
   }
 }
-
-// Update the Typography's variant prop options
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     t1: true;
@@ -78,26 +73,22 @@ declare module '@mui/material' {
 }
 
 export const colors = {
-  primary: '#041492', //Bright Midnight/600
-  primaryPressed: '#031074', //Bright Midnight/700
-  primaryDisabled: '#6872BD', //Bright Midnight/400
-  primaryDisabledText: '#03107480',
+  primary: '#041492', // blue
+  primaryPressed: '#031074', // dark-blue
+  primaryDisabled: '#6872BD', // light-blue
+  primaryDisabledText: '#03107480', // light dark
 
-  secondary: '#F8931F',
-  success: '#0C8C88',
-  error: '#88292F',
+  secondary: '#F8931F', // orange
+  success: '#0c8d4f', // green
+  error: '#88292F', // blend red
 
-  default: '#EBEFF2', //Perfect Landing/200
-  defaultText: '#5E6B74',
-  defaultPressed: '#D8E0E6', //Perfect Landing/300
-  defaultDisabled: '#D8E0E6',
+  default: '#EBEFF2', // bright grey
+  defaultText: '#5E6B74', // grey
+  defaultPressed: '#D8E0E6', //bright grey
+  defaultDisabled: '#D8E0E6', // bright grey
 
   white: '#FFFFFF',
   whitesmoke: '#F5F5F5',
-  disabledWhite: '#ffffff80',
-
-  grey: '#6E7079',
-  lightGrey: '#EFF1F2',
 };
 
 export const fonts = {
@@ -107,73 +98,86 @@ export const fonts = {
 
 export const theme = createTheme({
   typography: {
-    // fontFamily: fonts.primary,
+    fontFamily: fonts.primary,
+
     h1: {
-      fontFamily: fonts.primary,
       fontSize: 30,
       fontWeight: 'normal',
       lineHeight: '2.167',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
     h2: {
-      fontFamily: fonts.primary,
       fontSize: 24,
       fontWeight: 'normal',
       lineHeight: '1.6',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
     h3: {
-      fontFamily: fonts.primary,
       fontSize: 20,
       fontWeight: 'normal',
       lineHeight: '1.5',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
     h4: {
-      fontFamily: fonts.primary,
       fontSize: 18,
       fontWeight: 'normal',
       lineHeight: '1.428571',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
     h5: {
-      fontFamily: fonts.primary,
       fontSize: 16,
       fontWeight: 'normal',
       lineHeight: '1.4',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
     h6: {
-      fontFamily: fonts.primary,
       fontSize: 14,
       fontWeight: 'lighter',
       lineHeight: '1.3333',
+      '&.main': {
+        color: colors.whitesmoke,
+      },
     },
-    t1: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '16px',
-      fontWeight: 'bold',
-    },
-    t2: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '16px',
-      fontWeight: 600,
-    },
-    t3: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '16px',
-      fontWeight: 'normal',
-    },
-    t4: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '14px',
-      fontWeight: 600,
-    },
-    t5: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '14px',
-      fontWeight: 'normal',
-    },
-    t6: {
-      fontFamily: 'Source Sans 3',
-      fontSize: '12px',
-      fontWeight: 'normal',
-    },
+    // t1: {
+    // fontFamily: 'Source Sans 3',
+    //   fontSize: '16px',
+    //   fontWeight: 'bold',
+    // },
+    // t2: {
+    //   fontFamily: 'Source Sans 3',
+    //   fontSize: '16px',
+    //   fontWeight: 600,
+    // },
+    // t3: {
+    //   fontFamily: 'Source Sans 3',
+    //   fontSize: '16px',
+    //   fontWeight: 'normal',
+    // },
+    // t4: {
+    //   fontFamily: 'Source Sans 3',
+    //   fontSize: '14px',
+    //   fontWeight: 600,
+    // },
+    // t5: {
+    //   fontFamily: 'Source Sans 3',
+    //   fontSize: '14px',
+    //   fontWeight: 'normal',
+    // },
+    // t6: {
+    //   fontFamily: 'Source Sans 3',
+    //   fontSize: '12px',
+    //   fontWeight: 'normal',
+    // },
   },
   palette: {
     primary: {
@@ -194,129 +198,71 @@ export const theme = createTheme({
     white: {
       main: colors.white,
     },
-    grey: {
-      main: colors.grey,
-    },
-    'bright-midnight': {
-      main: '#041492',
-      '100': '#E5E7F4',
-      '200': '#CCD0E9',
-      '300': '#9AA1D3',
-      '400': '#6872BD',
-      '500': '#3643A7',
-      '600': '#041492',
-      '700': '#031074',
-      '800': '#020C57',
-      '900': '#01073A',
-      // "1000": "#00041D",
-    },
-    'miami-marmelade': {
-      '100': '#FEF4E8',
-      '200': '#FDE9D2',
-      '300': '#FCD3A5',
-      '400': '#FABE78',
-      '500': '#F9A84B',
-      '600': '#F8931F',
-      '700': '#C67518',
-      '800': '#945812',
-      '900': '#633A0C',
-      // "1000": "#311D06",
-    },
-    'flame-red': {
-      '100': '#F3E9EA',
-      '200': '#E7D4D5',
-      '300': '#CFA9AB',
-      '400': '#B77E82',
-      '500': '#9F5358',
-      '600': '#88292F',
-      '700': '#6C2025',
-      '800': '#51181C',
-      '900': '#361012',
-      // "1000": "#1B0809",
-    },
-    'perfect-landing': {
-      '100': '#F5F7F8',
-      '200': '#EBEFF2',
-      '300': '#D8E0E6',
-      '400': '#C4D1DA',
-      '500': '#B1C2CE',
-      '600': '#9EB3C2',
-      '700': '#7E8F9B',
-      '800': '#5E6B74',
-      '900': '#3F474D',
-      // "1000": "#1F2326",
-    },
-    'greenish-blue': {
-      '100': '#E6F3F3',
-      '200': '#CEE8E7',
-      '300': '#9DD1CF',
-      '400': '#6DBAB7',
-      '500': '#3CA39F',
-      '600': '#0C8C88',
-      '700': '#09706C',
-      '800': '#075451',
-      '900': '#043736',
-      // "1000": "#021C1B",
-    },
+    // 'bright-midnight': {
+    //   main: '#041492',
+    //   '100': '#E5E7F4',
+    //   '200': '#CCD0E9',
+    //   '300': '#9AA1D3',
+    //   '400': '#6872BD',
+    //   '500': '#3643A7',
+    //   '600': '#041492',
+    //   '700': '#031074',
+    //   '800': '#020C57',
+    //   '900': '#01073A',
+    //   // "1000": "#00041D",
+    // },
+    // 'miami-marmelade': {
+    //   '100': '#FEF4E8',
+    //   '200': '#FDE9D2',
+    //   '300': '#FCD3A5',
+    //   '400': '#FABE78',
+    //   '500': '#F9A84B',
+    //   '600': '#F8931F',
+    //   '700': '#C67518',
+    //   '800': '#945812',
+    //   '900': '#633A0C',
+    //   // "1000": "#311D06",
+    // },
+    // 'flame-red': {
+    //   '100': '#F3E9EA',
+    //   '200': '#E7D4D5',
+    //   '300': '#CFA9AB',
+    //   '400': '#B77E82',
+    //   '500': '#9F5358',
+    //   '600': '#88292F',
+    //   '700': '#6C2025',
+    //   '800': '#51181C',
+    //   '900': '#361012',
+    //   // "1000": "#1B0809",
+    // },
+    // 'perfect-landing': {
+    //   '100': '#F5F7F8',
+    //   '200': '#EBEFF2',
+    //   '300': '#D8E0E6',
+    //   '400': '#C4D1DA',
+    //   '500': '#B1C2CE',
+    //   '600': '#9EB3C2',
+    //   '700': '#7E8F9B',
+    //   '800': '#5E6B74',
+    //   '900': '#3F474D',
+    //   // "1000": "#1F2326",
+    // },
+    // 'greenish-blue': {
+    //   '100': '#E6F3F3',
+    //   '200': '#CEE8E7',
+    //   '300': '#9DD1CF',
+    //   '400': '#6DBAB7',
+    //   '500': '#3CA39F',
+    //   '600': '#0C8C88',
+    //   '700': '#09706C',
+    //   '800': '#075451',
+    //   '900': '#043736',
+    //   // "1000": "#021C1B",
+    // },
   },
   components: {
     MuiTextField: {
       variants: [
-        // primary outlined
-        // {
-        //   props: { variant: 'outlined', color: 'primary' },
-        //   style: {
-        //     '& .MuiInputLabel-root': {
-        //       fontFamily: fonts.primary,
-        //       color: `${colors.primary} !important`, // Цвет текста label
-        //       borderColor: colors.primary,
-        //     },
-        //     '& .MuiOutlinedInput-root': {
-        //       borderColor: colors.primary, // Цвет рамки
-        //       '& fieldset': {
-        //         borderColor: colors.primary, // Цвет рамки
-        //       },
-        //       '&:hover fieldset': {
-        //         borderColor: colors.primary, // Цвет рамки
-        //       },
-        //       '&.Mui-focused fieldset': {
-        //         borderColor: colors.primary, // Цвет рамки при фокусе (нажатии)
-        //       },
-        //       '& input': {
-        //         color: colors.primary, // Цвет текста внутри input
-        //         fontFamily: fonts.primary,
-        //       },
-        //     },
-        //   },
-        // },
-        // secondary outlined
-        // {
-        //   props: { variant: 'outlined', color: 'secondary' },
-        //   style: {
-        //     '& .MuiInputLabel-root': {
-        //       fontFamily: fonts.primary,
-        //       color: `${colors.secondary} !important`, // Цвет текста label
-        //       borderColor: colors.secondary,
-        //     },
-        //     '& .MuiOutlinedInput-root': {
-        //       borderColor: colors.secondary, // Цвет рамки
-        //       '& fieldset': {
-        //         borderColor: colors.secondary, // Цвет рамки
-        //       },
-        //       '&:hover fieldset': {
-        //         borderColor: colors.secondary, // Цвет рамки
-        //       },
-        //       '&.Mui-focused fieldset': {
-        //         borderColor: colors.secondary, // Цвет рамки при фокусе (нажатии)
-        //       },
-        //       '& input': {
-        //         color: colors.secondary, // Цвет текста внутри input
-        //         fontFamily: fonts.primary,
-        //       },
-        //     },
-        //   },
-        // },
-        // default outlined
         {
           props: { variant: 'outlined' },
           style: {
@@ -349,25 +295,12 @@ export const theme = createTheme({
     MuiAutocomplete: {
       styleOverrides: {
         root: {
-          minWidth: '200px',
+          minWidth: '260px',
         },
       },
     },
     MuiButton: {
       variants: [
-        // {
-        //   props: { variant: 'google' },
-        //   style: {
-        //     border: 'none',
-        //     textTransform: 'none',
-        //     fontSize: '16px',
-        //     fontFamily: fonts.primary,
-        //     color: colors.white,
-        //     padding: '12px 0',
-        //     boxShadow: '0px 0px 24px 0px rgba(50, 50, 50, 0.08)',
-        //     borderRadius: '8px',
-        //   },
-        // },
         {
           props: { variant: 'contained' },
           style: {
@@ -379,40 +312,10 @@ export const theme = createTheme({
             backgroundColor: colors.primary,
           },
         },
-        // {
-        //   props: {
-        //     variant: 'contained' as any,
-        //     color: 'primary',
-        //     size: 'small',
-        //   },
-        //   style: {
-        //     backgroundColor: colors.primary,
-        //     color: colors.white,
-        //     borderRadius: '8px',
-        //     fontWeight: 600,
-        //     padding: '8px 16px 8px 16px',
-        //     textTransform: 'capitalize',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:hover': {
-        //       backgroundColor: colors.primary,
-        //     },
-
-        //     '&:active': {
-        //       backgroundColor: colors.primaryPressed,
-        //     },
-        //     '&:disabled': {
-        //       color: colors.white,
-        //       backgroundColor: colors.primaryDisabled,
-        //     },
-        //   },
-        // },
         {
           props: {
             variant: 'contained',
             color: 'default',
-            size: 'medium',
           },
           style: {
             padding: '14px 18px',
@@ -438,17 +341,16 @@ export const theme = createTheme({
           props: {
             variant: 'contained',
             color: 'primary',
-            size: 'medium',
+            className: 'flight-search',
           },
           style: {
+            minWidth: '300px',
             padding: '12px 16px 12px 16px',
             textTransform: 'capitalize',
             textAlign: 'center',
-
             '&:hover': {
-              backgroundColor: colors.primary,
+              backgroundColor: colors.primaryPressed,
             },
-
             '&:active': {
               backgroundColor: colors.primaryPressed,
             },
@@ -458,211 +360,96 @@ export const theme = createTheme({
             },
           },
         },
-        // {
-        //   props: { variant: 'contained', color: 'default', size: 'medium' },
-        //   style: {
-        //     backgroundColor: colors.default,
-        //     color: colors.defaultText,
-        //     borderRadius: '8px',
-        //     fontWeight: 600,
-        //     padding: '12px 16px 12px 16px',
-        //     textTransform: 'lowercase',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:disabled': {
-        //       color: colors.defaultText,
-        //       backgroundColor: colors.defaultDisabled,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: { variant: 'contained', color: 'default', size: 'large' },
-        //   style: {
-        //     backgroundColor: colors.default,
-        //     color: colors.defaultText,
-        //     borderRadius: '8px',
-        //     padding: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'lowercase',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:disabled': {
-        //       color: colors.defaultText,
-        //       backgroundColor: colors.defaultDisabled,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: {
-        //     variant: 'contained' as any,
-        //     color: 'primary',
-        //     size: 'large',
-        //   },
-        //   style: {
-        //     backgroundColor: colors.primary,
-        //     color: colors.white,
-        //     borderRadius: '8px',
-        //     padding: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'lowercase',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:hover': {
-        //       backgroundColor: colors.primary,
-        //     },
-
-        //     '&:active': {
-        //       backgroundColor: colors.primaryPressed,
-        //     },
-        //     '&:disabled': {
-        //       color: colors.white,
-        //       backgroundColor: colors.primaryDisabled,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: { variant: 'outlined', color: 'primary', size: 'small' },
-        //   style: {
-        //     backgroundColor: colors.white,
-        //     color: colors.primary,
-        //     border: '1px solid #041492',
-        //     borderRadius: '8px',
-        //     padding: '8px 16px 8px 16px',
-        //     textTransform: 'capitalize',
-        //     fontSize: '16px',
-        //     fontWeight: 600,
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:active': {
-        //       backgroundColor: colors.primaryPressed,
-        //       color: colors.white,
-        //     },
-        //     '&:disabled': {
-        //       color: colors.primaryDisabled,
-        //       backgroundColor: colors.disabledWhite,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: { variant: 'outlined', color: 'primary', size: 'medium' },
-        //   style: {
-        //     backgroundColor: colors.white,
-        //     color: colors.primary,
-        //     border: '1px solid #041492',
-        //     borderRadius: '8px',
-        //     padding: '12px 16px 12px 16px',
-        //     fontSize: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'capitalize',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:active': {
-        //       backgroundColor: colors.primaryPressed,
-        //       color: colors.white,
-        //     },
-        //     '&:disabled': {
-        //       color: colors.primaryDisabled,
-        //       backgroundColor: colors.disabledWhite,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: { variant: 'outlined', color: 'primary', size: 'large' },
-        //   style: {
-        //     backgroundColor: colors.white,
-        //     color: colors.primary,
-        //     border: '1px solid #041492',
-        //     borderRadius: '8px',
-        //     padding: '16px',
-        //     fontSize: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'lowercase',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:active': {
-        //       backgroundColor: colors.primaryPressed,
-        //       color: colors.white,
-        //     },
-        //     '&:disabled': {
-        //       color: colors.primaryDisabled,
-        //       backgroundColor: colors.disabledWhite,
-        //     },
-        //   },
-        // },
-        // {
-        //   props: { variant: 'text', color: 'primary', size: 'small' },
-        //   style: {
-        //     color: colors.primary,
-        //     padding: '8px 16px 8px 16px',
-        //     fontSize: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'capitalize',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:hover': {
-        //       backgroundColor: 'transparent',
-        //     },
-
-        //     '&:active': {
-        //       color: colors.primaryPressed,
-        //     },
-        //   },
-        // },
-
-        // {
-        //   props: { variant: 'text', color: 'primary', size: 'medium' },
-        //   style: {
-        //     color: colors.primary,
-        //     padding: '12px 16px 12px 16px',
-        //     fontSize: '16px',
-        //     fontWeight: 600,
-        //     textTransform: 'lowercase',
-        //     fontFamily: 'Source Sans 3 Semibold',
-        //     textAlign: 'center',
-
-        //     '&:hover': {
-        //       backgroundColor: 'transparent',
-        //     },
-
-        //     '&:active': {
-        //       color: colors.primaryPressed,
-        //     },
-        //   },
-        // },
+        {
+          props: {
+            variant: 'contained',
+            color: 'primary',
+            className: 'flight-purchace',
+          },
+          style: {
+            minWidth: '80px',
+            padding: '6px 12px',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            '&:hover': {
+              backgroundColor: colors.success,
+            },
+            '&:active': {
+              backgroundColor: colors.success,
+            },
+            '&:disabled': {
+              color: colors.white,
+              backgroundColor: colors.primaryDisabled,
+            },
+          },
+        },
       ],
     },
     MuiStack: {
       styleOverrides: {
         root: {
-          '&.flights-stack': {
-            justifyContent: 'space-between',
-            margin: '10px',
-            border: '1px solid black',
-            padding: 10,
+          // flights-page.tsx
+          '&.page-stack': {
+            backgroundColor: colors.defaultText,
+            minHeight: '100vh',
+            maxWidth: '100vw',
           },
+          // flights-page.tsx, paths-list.tsx
+          '&.errors-stack': {
+            display: 'flex',
+            justifyContent: 'center',
+            minWidth: '100px',
+            maxWidth: '2100px',
+          },
+          // paths-list.tsx
           '&.paths-stack': {
             justifyContent: 'center',
             alignItems: 'center',
             width: '100%',
+            paddingTop: 20,
+            paddingBottom: 20,
+            gap: 20,
           },
-          '&.plane-icon-stack': {
+          // flights-list.tsx
+          '&.flights-element-stack': {
+            backgroundColor: colors.defaultPressed,
+            boxSizing: 'border-box',
             justifyContent: 'space-between',
-            alignItems: ' flex-end',
-            width: '10%',
-            minWidth: '200px',
+            minHeight: '100px',
+            minWidth: '600px',
+            padding: '20px',
+            borderRadius: '8px',
+            border: `1px solid ${colors.whitesmoke}`,
           },
+          // flights-list.tsx
           '&.price-stack': {
+            alignItems: 'flex-start',
+            minWidth: '120px',
             padding: 10,
           },
+          // flights-list.tsx
           '&.path-stack': {
+            minWidth: '180px',
+            padding: 10,
             alignItems: 'center',
+          },
+          // flights-list.tsx
+          '&.path-stack-outlook': {
+            flexDirection: 'column',
+            padding: 20,
+            minWidth: '400px',
+          },
+          // flights-list.tsx
+          '&.path-transfers-stack': {
+            justifyContent: 'space-around',
+          },
+          // flights-item.tsx
+          '&.plane-icon-stack': {
+            padding: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: ' flex-end',
+            width: '10%',
           },
         },
       },
@@ -680,6 +467,18 @@ export const theme = createTheme({
       styleOverrides: {
         tooltip: {
           padding: 0,
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.defaultText,
+          minWidth: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
         },
       },
     },
