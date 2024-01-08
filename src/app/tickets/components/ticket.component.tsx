@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent, Alert } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { Ticket } from '../types/Ticket.type'
+import { Ticket } from '../types/ticket.type'
 import { useState } from 'react'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
