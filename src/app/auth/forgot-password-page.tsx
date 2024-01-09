@@ -34,6 +34,10 @@ export default function ForgorPasswordPage() {
         },
     });
 
+    const handleNavigate = () => {
+        navigate('/admin/auth/reset-password')
+    }
+
 
     return (
         <Container>
@@ -72,7 +76,7 @@ export default function ForgorPasswordPage() {
                             error={formik.touched.email && Boolean(formik.errors.email)}
                             helperText={formik.touched.email && formik.errors.email}
                         />
-                        <Button color="primary" variant="contained" fullWidth type="submit">
+                        <Button color="primary" variant="contained" fullWidth type="submit" onClick={handleNavigate}>
                             {pending ? <CircularProgress /> : 'CONTINUE'}
                         </Button>
                         {errors ? <AlertMessage errorMessage={errors} /> : null}

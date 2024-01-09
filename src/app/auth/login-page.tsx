@@ -56,6 +56,7 @@ export default function LoginPage() {
     const handleShowPassword = () => {
         setShowPassword(prev => !prev)
     }
+
     return (
         <Container>
             <Box sx={{
@@ -120,6 +121,9 @@ export default function LoginPage() {
                         <Button color="primary" variant="contained" fullWidth type="submit">
                             {pending ? <CircularProgress /> : 'SIGNIN'}
                         </Button>
+                        <Link to='/admin/auth/forgot-password' style={{ textDecoration: 'none' }}>
+                            <Typography variant='h5' color='whitesmoke'>Forget password?</Typography>
+                        </Link>
                     </form>
                     {errors ? <AlertMessage errorMessage={errors} /> : null}
                 </Stack>
