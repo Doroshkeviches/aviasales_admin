@@ -8,6 +8,7 @@ import { getCities, getFlights } from '../store/flghts.action'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
+import AlertMessage from 'src/app/auth/components/alert-message';
 
 const FormControlMuiSx = {
     display: 'flex',
@@ -122,17 +123,9 @@ export default function FlightsSearch() {
 
                 <Button onClick={handleGetPath} variant='contained' color='primary' className='flight-search'>SEARCH</Button>
 
-                <Stack className='errors-stack' spacing={2}>
-                    {validationErrors ? <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        {validationErrors}</Alert> : null}
-                    {errors_flights ? <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        {errors_flights}</Alert> : null}
-                    {errors_city ? <Alert severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        {errors_city}</Alert> : null}
-                </Stack>
+                {validationErrors ? <AlertMessage errorMessage={validationErrors} /> : null}
+                {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null}
+                {errors_city ? <AlertMessage errorMessage={errors_city} /> : null}
             </FormControl>
         </>
     )

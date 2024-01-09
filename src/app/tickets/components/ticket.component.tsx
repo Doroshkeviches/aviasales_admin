@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent, Alert } from '@mui/material'
+import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Ticket } from '../types/Ticket.type'
 import { useState } from 'react'
@@ -6,6 +6,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
 import { baseUrl } from 'src/constants';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
+import AlertMessage from 'src/app/auth/components/alert-message';
 
 interface Props {
   ticket: Ticket
@@ -13,7 +14,6 @@ interface Props {
 export default function TicketComponent({ ticket }: Props) {
   console.log(ticket)
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
-
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
   const [isLoading, errors, data, fetchData] = useRepository()
@@ -65,11 +65,7 @@ export default function TicketComponent({ ticket }: Props) {
           }
         </CardActions>
       </Card>
-      {errors ?
-        <Alert severity="error">{errors}</Alert>
-        :
-        null
-      }
+      {errors ? <AlertMessage errorMessage={errors} /> : null}
     </>
   )
 }

@@ -474,11 +474,17 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.defaultText,
-          minWidth: '100vw',
+          maxWidth: 'false',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           minHeight: '100vh',
+          '@media (min-width: 1200px)': {
+            maxWidth: '100%',
+          },
+          '@media (min-height: 600px)': {
+            minHeight: '100vh',
+          },
         },
       },
     },

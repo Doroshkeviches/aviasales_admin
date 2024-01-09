@@ -14,11 +14,7 @@ export default function PathsList() {
     }
     return (
         <>
-            {/* <Stack className='errors-stack' spacing={2}>
-                {errors_flights ? <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    {errors_flights}</Alert> : null}
-            </Stack> */}
+            {/* {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null} */}
             <Stack direction='column' className='paths-stack'>
                 {flights.map((flightList) => {
                     return <FlightList key={flightList.id} flightList={flightList} />

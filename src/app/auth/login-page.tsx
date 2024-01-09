@@ -1,4 +1,4 @@
-import { Alert, Box, Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
 import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
@@ -11,6 +11,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signout } from 'src/utils/signout';
 // @ts-ignore
 import image from './plane1.png';
+import AlertMessage from './components/alert-message';
 
 export default function LoginPage() {
     const dispatch = useAppDispatch()
@@ -99,18 +100,28 @@ export default function LoginPage() {
                             id="password"
                             name="password"
                             label="Password"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             value={formik.values.password}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             error={formik.touched.password && Boolean(formik.errors.password)}
                             helperText={formik.touched.password && formik.errors.password}
+                            InputProps={{
+                                endAdornment: <IconButton
+                                    sx={{ color: 'whitesmoke' }}
+                                    aria-label="toggle password visibility"
+                                    onClick={handleShowPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>,
+                            }}
                         />
                         <Button color="primary" variant="contained" fullWidth type="submit">
-                            {pending ? <CircularProgress /> : 'LOGIN'}
+                            {pending ? <CircularProgress /> : 'SIGNIN'}
                         </Button>
                     </form>
-                    {errors ? <Alert severity="error">{errors}</Alert> : null}
+                    {errors ? <AlertMessage errorMessage={errors} /> : null}
                 </Stack>
             </Box>
         </Container>

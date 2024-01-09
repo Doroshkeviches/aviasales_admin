@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flight } from '../types/Flight.type'
-import { Button, Card, CardActions, CardContent, Stack, Tooltip, Typography } from '@mui/material'
+import { Card, CardContent, Stack, Tooltip, Typography } from '@mui/material'
 // import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 // import FlightLandIcon from '@mui/icons-material/FlightLand';
 // import Road from './ui/road'
@@ -31,9 +31,8 @@ export default function FlightItem({ flight }: Props) {
           </CardContent>
         </Card>
       }>
-        <Typography variant='h4'>{flight.to_city.title}</Typography>
+        <Typography variant='h5'>{flight.to_city.title}</Typography>
       </Tooltip>
     </Stack>
-
   )
 }
