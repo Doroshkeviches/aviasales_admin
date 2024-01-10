@@ -1,4 +1,13 @@
-import { PaletteColorOptions, createTheme } from '@mui/material';
+import { PaletteColorOptions, createTheme, styled } from '@mui/material';
+// @ts-ignore
+import image from './plane1.png';
+
+export const GlobalStyles = styled('div')({
+  body: {
+    margin: 0,
+    padding: 0,
+  },
+});
 declare module '@mui/material' {
   interface Color {
     main: string;
@@ -87,6 +96,9 @@ export const colors = {
   defaultPressed: '#D8E0E6', //bright grey
   defaultDisabled: '#D8E0E6', // bright grey
 
+  darkBlue: '#002ead',
+  grayContainer: 'D1D1D1',
+
   white: '#FFFFFF',
   whitesmoke: '#F5F5F5',
 };
@@ -107,6 +119,9 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '@media (max-width: 416px)': {
+        lineHeight: '1.2',
+      },
     },
     h2: {
       fontSize: 24,
@@ -114,6 +129,9 @@ export const theme = createTheme({
       lineHeight: '1.6',
       '&.main': {
         color: colors.whitesmoke,
+      },
+      '@media (max-width: 416px)': {
+        lineHeight: '1.2',
       },
     },
     h3: {
@@ -283,7 +301,7 @@ export const theme = createTheme({
                 borderColor: colors.whitesmoke, // Цвет рамки при фокусе (нажатии)
               },
               '& input': {
-                minWidth: '200px',
+                maxWidth: '70%',
                 color: colors.whitesmoke, // Цвет текста внутри input
                 fontFamily: fonts.primary,
               },
@@ -292,10 +310,17 @@ export const theme = createTheme({
         },
       ],
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          maxWidth: '240px',
+        },
+      },
+    },
     MuiAutocomplete: {
       styleOverrides: {
         root: {
-          minWidth: '260px',
+          maxWidth: '400px',
         },
       },
     },
@@ -440,19 +465,19 @@ export const theme = createTheme({
     MuiStack: {
       styleOverrides: {
         root: {
-          // flights-page.tsx
-          '&.page-stack': {
-            backgroundColor: colors.defaultText,
-            minHeight: '100vh',
-            maxWidth: '100vw',
-          },
+          // // flights-page.tsx
+          // '&.page-stack': {
+          //   backgroundColor: colors.defaultText,
+          //   minHeight: '100vh',
+          //   maxWidth: '100vw',
+          // },
           // flights-page.tsx, paths-list.tsx
-          '&.errors-stack': {
-            display: 'flex',
-            justifyContent: 'center',
-            minWidth: '100px',
-            maxWidth: '2100px',
-          },
+          // '&.errors-stack': {
+          //   display: 'flex',
+          //   justifyContent: 'center',
+          //   minWidth: '100px',
+          //   maxWidth: '2100px',
+          // },
           // paths-list.tsx
           '&.paths-stack': {
             justifyContent: 'center',
@@ -513,6 +538,13 @@ export const theme = createTheme({
             paddingBottom: 20,
             gap: 20,
           },
+          '&.auth-stack': {
+            borderRadius: '24px',
+            backgroundImage: `url(${image})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            padding: '30px 10px 100px',
+          },
         },
       },
     },
@@ -543,12 +575,14 @@ export const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.defaultText,
+          backgroundColor: colors.grayContainer,
           maxWidth: 'false',
           display: 'flex',
+          minHeight: '100vh',
+          minWidth: '100%',
           justifyContent: 'center',
           alignItems: 'center',
-          minHeight: '100vh',
+
           '@media (min-width: 1200px)': {
             maxWidth: '100%',
           },

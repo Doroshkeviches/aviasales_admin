@@ -5,21 +5,23 @@ import AppRoutes from './app.routes';
 import { Provider } from "react-redux";
 import store from "./store";
 import { ThemeProvider } from "@emotion/react";
-import { theme } from "./theme";
+import { theme, GlobalStyles } from "./theme";
 
 function App() {
 
 
   return (
-    <ErrorBoundaryComp>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <AppRoutes />
-          </Router>
-        </ThemeProvider>
-      </Provider>
-    </ErrorBoundaryComp>
+      <ErrorBoundaryComp>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+          <GlobalStyles>
+            <Router>
+              <AppRoutes />
+            </Router>
+            </GlobalStyles>
+          </ThemeProvider>
+        </Provider>
+      </ErrorBoundaryComp>
   );
 }
 

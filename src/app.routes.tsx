@@ -3,6 +3,7 @@ import { Navigate, Routes, Route } from "react-router-dom";
 // import PageHeaderComp from "./components/page-header.comp";
 import { useAppDispatch, useAppSelector } from "src/storeTypes";
 import { sessionSelector } from "./app/auth/store/auth.selector";
+import { Container } from "@mui/material";
 
 // ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
@@ -38,21 +39,23 @@ const FlightsRoutes = React.lazy(() => import("./app/flights/flights.routes"))
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      {/* PUBLIC */}
-      <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-      {/* PUBLIC */}
-      <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
+    <Container>
+      <Routes>
+        {/* PUBLIC */}
+        <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
+        {/* PUBLIC */}
+        <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
 
-      {/* PRIVATE */}
-      <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
-      {/* PRIVATE */}
-      <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
+        {/* PRIVATE */}
+        <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
+        {/* PRIVATE */}
+        <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
 
-      {/* DEFAULT */}
-      {/* <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} /> */}
-      <Route path='/*' element={<Navigate to="/admin/flights" />} />
-    </Routes>
+        {/* DEFAULT */}
+        {/* <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} /> */}
+        <Route path='/*' element={<Navigate to="/admin/flights" />} />
+      </Routes>
+    </Container>
   );
 };
 

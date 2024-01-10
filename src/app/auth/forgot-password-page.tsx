@@ -6,8 +6,6 @@ import * as Yup from 'yup'
 import { resetTokenErrorsSelector, resetTokenPendingSelector, resetTokenSelector } from './store/auth.selector';
 import { Box, Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-// @ts-ignore
-import image from './plane1.png';
 import AlertMessage from './components/alert-message';
 
 export default function ForgorPasswordPage() {
@@ -40,49 +38,36 @@ export default function ForgorPasswordPage() {
 
 
     return (
-        <Container>
-            <Box sx={{
-                borderRadius: '24px',
-                backgroundImage: `url(${image})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                minWidth: 500,
-                minHeight: 550,
-            }}
-                display={'flex'}
-                justifyContent={'center'}
-            >
-                <Stack direction="column" sx={{ width: 400, paddingTop: 2 }} useFlexGap flexWrap="nowrap" gap={2}>
-                    <form onSubmit={formik.handleSubmit}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginTop: '140px',
-                            padding: '0px 10px',
-                            textAlign: 'center',
-                            gap: '10px'
-                        }}>
-                        <Typography variant='h1' color='whitesmoke'>ENTER YOUR EMAIL</Typography>
-                        <TextField
-                            fullWidth
-                            id="email"
-                            name="email"
-                            label="Email"
-                            value={formik.values.email}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            error={formik.touched.email && Boolean(formik.errors.email)}
-                            helperText={formik.touched.email && formik.errors.email}
-                        />
-                        <Button color="primary" variant="contained" fullWidth type="submit" onClick={handleNavigate}>
-                            {pending ? <CircularProgress /> : 'CONTINUE'}
-                        </Button>
-                        {errors ? <AlertMessage errorMessage={errors} /> : null}
-                    </form>
-                </Stack>
-            </Box>
-        </Container>
+        <>
+            <Stack direction="column" gap={2} className='auth-stack'>
+                <form onSubmit={formik.handleSubmit}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '20px 20px',
+                        textAlign: 'center',
+                        gap: '10px'
+                    }}>
+                    <Typography variant='h1' color='whitesmoke'>ENTER YOUR EMAIL</Typography>
+                    <TextField
+                        fullWidth
+                        id="email"
+                        name="email"
+                        label="Email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                    />
+                    <Button color="primary" variant="contained" fullWidth type="submit" onClick={handleNavigate}>
+                        {pending ? <CircularProgress /> : 'CONTINUE'}
+                    </Button>
+                    {errors ? <AlertMessage errorMessage={errors} /> : null}
+                </form>
+            </Stack>
+        </ >
     )
 }
