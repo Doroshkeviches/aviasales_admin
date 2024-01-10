@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { User } from '../types/User.type';
-import { TextField, Button, CircularProgress, Alert } from '@mui/material';
+import { TextField, Button, CircularProgress, Alert, Box } from '@mui/material';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import { useFormik } from 'formik';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -30,16 +30,25 @@ export default function UserEdit({ user }: Props) {
     },
     validationSchema: SigninSchema,
     onSubmit: async (value) => {
-      const body =  { ...user, ...value }
+      const body = { ...user, ...value }
       dispatch(updateUser(body))
       setIsDisabled(true)
-
     },
   });
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // marginTop: '40px',
+        padding: '0px 10px',
+        textAlign: 'center',
+        gap: '10px'
+      }}>
         <TextField
+          variant='outlined'
           fullWidth
           id="email"
           name="email"
@@ -55,7 +64,7 @@ export default function UserEdit({ user }: Props) {
           fullWidth
           id="first_name"
           name="first_name"
-          label="first_name"
+          label="First Name"
           type="first_name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
@@ -68,7 +77,7 @@ export default function UserEdit({ user }: Props) {
           fullWidth
           id="last_name"
           name="last_name"
-          label="last_name"
+          label="Last Name"
           type="last_name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
@@ -80,8 +89,8 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            {false ? <CircularProgress /> : 'submit'}
+          <Button color="default" variant="contained" className='submit-user-changes' fullWidth type="submit">
+            {false ? <CircularProgress /> : 'SUBMIT CHANGES'}
           </Button>
         }
       </form>

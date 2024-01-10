@@ -1,8 +1,9 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Autocomplete, TextField, Button, Checkbox, FormControlLabel, FormControl, CircularProgress, Box, Typography, Alert, AlertTitle, Stack } from '@mui/material'
+import { Autocomplete, TextField, Button, Checkbox, FormControlLabel, FormControl, CircularProgress, Box, Typography, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getCities, getFlights } from '../store/flghts.action'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -18,7 +19,7 @@ const FormControlMuiSx = {
     textAlign: 'center',
     backgroundColor: 'grey',
     gap: 2,
-    padding: '20px'
+    padding: '40px'
 
 }
 export default function FlightsSearch() {
@@ -35,6 +36,7 @@ export default function FlightsSearch() {
     const cities = useAppSelector(citiesSelector)
     const errors_flights = useAppSelector(flightsErrorsSelector)
     const tomorrow = dayjs().add(1, 'day');
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getCities())
@@ -77,10 +79,17 @@ export default function FlightsSearch() {
         }
         dispatch(getFlights(body))
     }
+    const navigateToSignin = () => {
+        navigate('/admin/auth/signin')
+    }
     return (
         <>
             <FormControl error={!!validationErrors}
                 sx={FormControlMuiSx}>
+                {/* isAuthorized */}
+                {true ?
+                    <Button variant='contained' color='default' onClick={navigateToSignin} sx={{ marginLeft: 'auto' }}>SIGNIN</Button>
+                    : null}
                 <Typography variant='h1' className='main'>FLIGHTSSALES</Typography>
                 <Typography variant='h3' className='main'>We are here to help you find tickets</Typography>
 

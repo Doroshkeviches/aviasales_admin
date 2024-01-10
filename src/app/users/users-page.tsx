@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getUsers, getUsersBySearch } from './store/users.action'
 import { usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
 import UserCard from './components/user-card.component'
-import { TextField } from '@mui/material'
+import { Box, Container, Stack, TextField, Typography } from '@mui/material'
 import useDebounce from 'src/hooks/useDebounce'
+import AlertMessage from '../auth/components/alert-message'
 
 export default function UsersPage() {
     const users = useAppSelector(usersSelector)
@@ -20,18 +21,24 @@ export default function UsersPage() {
     const debounced = useDebounce(handleInput)
 
     return (
-        <>
-            <TextField
-                id="filled-search"
-                label="Search user"
-                type="search"
-                variant="filled"
-                onChange={(e) => debounced(e.target.value)}
-            />
-            {users.map(user => {
-                return <UserCard user={user} />
-            })}
-            {errors}
-        </>
+        <Container>
+            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} flexWrap={'wrap'} gap={4}>
+            <Typography variant='h1' color={'whitesmoke'}>REGISTERED USERS</Typography>
+                <TextField
+                    id="filled-search"
+                    label="Search user"
+                    type="search"
+                    sx={{color: 'whitesmoke', minWidth: 600}}
+                    variant='outlined'
+                    onChange={(e) => debounced(e.target.value)}
+                />
+                <Stack direction='column' className='users-stack'>
+                    {users.map(user => {
+                        return <UserCard user={user} />
+                    })}
+                </Stack>
+            </Box>
+            {errors ? <AlertMessage errorMessage={errors} /> : null}
+        </Container>
     )
 }

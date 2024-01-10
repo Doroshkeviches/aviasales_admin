@@ -318,7 +318,7 @@ export const theme = createTheme({
             color: 'default',
           },
           style: {
-            padding: '14px 18px',
+            padding: '8px 16px',
             textTransform: 'capitalize',
             textAlign: 'center',
             color: colors.whitesmoke,
@@ -330,6 +330,58 @@ export const theme = createTheme({
 
             '&:active': {
               backgroundColor: colors.secondary,
+            },
+            '&:disabled': {
+              color: colors.white,
+              backgroundColor: colors.secondary,
+            },
+          },
+        },
+        {
+          props: {
+            variant: 'contained',
+            color: 'default',
+            className: 'submit-user-changes',
+          },
+          style: {
+            padding: '14px 16px',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            color: colors.whitesmoke,
+            backgroundColor: 'colors.primaryPressed',
+
+            '&:hover': {
+              backgroundColor: colors.success,
+            },
+
+            '&:active': {
+              backgroundColor: colors.success,
+            },
+            '&:disabled': {
+              color: colors.white,
+              backgroundColor: colors.secondary,
+            },
+          },
+        },
+        {
+          props: {
+            variant: 'contained',
+            color: 'default',
+            className: 'submit-ticket-changes',
+          },
+          style: {
+            padding: '8px 16px',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            color: colors.whitesmoke,
+            backgroundColor: 'colors.primaryPressed',
+
+            '&:hover': {
+              backgroundColor: colors.success,
+            },
+
+            '&:active': {
+              backgroundColor: colors.success,
             },
             '&:disabled': {
               color: colors.white,
@@ -451,6 +503,16 @@ export const theme = createTheme({
             alignItems: ' flex-end',
             width: '10%',
           },
+          '&.users-stack': {
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            maxWidth: 1200,
+            width: '100%',
+            paddingTop: 20,
+            paddingBottom: 20,
+            gap: 20,
+          },
         },
       },
     },
@@ -458,7 +520,15 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '&.flight-card': {
-            backgroundColor: 'white',
+            backgroundColor: colors.white,
+          },
+          '&.user-card': {
+            backgroundColor: colors.white,
+            minWidth: 450,
+          },
+          '&.ticket-card': {
+            backgroundColor: colors.white,
+            minWidth: 450,
           },
         },
       },
@@ -485,6 +555,13 @@ export const theme = createTheme({
           '@media (min-height: 600px)': {
             minHeight: '100vh',
           },
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          minWidth: '100px',
         },
       },
     },

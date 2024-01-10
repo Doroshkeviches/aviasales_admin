@@ -8,23 +8,24 @@ interface Props {
 export default function UserCard({ user }: Props) {
   return (
     <>
-      <Card sx={{ minWidth: 275 }}>
+      <Card className='user-card'>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {user.first_name}
+          <Typography variant='h3'>
+            {user.last_name} {user.first_name}
           </Typography>
-          <Typography variant="h5" component="div">
-            {user.last_name}
+          <Typography variant='h5'>
+            Actual Email: {user.email}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {user.email}
-          </Typography>
-          <Typography variant="body2">
-            {user.id}
+          <Typography variant="h6">
+            Actual ID: {user.id}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Link to={`${user.id}`}>Learn More</Link>
+        <CardActions sx={{ padding: "16px" }}>
+          <Link to={`${user.id}`} style={{ textDecoration: 'none' }}>
+            <Typography variant='h6'>
+              Watch Personal Info
+            </Typography>
+          </Link>
         </CardActions>
       </Card>
     </>
