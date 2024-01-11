@@ -4,7 +4,7 @@ import { forgotPassword, signin } from './store/auth.actions';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import * as Yup from 'yup'
 import { resetTokenErrorsSelector, resetTokenPendingSelector, resetTokenSelector } from './store/auth.selector';
-import { Box, Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import AlertMessage from './components/alert-message';
 
@@ -56,6 +56,8 @@ export default function ForgorPasswordPage() {
                         id="email"
                         name="email"
                         label="Email"
+                        placeholder='Enter your email'
+                        InputLabelProps={{ shrink: true }}
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

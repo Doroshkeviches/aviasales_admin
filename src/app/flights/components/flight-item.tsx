@@ -1,9 +1,6 @@
 import React from 'react'
 import { Flight } from '../types/Flight.type'
 import { Card, CardContent, Stack, Tooltip, Typography } from '@mui/material'
-// import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
-// import FlightLandIcon from '@mui/icons-material/FlightLand';
-// import Road from './ui/road'
 interface Props {
   flight: Flight
 }

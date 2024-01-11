@@ -11,17 +11,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
 import AlertMessage from 'src/app/auth/components/alert-message';
 
-const FormControlMuiSx = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    backgroundColor: 'grey',
-    gap: 2,
-    padding: '40px'
-
-}
 export default function FlightsSearch() {
     const [startDate, setStartDate] = useState<Date | null>(null)
     const [returnDate, setReturnDate] = useState<Date | null>(null)
@@ -84,8 +73,7 @@ export default function FlightsSearch() {
     }
     return (
         <>
-            <FormControl error={!!validationErrors}
-                sx={FormControlMuiSx}>
+            <FormControl error={!!validationErrors} className='form-control-search'>
                 {/* isAuthorized */}
                 {true ?
                     <Button variant='contained' color='default' onClick={navigateToSignin} sx={{ marginLeft: 'auto' }}>SIGNIN</Button>
@@ -93,31 +81,29 @@ export default function FlightsSearch() {
                 <Typography variant='h1' className='main'>FLIGHTSSALES</Typography>
                 <Typography variant='h3' className='main'>We are here to help you find tickets</Typography>
 
-                <Box display={'flex'} flexWrap={'wrap'} gap={2}>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={cities}
-                        renderInput={(params) => <TextField {...params} label="City" />}
-                        value={from_city}
-                        onChange={(event: any, newValue: string | null) => {
-                            setFrom_city(newValue);
-                        }}
-                    />
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={cities}
-                        renderInput={(params) => <TextField {...params} label="City" />}
-                        value={to_city}
-                        onChange={(event: any, newValue: string | null) => {
-                            setTo_city(newValue);
-                        }}
-                    />
-                </Box>
-
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker']} >
+                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    {/* <DemoContainer components={['DatePicker']}> */}
+                    <Stack className='cities-search-stack'>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={cities}
+                            renderInput={(params) => <TextField {...params} label="From City" />}
+                            value={from_city}
+                            onChange={(event: any, newValue: string | null) => {
+                                setFrom_city(newValue);
+                            }}
+                        />
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={cities}
+                            renderInput={(params) => <TextField {...params} label="To City" />}
+                            value={to_city}
+                            onChange={(event: any, newValue: string | null) => {
+                                setTo_city(newValue);
+                            }}
+                        />
                         <DatePicker label="Start Date"
                             value={startDate}
                             defaultValue={tomorrow.toDate()}
@@ -125,12 +111,16 @@ export default function FlightsSearch() {
                         {isReturn ? <DatePicker label="Return Date"
                             value={returnDate}
                             onChange={(newValue: Date | null) => setReturnDate(newValue)} /> : null}
-                    </DemoContainer>
+                        {/* </DemoContainer> */}
+                    </Stack>
                 </LocalizationProvider>
 
                 <FormControlLabel control={<Checkbox onClick={() => setIsReturn(prev => !prev)} />} label="Return" />
 
-                <Button onClick={handleGetPath} variant='contained' color='primary' className='flight-search'>SEARCH</Button>
+                <Button
+                    onClick={handleGetPath} fullWidth
+                    variant='contained' color='primary'
+                    className='flight-search'>SEARCH</Button>
 
                 {validationErrors ? <AlertMessage errorMessage={validationErrors} /> : null}
                 {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null}

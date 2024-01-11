@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Button, CircularProgress, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
 import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
@@ -9,17 +9,16 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import { Link } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signout } from 'src/utils/signout';
-// @ts-ignore
-// import image from './plane1.png';
 import AlertMessage from './components/alert-message';
 
 export default function LoginPage() {
+    const [showPassword, setShowPassword] = useState<boolean>()
     const dispatch = useAppDispatch()
     const errors = useAppSelector(sessionErrorsSelector)
     const pending = useAppSelector(sessionPendingSelector)
     const session = useAppSelector(sessionSelector)
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState<boolean>()
+
     useEffect(() => {
         if (session) {
             signout(dispatch)
@@ -57,6 +56,10 @@ export default function LoginPage() {
         setShowPassword(prev => !prev)
     }
 
+    const navigateToForgotPassword = () => {
+        navigate('/admin/auth/forgot-password')
+    }
+
     return (
         <>
             <Stack direction="column" gap={2} className='auth-stack'>
@@ -70,13 +73,15 @@ export default function LoginPage() {
                         textAlign: 'center',
                         gap: '10px'
                     }}>
-                    <Typography variant='h1' color='whitesmoke'>SIGN IN TO CONTINUE</Typography>
+                    <Typography variant='h1' color='whitesmoke'>SIGN IN</Typography>
                     <TextField
                         variant='outlined'
                         fullWidth
                         id="email"
                         name="email"
                         label="Email"
+                        placeholder='Enter your email'
+                        InputLabelProps={{ shrink: true }}
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -89,6 +94,8 @@ export default function LoginPage() {
                         id="password"
                         name="password"
                         label="Password"
+                        placeholder='Enter your password'
+                        InputLabelProps={{ shrink: true }}
                         type={showPassword ? 'text' : 'password'}
                         value={formik.values.password}
                         onChange={formik.handleChange}
@@ -106,12 +113,12 @@ export default function LoginPage() {
                             </IconButton>,
                         }}
                     />
+                    <Typography variant='h6' className='forget-password' onClick={navigateToForgotPassword}>Forgot password?</Typography>
                     <Button variant="contained" fullWidth type="submit">
-                        {pending ? <CircularProgress /> : 'SIGNIN'}
+                        {pending ? <CircularProgress /> : 'SIGN IN'}
                     </Button>
-                    <Link to='/admin/auth/forgot-password' style={{ textDecoration: 'none' }}>
-                        <Typography variant='h5' color='whitesmoke'>Forget password?</Typography>
-                    </Link>
+                    {/* <Link to='/admin/auth/forgot-password' style={{ textDecoration: 'none' }}> */}
+                    {/* </Link> */}
                 </form>
                 {errors ? <AlertMessage errorMessage={errors} /> : null}
             </Stack>

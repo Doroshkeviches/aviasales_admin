@@ -89,7 +89,8 @@ export const colors = {
 
   secondary: '#F8931F', // orange
   success: '#0c8d4f', // green
-  error: '#88292F', // blend red
+  error: '#F44336',
+  // error: '#88292F', // blend red
 
   default: '#EBEFF2', // bright grey
   defaultText: '#5E6B74', // grey
@@ -110,7 +111,10 @@ export const fonts = {
 
 export const theme = createTheme({
   typography: {
-    fontFamily: fonts.primary,
+    allVariants: {
+      cursor: 'default',
+      fontFamily: fonts.primary,
+    },
 
     h1: {
       fontSize: 30,
@@ -163,6 +167,12 @@ export const theme = createTheme({
       fontWeight: 'lighter',
       lineHeight: '1.3333',
       '&.main': {
+        color: colors.whitesmoke,
+      },
+      '&.forget-password': {
+        marginLeft: 'auto',
+        cursor: 'pointer',
+        fontWeight: 500,
         color: colors.whitesmoke,
       },
     },
@@ -280,47 +290,83 @@ export const theme = createTheme({
   },
   components: {
     MuiTextField: {
-      variants: [
-        {
-          props: { variant: 'outlined' },
-          style: {
-            '& .MuiInputLabel-root': {
-              fontFamily: fonts.primary,
-              color: `${colors.whitesmoke} !important`, // Цвет текста label
-              borderColor: colors.whitesmoke,
-            },
-            '& .MuiOutlinedInput-root': {
+      styleOverrides: {
+        root: {
+          '& .MuiSvgIcon-root': {
+            color: colors.whitesmoke,
+          },
+          '& .MuiInputLabel-root': {
+            fontFamily: fonts.primary,
+            color: `${colors.whitesmoke} !important`, // Цвет текста label
+            borderColor: colors.whitesmoke,
+          },
+          '& .MuiOutlinedInput-root': {
+            cursor: 'pointer',
+            borderColor: colors.whitesmoke, // Цвет рамки
+
+            '& fieldset': {
               borderColor: colors.whitesmoke, // Цвет рамки
-              '& fieldset': {
-                borderColor: colors.whitesmoke, // Цвет рамки
+            },
+            '&:hover fieldset': {
+              cursor: 'pointer',
+              borderColor: colors.whitesmoke, // Цвет рамки
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: colors.whitesmoke, // Цвет рамки при фокусе (нажатии)
+            },
+            '& input': {
+              '&:-internal-autofill-selected': {
+                backgroundColor: 'red',
               },
-              '&:hover fieldset': {
-                borderColor: colors.whitesmoke, // Цвет рамки
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: colors.whitesmoke, // Цвет рамки при фокусе (нажатии)
-              },
-              '& input': {
-                maxWidth: '70%',
-                color: colors.whitesmoke, // Цвет текста внутри input
-                fontFamily: fonts.primary,
-              },
+              cursor: 'pointer',
+              maxWidth: '100%',
+              color: colors.whitesmoke, // Цвет текста внутри input
+              fontFamily: fonts.primary,
             },
           },
         },
-      ],
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          '&.form-control-search': {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            backgroundColor: 'grey',
+            padding: '20px 40px',
+          },
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          color: colors.whitesmoke,
+          '& .MuiCheckbox-root': {
+            color: colors.whitesmoke,
+          },
+        },
+      },
     },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          maxWidth: '240px',
+          width: '100%',
+          lineHeight: 1.2,
+          margin: 0,
+          paddingTop: 6,
         },
       },
     },
     MuiAutocomplete: {
       styleOverrides: {
         root: {
-          maxWidth: '400px',
+          // minWidth: '70%',
+          // maxWidth: '70%',
         },
       },
     },
@@ -421,7 +467,7 @@ export const theme = createTheme({
             className: 'flight-search',
           },
           style: {
-            minWidth: '300px',
+            maxWidth: '35%',
             padding: '12px 16px 12px 16px',
             textTransform: 'capitalize',
             textAlign: 'center',
@@ -465,19 +511,18 @@ export const theme = createTheme({
     MuiStack: {
       styleOverrides: {
         root: {
-          // // flights-page.tsx
-          // '&.page-stack': {
-          //   backgroundColor: colors.defaultText,
-          //   minHeight: '100vh',
-          //   maxWidth: '100vw',
-          // },
-          // flights-page.tsx, paths-list.tsx
-          // '&.errors-stack': {
-          //   display: 'flex',
-          //   justifyContent: 'center',
-          //   minWidth: '100px',
-          //   maxWidth: '2100px',
-          // },
+          // flights-page.tsx
+          '&.page-stack': {
+            flexDirection: 'column',
+            minWidth: '100vw',
+            minHeight: '100vh',
+          },
+          '&.cities-search-stack': {
+            paddingTop: 20,
+            minWidth: '35%',
+            gap: 18,
+            flexWrap: 'wrap',
+          },
           // paths-list.tsx
           '&.paths-stack': {
             justifyContent: 'center',
@@ -490,13 +535,10 @@ export const theme = createTheme({
           // flights-list.tsx
           '&.flights-element-stack': {
             backgroundColor: colors.defaultPressed,
-            boxSizing: 'border-box',
             justifyContent: 'space-between',
             minHeight: '100px',
-            minWidth: '600px',
             padding: '20px',
             borderRadius: '8px',
-            border: `1px solid ${colors.whitesmoke}`,
           },
           // flights-list.tsx
           '&.price-stack': {
@@ -519,6 +561,7 @@ export const theme = createTheme({
           // flights-list.tsx
           '&.path-transfers-stack': {
             justifyContent: 'space-around',
+            gap: 3,
           },
           // flights-item.tsx
           '&.plane-icon-stack': {
@@ -544,6 +587,9 @@ export const theme = createTheme({
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             padding: '30px 10px 100px',
+            width: '25vw',
+            maxWidth: '25vw',
+            minHeight: '45vh',
           },
         },
       },
@@ -575,7 +621,7 @@ export const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.grayContainer,
+          backgroundColor: colors.defaultText,
           maxWidth: 'false',
           display: 'flex',
           minHeight: '100vh',
