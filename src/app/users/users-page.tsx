@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getUsers, getUsersBySearch } from './store/users.action'
 import { usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
 import UserCard from './components/user-card.component'
-import { Box, Container, Stack, TextField, Typography } from '@mui/material'
+import { Container, Stack, TextField, Typography } from '@mui/material'
 import useDebounce from 'src/hooks/useDebounce'
 import AlertMessage from '../auth/components/alert-message'
 

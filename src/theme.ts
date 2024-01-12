@@ -1,6 +1,5 @@
 import { PaletteColorOptions, createTheme, styled } from '@mui/material';
-// @ts-ignore
-import image from './plane1.png';
+import image from './assets/plane1.png';
 
 export const GlobalStyles = styled('div')({
   body: {

@@ -14,9 +14,6 @@ export default function ResetPasswordPage() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const SigninSchema = Yup.object().shape({
-    // email: Yup.string()
-    //   .email('Invalid email')
-    //   .required('Required'),
     password: Yup.string()
       .required('Password is required')
       .matches(
@@ -34,7 +31,6 @@ export default function ResetPasswordPage() {
 
   const formik = useFormik({
     initialValues: {
-      // email: '',
       password: '',
       password_confirm: '',
     },

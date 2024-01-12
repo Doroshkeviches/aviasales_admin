@@ -35,7 +35,7 @@ const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
 const AuthRoutes = React.lazy(() => import("./app/auth/index"))
 const TicketRoutes = React.lazy(() => import("./app/tickets/index"))
 const UsersRoutes = React.lazy(() => import("./app/users/index"))
-const FlightsRoutes = React.lazy(() => import("./app/flights/flights.routes"))
+const FlightsRoutes = React.lazy(() => import("./app/flights/index"))
 
 const AppRoutes = () => {
   return (
@@ -43,17 +43,14 @@ const AppRoutes = () => {
       <Routes>
         {/* PUBLIC */}
         <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-        {/* PUBLIC */}
         <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
 
         {/* PRIVATE */}
         <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
-        {/* PRIVATE */}
         <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
 
         {/* DEFAULT */}
-        {/* <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} /> */}
-        <Route path='/*' element={<Navigate to="/admin/flights" />} />
+        <Route path='/*' element={<Navigate to="/admin/auth/signin" />} />
       </Routes>
     </Container>
   );
