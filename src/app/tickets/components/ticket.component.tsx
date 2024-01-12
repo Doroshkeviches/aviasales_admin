@@ -1,5 +1,5 @@
 import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { Ticket } from '../types/Ticket.type'
+import { Ticket } from '../types/ticket.type'
 import { useState } from 'react'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
@@ -46,7 +46,6 @@ export default function TicketComponent({ ticket }: Props) {
             id="demo-simple-select"
             value={selectItem}
             className='ticket-status-select'
-            // label="Ticket Status"
             onChange={handleSelectChange}
             sx={{ marginTop: 2 }}
           >
@@ -60,7 +59,7 @@ export default function TicketComponent({ ticket }: Props) {
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
             <Button onClick={handleSubmit} variant='contained' color='success' fullWidth type="submit">
-              {isLoading ? <CircularProgress /> : 'SUBMIT CHANGES'}
+              {isLoading ? <CircularProgress /> : 'SUBMIT'}
             </Button>
           }
         </CardActions>

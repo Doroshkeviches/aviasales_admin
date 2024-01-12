@@ -4,8 +4,8 @@ import AppRoutes from './app.routes';
 // import './app.sass';
 import { Provider } from "react-redux";
 import store from "./store";
-import { ThemeProvider } from "@emotion/react";
-import { theme, GlobalStyles } from "./theme";
+import { theme } from "./theme";
+import { ThemeProvider } from "@mui/material";
 
 function App() {
 
@@ -14,11 +14,9 @@ function App() {
       <ErrorBoundaryComp>
         <Provider store={store}>
           <ThemeProvider theme={theme}>
-          <GlobalStyles>
             <Router>
               <AppRoutes />
             </Router>
-            </GlobalStyles>
           </ThemeProvider>
         </Provider>
       </ErrorBoundaryComp>

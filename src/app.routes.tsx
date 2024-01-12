@@ -6,10 +6,23 @@ import { sessionSelector } from "./app/auth/store/auth.selector";
 import { Container } from "@mui/material";
 
 // ======= private route ======= //
+const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
+  const session = useAppSelector(sessionSelector)
+  return session?.role_type === "Admin" ? (
+    <>
+      {/* <PageHeaderComp /> */}
+      <Suspense fallback={<div />}>
+        <Element />
+      </Suspense>
+    </>
+  ) : (
+    <Navigate to={"/admin/flights"} />
+  );
+};
+// ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
-  // session?.role_type === "Admin"
-  return true ? (
+  return session ? (
     <>
       {/* <PageHeaderComp /> */}
       <Suspense fallback={<div />}>
@@ -43,11 +56,11 @@ const AppRoutes = () => {
       <Routes>
         {/* PUBLIC */}
         <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-        <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
+        <Route path='/admin/flights/*' element={<PrivateRoute element={FlightsRoutes} />} />
 
         {/* PRIVATE */}
         <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
-        <Route path='/admin/users/*' element={<PrivateRoute element={UsersRoutes} />} />
+        <Route path='/admin/users/*' element={<AdminPrivateRoute element={UsersRoutes} />} />
 
         {/* DEFAULT */}
         <Route path='/*' element={<Navigate to="/admin/auth/signin" />} />
