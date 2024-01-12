@@ -1,31 +1,34 @@
 import React from 'react'
 import { User } from '../types/User.type'
-import { Card, CardContent, Typography, CardActions, Button } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Card, CardContent, Typography, CardActions } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 interface Props {
   user: User
 }
 export default function UserCard({ user }: Props) {
+  const navigate = useNavigate()
+
+  const navigateToPersonalInfo = () => {
+    navigate(`${user.id}`)
+  }
   return (
     <>
       <Card className='user-card'>
         <CardContent>
-          <Typography variant='h3'>
+          <Typography variant='h2'>
             {user.last_name} {user.first_name}
           </Typography>
-          <Typography variant='h5'>
-            Actual Email: {user.email}
+          <Typography variant='h5' paddingTop={'3px'}>
+            Email: {user.email}
           </Typography>
-          <Typography variant="h6">
-            Actual ID: {user.id}
+          <Typography variant="h5" paddingTop={'3px'}>
+            Tickets purchaced: {user.tickets.length}
           </Typography>
         </CardContent>
         <CardActions sx={{ padding: "16px" }}>
-          <Link to={`${user.id}`} style={{ textDecoration: 'none' }}>
-            <Typography variant='h6'>
-              Watch Personal Info
-            </Typography>
-          </Link>
+          <Typography variant='h5' className='personal-info' onClick={navigateToPersonalInfo} sx={{ cursor: 'pointer' }}>
+            Watch Personal Info
+          </Typography>
         </CardActions>
       </Card>
     </>

@@ -127,6 +127,10 @@ export const theme = createTheme({
         lineHeight: '1.6',
         fontSize: 24,
       },
+      '@media (max-width: 520px)': {
+        lineHeight: '1.4',
+        fontSize: 20,
+      },
       '@media (max-width: 460px)': {
         lineHeight: '1.2',
         fontSize: 18,
@@ -146,6 +150,10 @@ export const theme = createTheme({
       '@media (max-width: 785px)': {
         lineHeight: '1.5',
         fontSize: 20,
+      },
+      '@media (max-width: 520px)': {
+        lineHeight: '1.3',
+        fontSize: 18,
       },
       '@media (max-width: 460px)': {
         lineHeight: '1.2',
@@ -179,6 +187,10 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '&.personal-info': {
+        fontWeight: 500,
+        color: colors.primaryPressed,
+      },
       '@media (max-width: 1100px)': {
         lineHeight: '1.2',
         fontSize: 14,
@@ -189,7 +201,7 @@ export const theme = createTheme({
       },
       '@media (max-width: 460px)': {
         lineHeight: '1',
-        fontSize: 6,
+        fontSize: 8,
       },
     },
     h6: {
@@ -345,9 +357,6 @@ export const theme = createTheme({
               borderColor: colors.whitesmoke, // Цвет рамки при фокусе (нажатии)
             },
             '& input': {
-              '&:-internal-autofill-selected': {
-                backgroundColor: 'red',
-              },
               cursor: 'pointer',
               maxWidth: '100%',
               color: colors.whitesmoke, // Цвет текста внутри input
@@ -652,7 +661,6 @@ export const theme = createTheme({
             justifyContent: 'center',
             alignItems: 'center',
             flexWrap: 'wrap',
-            maxWidth: 1200,
             width: '100%',
             paddingTop: 20,
             paddingBottom: 20,
@@ -668,6 +676,26 @@ export const theme = createTheme({
             maxWidth: '25vw',
             minHeight: '45vh',
           },
+          '&.users-search-stack': {
+            display: 'flex',
+            gap: 10,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            backgroundColor: colors.grey,
+            padding: '40px 0px',
+          },
+          '&.user-edit-stack': {
+            display: 'flex',
+            gap: 16,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            backgroundColor: colors.grey,
+            padding: '20px 20px',
+          },
         },
       },
     },
@@ -678,12 +706,28 @@ export const theme = createTheme({
             backgroundColor: colors.white,
           },
           '&.user-card': {
-            backgroundColor: colors.white,
-            minWidth: 450,
+            backgroundColor: colors.whitesmoke,
+            width: '35%',
           },
           '&.ticket-card': {
-            backgroundColor: colors.white,
-            minWidth: 450,
+            backgroundColor: colors.whitesmoke,
+            width: '50%',
+          },
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 10,
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          '&.MuiCardActions-root': {
+            padding: '0px 10px 10px',
           },
         },
       },
@@ -725,7 +769,13 @@ export const theme = createTheme({
     MuiSelect: {
       styleOverrides: {
         root: {
-          minWidth: '100px',
+          minWidth: '20%',
+          '& .MuiSelect-select': {
+            padding: '4px 8px',
+          },
+          '@media (max-width: 1000px)': {},
+          '@media (max-width: 460px)': {},
+          '@media (max-width: 360px)': {},
         },
       },
     },

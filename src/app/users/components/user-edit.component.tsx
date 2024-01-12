@@ -41,6 +41,8 @@ export default function UserEdit({ user }: Props) {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        flexWrap: 'wrap',
+        width: '40%',
         alignItems: 'center',
         // marginTop: '40px',
         padding: '0px 10px',
@@ -48,6 +50,7 @@ export default function UserEdit({ user }: Props) {
         gap: '10px'
       }}>
         <TextField
+          className='edit'
           variant='outlined'
           fullWidth
           id="email"
@@ -61,6 +64,7 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
+          className='edit'
           fullWidth
           id="first_name"
           name="first_name"
@@ -74,6 +78,7 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.first_name && formik.errors.first_name}
         />
         <TextField
+          className='edit'
           fullWidth
           id="last_name"
           name="last_name"
@@ -89,8 +94,8 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button color="default" variant="contained" className='submit-user-changes' fullWidth type="submit">
-            {false ? <CircularProgress /> : 'SUBMIT CHANGES'}
+          <Button  className='flight-purchace' variant="contained" fullWidth type="submit">
+            {false ? <CircularProgress /> : 'SUBMIT'}
           </Button>
         }
       </form>

@@ -21,23 +21,25 @@ export default function UsersPage() {
     const debounced = useDebounce(handleInput)
 
     return (
-        <Container>
-            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} flexWrap={'wrap'} gap={4}>
-            <Typography variant='h1' color={'whitesmoke'}>REGISTERED USERS</Typography>
+        <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <Stack className='users-search-stack'>
+                <Typography variant='h1' className='main'>REGISTERED USERS</Typography>
                 <TextField
                     id="filled-search"
                     label="Search user"
+                    placeholder='Enter user name'
+                    InputLabelProps={{ shrink: true }}
                     type="search"
-                    sx={{color: 'whitesmoke', minWidth: 600}}
+                    sx={{ color: 'whitesmoke', width: '40%' }}
                     variant='outlined'
                     onChange={(e) => debounced(e.target.value)}
                 />
-                <Stack direction='column' className='users-stack'>
-                    {users.map(user => {
-                        return <UserCard user={user} />
-                    })}
-                </Stack>
-            </Box>
+            </Stack>
+            <Stack direction='column' className='users-stack'>
+                {users.map(user => {
+                    return <UserCard user={user} />
+                })}
+            </Stack>
             {errors ? <AlertMessage errorMessage={errors} /> : null}
         </Container>
     )

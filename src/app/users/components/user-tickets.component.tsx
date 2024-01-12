@@ -31,19 +31,16 @@ export default function UserTicketsComponent({ ticket }: Props) {
     <>
       <Card className='ticket-card'>
         <CardContent>
-          <Typography variant='h4' >
-            HOLDER NAME: {ticket.holder_first_name}
+          <Typography variant='h2' >
+            TICKET HOLDER:
           </Typography>
-          <Typography variant='h4' >
-            HOLDER LASTNAME: {ticket.holder_last_name}
+          <Typography variant='h2' > 
+          {ticket.holder_first_name} {ticket.holder_last_name}
           </Typography>
-          <Typography variant='h4'>
-            FROM: {ticket.flight.from_city.title}
+          <Typography variant='h5' sx={{marginTop: 2}}>
+            FROM: {ticket.flight.from_city.title} TO: {ticket.flight.to_city.title}
           </Typography>
-          <Typography variant='h4'>
-            TO: {ticket.flight.to_city.title}
-          </Typography>
-          <Typography variant="h4">
+          <Typography variant="h5">
             PRICE: {ticket.flight.price} $
           </Typography>
           <Select
@@ -53,6 +50,7 @@ export default function UserTicketsComponent({ ticket }: Props) {
             value={selectItem}
             className='ticket-status-select'
             // label="Ticket Status"
+            sx={{marginTop: 2}}
             onChange={handleSelectChange}
           >
             {ticket_status_enum.map(item => {
@@ -64,8 +62,8 @@ export default function UserTicketsComponent({ ticket }: Props) {
           {isDisabled ?
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
-            <Button onClick={handleSubmit} color="default" variant="contained" className='submit-ticket-changes' fullWidth type="submit">
-              {isLoading ? <CircularProgress /> : 'SUBMIT CHANGES'}
+            <Button onClick={handleSubmit} className='flight-purchace' variant="contained" fullWidth type="submit">
+              {isLoading ? <CircularProgress /> : 'SUBMIT'}
             </Button>
           }
         </CardActions>
