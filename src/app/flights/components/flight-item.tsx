@@ -28,8 +28,14 @@ export default function FlightItem({ flight }: Props) {
           </CardContent>
         </Card>
       }>
-        <Typography variant='h5'>{flight.to_city.title}</Typography>
-      </Tooltip>
-    </Stack>
+        <Stack sx={{ width: "100%", alignItems: 'center', gap: 0.2 }}>
+          <Stack className='elem-transfer-path'>
+          </Stack>
+          {/* <Typography variant='h5'>{flight.to_city.title}</Typography> */}
+          {/* <Typography variant='h6'>{flight.start_flight_date.getDate()}</Typography>
+          <Typography variant='h6'>{flight.end_flight_date.getDate()}</Typography> */}
+        </Stack>
+      </Tooltip >
+    </Stack >
   )
 }

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
 import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import { Link } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signout } from 'src/utils/signout';
 import AlertMessage from './components/alert-message';
@@ -61,7 +60,7 @@ export default function LoginPage() {
     }
 
     return (
-        <>
+        <Container className='auth'>
             <Stack direction="column" gap={2} className='auth-stack'>
                 <form onSubmit={formik.handleSubmit}
                     style={{
@@ -117,11 +116,9 @@ export default function LoginPage() {
                     <Button variant="contained" fullWidth type="submit">
                         {pending ? <CircularProgress /> : 'SIGN IN'}
                     </Button>
-                    {/* <Link to='/admin/auth/forgot-password' style={{ textDecoration: 'none' }}> */}
-                    {/* </Link> */}
                 </form>
                 {errors ? <AlertMessage errorMessage={errors} /> : null}
             </Stack>
-        </>
+        </Container>
     )
 }

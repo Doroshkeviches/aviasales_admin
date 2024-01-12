@@ -4,7 +4,7 @@ import { forgotPassword, signin } from './store/auth.actions';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import * as Yup from 'yup'
 import { resetTokenErrorsSelector, resetTokenPendingSelector, resetTokenSelector } from './store/auth.selector';
-import { Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import AlertMessage from './components/alert-message';
 
@@ -38,7 +38,7 @@ export default function ForgorPasswordPage() {
 
 
     return (
-        <>
+        <Container className='auth'>
             <Stack direction="column" gap={2} className='auth-stack'>
                 <form onSubmit={formik.handleSubmit}
                     style={{
@@ -70,6 +70,6 @@ export default function ForgorPasswordPage() {
                     {errors ? <AlertMessage errorMessage={errors} /> : null}
                 </form>
             </Stack>
-        </ >
+        </ Container>
     )
 }

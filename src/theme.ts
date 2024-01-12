@@ -82,24 +82,24 @@ declare module '@mui/material' {
 }
 
 export const colors = {
-  primary: '#041492', // blue
-  primaryPressed: '#031074', // dark-blue
+  primary: '#031074', // dark-blue
+  primaryPressed: '#041492', // blue
   primaryDisabled: '#6872BD', // light-blue
-  primaryDisabledText: '#03107480', // light dark
 
-  secondary: '#F8931F', // orange
+  orange: '#F8931F', // orange
   success: '#0c8d4f', // green
   error: '#F44336',
-  // error: '#88292F', // blend red
+  // successBlend: '#0c8d60', // blend green
+  // errorBlend: '#88292F', // blend red
 
-  default: '#EBEFF2', // bright grey
-  defaultText: '#5E6B74', // grey
-  defaultPressed: '#D8E0E6', //bright grey
-  defaultDisabled: '#D8E0E6', // bright grey
+  brightGrey: '#EBEFF2',
+  lightGrey: '#D1D1D1',
+  grey: '#5E6B74',
+  greyPressed: '#D8E0E6',
+  greyDisabled: '#D8E0E6',
 
-  darkBlue: '#002ead',
-  grayContainer: 'D1D1D1',
-
+  blue: '#002ead',
+  black: '#000000',
   white: '#FFFFFF',
   whitesmoke: '#F5F5F5',
 };
@@ -123,8 +123,17 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
-      '@media (max-width: 416px)': {
+      '@media (max-width: 785px)': {
+        lineHeight: '1.6',
+        fontSize: 24,
+      },
+      '@media (max-width: 460px)': {
         lineHeight: '1.2',
+        fontSize: 18,
+      },
+      '@media (max-width: 360px)': {
+        lineHeight: '1',
+        fontSize: 16,
       },
     },
     h2: {
@@ -134,8 +143,17 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
-      '@media (max-width: 416px)': {
+      '@media (max-width: 785px)': {
+        lineHeight: '1.5',
+        fontSize: 20,
+      },
+      '@media (max-width: 460px)': {
         lineHeight: '1.2',
+        fontSize: 16,
+      },
+      '@media (max-width: 360px)': {
+        lineHeight: '1',
+        fontSize: 14,
       },
     },
     h3: {
@@ -160,6 +178,18 @@ export const theme = createTheme({
       lineHeight: '1.4',
       '&.main': {
         color: colors.whitesmoke,
+      },
+      '@media (max-width: 1100px)': {
+        lineHeight: '1.2',
+        fontSize: 14,
+      },
+      '@media (max-width: 785px)': {
+        lineHeight: '1.2',
+        fontSize: 12,
+      },
+      '@media (max-width: 460px)': {
+        lineHeight: '1',
+        fontSize: 6,
       },
     },
     h6: {
@@ -212,7 +242,7 @@ export const theme = createTheme({
       main: colors.primary,
     },
     secondary: {
-      main: colors.secondary,
+      main: colors.orange,
     },
     error: {
       main: colors.error,
@@ -221,7 +251,7 @@ export const theme = createTheme({
       main: colors.success,
     },
     default: {
-      main: colors.default,
+      main: colors.blue,
     },
     white: {
       main: colors.white,
@@ -336,8 +366,8 @@ export const theme = createTheme({
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            backgroundColor: 'grey',
-            padding: '20px 40px',
+            backgroundColor: colors.grey,
+            padding: '40px 0px',
           },
         },
       },
@@ -393,18 +423,18 @@ export const theme = createTheme({
             textTransform: 'capitalize',
             textAlign: 'center',
             color: colors.whitesmoke,
-            backgroundColor: 'colors.primaryPressed',
+            backgroundColor: colors.primary,
 
             '&:hover': {
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.orange,
             },
 
             '&:active': {
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.orange,
             },
             '&:disabled': {
               color: colors.white,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.orange,
             },
           },
         },
@@ -419,7 +449,7 @@ export const theme = createTheme({
             textTransform: 'capitalize',
             textAlign: 'center',
             color: colors.whitesmoke,
-            backgroundColor: 'colors.primaryPressed',
+            backgroundColor: colors.primaryDisabled,
 
             '&:hover': {
               backgroundColor: colors.success,
@@ -430,7 +460,7 @@ export const theme = createTheme({
             },
             '&:disabled': {
               color: colors.white,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.orange,
             },
           },
         },
@@ -445,7 +475,7 @@ export const theme = createTheme({
             textTransform: 'capitalize',
             textAlign: 'center',
             color: colors.whitesmoke,
-            backgroundColor: 'colors.primaryPressed',
+            backgroundColor: colors.primary,
 
             '&:hover': {
               backgroundColor: colors.success,
@@ -456,7 +486,7 @@ export const theme = createTheme({
             },
             '&:disabled': {
               color: colors.white,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.orange,
             },
           },
         },
@@ -467,6 +497,7 @@ export const theme = createTheme({
             className: 'flight-search',
           },
           style: {
+            backgroundColor: colors.primary,
             maxWidth: '35%',
             padding: '12px 16px 12px 16px',
             textTransform: 'capitalize',
@@ -491,9 +522,27 @@ export const theme = createTheme({
           },
           style: {
             minWidth: '80px',
+            backgroundColor: colors.primary,
             padding: '6px 12px',
             textTransform: 'capitalize',
             textAlign: 'center',
+
+            '@media (max-width: 785px)': {
+              minWidth: '40px',
+              padding: '3px 12px',
+              lineHeight: '1.4',
+              fontSize: 14,
+            },
+            '@media (max-width: 460px)': {
+              padding: '3px 8px',
+              lineHeight: '1.2',
+              fontSize: 12,
+            },
+            '@media (max-width: 360px)': {
+              padding: '3px 8px',
+              lineHeight: '1',
+              fontSize: 10,
+            },
             '&:hover': {
               backgroundColor: colors.success,
             },
@@ -511,11 +560,9 @@ export const theme = createTheme({
     MuiStack: {
       styleOverrides: {
         root: {
-          // flights-page.tsx
           '&.page-stack': {
             flexDirection: 'column',
-            minWidth: '100vw',
-            minHeight: '100vh',
+            minWidth: '100%',
           },
           '&.cities-search-stack': {
             paddingTop: 20,
@@ -523,53 +570,83 @@ export const theme = createTheme({
             gap: 18,
             flexWrap: 'wrap',
           },
-          // paths-list.tsx
           '&.paths-stack': {
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
-            paddingTop: 20,
-            paddingBottom: 20,
+            padding: '40px',
             gap: 20,
           },
-          // flights-list.tsx
           '&.flights-element-stack': {
-            backgroundColor: colors.defaultPressed,
+            backgroundColor: colors.whitesmoke,
             justifyContent: 'space-between',
             minHeight: '100px',
             padding: '20px',
             borderRadius: '8px',
+
+            '@media (max-width: 785px)': {
+              padding: '10px',
+            },
+            '@media (max-width: 460px)': {
+              padding: 5,
+            },
           },
-          // flights-list.tsx
           '&.price-stack': {
-            alignItems: 'flex-start',
-            minWidth: '120px',
+            alignItems: 'center',
+            minWidth: '10%',
             padding: 10,
+            gap: 10,
+
+            '@media (max-width: 460px)': {
+              padding: 5,
+              justifyContent: 'center',
+            },
           },
-          // flights-list.tsx
           '&.path-stack': {
             minWidth: '180px',
             padding: 10,
+            justifyContent: 'space-between',
             alignItems: 'center',
           },
-          // flights-list.tsx
           '&.path-stack-outlook': {
             flexDirection: 'column',
             padding: 20,
-            minWidth: '400px',
+            width: '25vw',
+
+            '@media (max-width: 785px)': {
+              padding: 10,
+            },
+            '@media (max-width: 460px)': {
+              padding: 5,
+            },
           },
-          // flights-list.tsx
+          '&.transfer-path': {
+            width: '100%',
+            borderTop: `1px solid ${colors.black}`,
+            padding: '0px',
+            borderRadius: '0px',
+          },
+          '&.elem-transfer-path': {
+            width: '100%',
+            height: '3px',
+            padding: '0px',
+            backgroundColor: colors.black,
+            borderRadius: '0px',
+          },
           '&.path-transfers-stack': {
-            justifyContent: 'space-around',
-            gap: 3,
+            borderTop: `1px solid ${colors.black}`,
+            justifyContent: 'space-between',
+            gap: '20%',
+
+            '@media (max-width: 785px)': {
+              gap: '10%',
+            },
           },
-          // flights-item.tsx
           '&.plane-icon-stack': {
-            padding: 10,
+            padding: 0,
             flexDirection: 'row',
             justifyContent: 'space-around',
-            alignItems: ' flex-end',
-            width: '10%',
+            alignItems: 'center',
+            width: '100%',
           },
           '&.users-stack': {
             justifyContent: 'center',
@@ -621,16 +698,23 @@ export const theme = createTheme({
     MuiContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: colors.defaultText,
+          backgroundColor: colors.lightGrey,
           maxWidth: 'false',
           display: 'flex',
           minHeight: '100vh',
           minWidth: '100%',
           justifyContent: 'center',
-          alignItems: 'center',
+          padding: 0,
+
+          '.auth': {
+            alignItems: 'center',
+          },
 
           '@media (min-width: 1200px)': {
             maxWidth: '100%',
+          },
+          '@media (min-width: 600px)': {
+            padding: 0,
           },
           '@media (min-height: 600px)': {
             minHeight: '100vh',

@@ -29,21 +29,15 @@ export default function FlightsList({ flightList }: Props) {
                         <Typography variant='h5'>{flightList.from_city}</Typography>
                     </Stack>
                     <Stack direction='column' className='path-stack-outlook'>
-                        <Stack direction='row' alignItems={'flex-end'} gap={1}>
+                        <Stack direction={'row'} justifyContent={'space-between'} sx={{ marginBottom: '2px' }}>
                             <FlightTakeoffIcon />
-                            <div
-                                style={{
-                                    width: '100%',
-                                    height: '2px',
-                                    padding: '2px',
-                                    backgroundColor: 'black',
-                                    borderRadius: '8px'
-                                }}>
-                            </div>
                             <FlightLandIcon />
                         </Stack>
+           
+                            {/* <Stack className='transfer-path'>
+                            </Stack> */}
                         <Stack direction='row' className='path-transfers-stack'>
-                            {flightList.paths.length > 1 && flightList.paths.map((flight: Flight) => {
+                            {flightList.paths.map((flight: Flight) => {
                                 return <FlightItem key={flight.id} flight={flight} />
                             })}
                         </Stack>

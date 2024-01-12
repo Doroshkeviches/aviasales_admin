@@ -1,4 +1,4 @@
-import { TextField, Button, CircularProgress, IconButton, Stack, Typography } from '@mui/material';
+import { TextField, Button, CircularProgress, IconButton, Stack, Typography, Container } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
 import { forgotPassword, resetPassword } from './store/auth.actions';
@@ -52,8 +52,9 @@ export default function ResetPasswordPage() {
   const handleShowConfirmPassword = () => {
     setShowConfirmPassword(prev => !prev)
   }
+
   return (
-    <>
+    <Container className='auth'>
       <Stack direction="column" gap={2} className='auth-stack'>
         <form onSubmit={formik.handleSubmit}
           style={{
@@ -120,6 +121,6 @@ export default function ResetPasswordPage() {
         </form>
         {/* {errors ? <AlertMessage errorMessage={errors}/> : null} */}
       </Stack>
-    </ >
+    </Container>
   )
 }
