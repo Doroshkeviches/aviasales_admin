@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getTickets } from './store/tickets.action'
 import { ticketsErrorsSelector, ticketsPendingSelector, ticketsSelector } from './store/tickets.selector'
 import TicketComponent from './components/ticket.component'
-import { Box, Container, Stack, Typography } from '@mui/material'
+import { Container, Stack, Typography } from '@mui/material'
 import AlertMessage from '../auth/components/alert-message'
 
 export default function TicketPage() {
@@ -14,17 +14,17 @@ export default function TicketPage() {
     useEffect(() => {
         dispatch(getTickets())
     }, [])
-    console.log(tickets)
+
     return (
-        <Container>
-            <Box display={'flex'} flexDirection={'column'} alignItems={'center'} flexWrap={'wrap'} gap={4}>
+        <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <Stack className='tickets-search-stack'>
                 <Typography variant='h1' color={'whitesmoke'}>TICKETS</Typography>
                 <Stack direction='column' className='users-stack'>
                     {tickets.map(ticket => {
                         return <TicketComponent ticket={ticket} />
                     })}
                 </Stack>
-            </Box>
+            </Stack>
             {errors ? <AlertMessage errorMessage={errors} /> : null}
         </Container>
     )

@@ -34,7 +34,7 @@ export default function UserPage() {
     return (
         <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
             {user ? <><Stack className='user-edit-stack'>
-                <Button variant='contained' className='flight-purchace'  onClick={navigateBackToUsers} sx={{ marginLeft: 'auto' }}>BACK</Button>
+                <Button variant='contained' color='success' onClick={navigateBackToUsers} sx={{ marginLeft: 'auto' }}>BACK</Button>
                 <Typography variant='h1' color={'whitesmoke'}>USER: {user.first_name} {user.last_name}</Typography>
                 <UserEdit user={user} />
             </Stack>

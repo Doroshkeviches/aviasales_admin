@@ -94,7 +94,7 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button  className='flight-purchace' variant="contained" fullWidth type="submit">
+          <Button  variant='contained' color='success' fullWidth type="submit">
             {false ? <CircularProgress /> : 'SUBMIT'}
           </Button>
         }

@@ -20,7 +20,7 @@ export default function FlightsList({ flightList }: Props) {
             <Stack direction='row' className='flights-element-stack'>
                 <Stack direction='column' className='price-stack' gap={3}>
                     <Typography variant='h1'>{flightList.totalPrice} $</Typography>
-                    <Button variant='contained' color='primary' className='flight-purchace'>BUY</Button>
+                    <Button variant='contained' color='success'>BUY</Button>
                 </Stack>
                 <Stack direction='row' className='path-stack'>
                     <Stack alignItems={'center'}>
@@ -33,8 +33,8 @@ export default function FlightsList({ flightList }: Props) {
                             <FlightTakeoffIcon />
                             <FlightLandIcon />
                         </Stack>
-           
-                            {/* <Stack className='transfer-path'>
+
+                        {/* <Stack className='transfer-path'>
                             </Stack> */}
                         <Stack direction='row' className='path-transfers-stack'>
                             {flightList.paths.map((flight: Flight) => {

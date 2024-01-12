@@ -86,11 +86,11 @@ export const colors = {
   primaryPressed: '#041492', // blue
   primaryDisabled: '#6872BD', // light-blue
 
-  orange: '#F8931F', // orange
+  secondary: '#F8931F', // orange
   success: '#0c8d4f', // green
   error: '#F44336',
-  // successBlend: '#0c8d60', // blend green
-  // errorBlend: '#88292F', // blend red
+  successBlend: '#0c8d60', // blend green
+  errorBlend: '#88292F', // blend red
 
   brightGrey: '#EBEFF2',
   lightGrey: '#D1D1D1',
@@ -201,7 +201,7 @@ export const theme = createTheme({
       },
       '@media (max-width: 460px)': {
         lineHeight: '1',
-        fontSize: 8,
+        fontSize: 10,
       },
     },
     h6: {
@@ -254,7 +254,7 @@ export const theme = createTheme({
       main: colors.primary,
     },
     secondary: {
-      main: colors.orange,
+      main: colors.secondary,
     },
     error: {
       main: colors.error,
@@ -268,67 +268,6 @@ export const theme = createTheme({
     white: {
       main: colors.white,
     },
-    // 'bright-midnight': {
-    //   main: '#041492',
-    //   '100': '#E5E7F4',
-    //   '200': '#CCD0E9',
-    //   '300': '#9AA1D3',
-    //   '400': '#6872BD',
-    //   '500': '#3643A7',
-    //   '600': '#041492',
-    //   '700': '#031074',
-    //   '800': '#020C57',
-    //   '900': '#01073A',
-    //   // "1000": "#00041D",
-    // },
-    // 'miami-marmelade': {
-    //   '100': '#FEF4E8',
-    //   '200': '#FDE9D2',
-    //   '300': '#FCD3A5',
-    //   '400': '#FABE78',
-    //   '500': '#F9A84B',
-    //   '600': '#F8931F',
-    //   '700': '#C67518',
-    //   '800': '#945812',
-    //   '900': '#633A0C',
-    //   // "1000": "#311D06",
-    // },
-    // 'flame-red': {
-    //   '100': '#F3E9EA',
-    //   '200': '#E7D4D5',
-    //   '300': '#CFA9AB',
-    //   '400': '#B77E82',
-    //   '500': '#9F5358',
-    //   '600': '#88292F',
-    //   '700': '#6C2025',
-    //   '800': '#51181C',
-    //   '900': '#361012',
-    //   // "1000": "#1B0809",
-    // },
-    // 'perfect-landing': {
-    //   '100': '#F5F7F8',
-    //   '200': '#EBEFF2',
-    //   '300': '#D8E0E6',
-    //   '400': '#C4D1DA',
-    //   '500': '#B1C2CE',
-    //   '600': '#9EB3C2',
-    //   '700': '#7E8F9B',
-    //   '800': '#5E6B74',
-    //   '900': '#3F474D',
-    //   // "1000": "#1F2326",
-    // },
-    // 'greenish-blue': {
-    //   '100': '#E6F3F3',
-    //   '200': '#CEE8E7',
-    //   '300': '#9DD1CF',
-    //   '400': '#6DBAB7',
-    //   '500': '#3CA39F',
-    //   '600': '#0C8C88',
-    //   '700': '#09706C',
-    //   '800': '#075451',
-    //   '900': '#043736',
-    //   // "1000": "#021C1B",
-    // },
   },
   components: {
     MuiTextField: {
@@ -435,67 +374,15 @@ export const theme = createTheme({
             backgroundColor: colors.primary,
 
             '&:hover': {
-              backgroundColor: colors.orange,
+              backgroundColor: colors.secondary,
             },
 
             '&:active': {
-              backgroundColor: colors.orange,
+              backgroundColor: colors.secondary,
             },
             '&:disabled': {
               color: colors.white,
-              backgroundColor: colors.orange,
-            },
-          },
-        },
-        {
-          props: {
-            variant: 'contained',
-            color: 'default',
-            className: 'submit-user-changes',
-          },
-          style: {
-            padding: '14px 16px',
-            textTransform: 'capitalize',
-            textAlign: 'center',
-            color: colors.whitesmoke,
-            backgroundColor: colors.primaryDisabled,
-
-            '&:hover': {
-              backgroundColor: colors.success,
-            },
-
-            '&:active': {
-              backgroundColor: colors.success,
-            },
-            '&:disabled': {
-              color: colors.white,
-              backgroundColor: colors.orange,
-            },
-          },
-        },
-        {
-          props: {
-            variant: 'contained',
-            color: 'default',
-            className: 'submit-ticket-changes',
-          },
-          style: {
-            padding: '8px 16px',
-            textTransform: 'capitalize',
-            textAlign: 'center',
-            color: colors.whitesmoke,
-            backgroundColor: colors.primary,
-
-            '&:hover': {
-              backgroundColor: colors.success,
-            },
-
-            '&:active': {
-              backgroundColor: colors.success,
-            },
-            '&:disabled': {
-              color: colors.white,
-              backgroundColor: colors.orange,
+              backgroundColor: colors.secondary,
             },
           },
         },
@@ -526,8 +413,7 @@ export const theme = createTheme({
         {
           props: {
             variant: 'contained',
-            color: 'primary',
-            className: 'flight-purchace',
+            color: 'success',
           },
           style: {
             minWidth: '80px',
@@ -686,6 +572,15 @@ export const theme = createTheme({
             backgroundColor: colors.grey,
             padding: '40px 0px',
           },
+          '&.tickets-search-stack': {
+            display: 'flex',
+            gap: 10,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.grey,
+            padding: '40px 0px',
+          },
           '&.user-edit-stack': {
             display: 'flex',
             gap: 16,
@@ -708,10 +603,16 @@ export const theme = createTheme({
           '&.user-card': {
             backgroundColor: colors.whitesmoke,
             width: '35%',
+            '@media (max-width: 1000px)': {
+              width: '60%',
+            },
           },
           '&.ticket-card': {
             backgroundColor: colors.whitesmoke,
-            width: '50%',
+            width: '35%',
+            '@media (max-width: 1000px)': {
+              width: '60%',
+            },
           },
         },
       },

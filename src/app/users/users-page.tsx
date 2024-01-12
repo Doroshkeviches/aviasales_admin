@@ -27,7 +27,7 @@ export default function UsersPage() {
                 <TextField
                     id="filled-search"
                     label="Search user"
-                    placeholder='Enter user name'
+                    placeholder='Enter user'
                     InputLabelProps={{ shrink: true }}
                     type="search"
                     sx={{ color: 'whitesmoke', width: '40%' }}

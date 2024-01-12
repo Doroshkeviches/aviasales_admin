@@ -1,10 +1,8 @@
 import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { Link } from 'react-router-dom'
 import { Ticket } from '../types/Ticket.type'
 import { useState } from 'react'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
-// import { baseUrl } from 'src/constants';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
 import AlertMessage from 'src/app/auth/components/alert-message';
 
@@ -12,7 +10,6 @@ interface Props {
   ticket: Ticket
 }
 export default function TicketComponent({ ticket }: Props) {
-  console.log(ticket)
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
@@ -29,21 +26,18 @@ export default function TicketComponent({ ticket }: Props) {
   }
   return (
     <>
-         <Card className='ticket-card'>
+      <Card className='ticket-card'>
         <CardContent>
-          <Typography variant='h4' >
-            HOLDER NAME: {ticket.holder_first_name}
+          <Typography variant='h2' >
+            {ticket.holder_first_name} {ticket.holder_last_name}
           </Typography>
-          <Typography variant='h4' >
-            HOLDER LASTNAME: {ticket.holder_last_name}
-          </Typography>
-          <Typography variant='h4'>
+          <Typography variant='h5' paddingTop={'3px'}>
             FROM: {ticket.flight.from_city.title}
           </Typography>
-          <Typography variant='h4'>
+          <Typography variant='h5' paddingTop={'3px'}>
             TO: {ticket.flight.to_city.title}
           </Typography>
-          <Typography variant="h4">
+          <Typography variant="h5" paddingTop={'3px'}>
             PRICE: {ticket.flight.price} $
           </Typography>
           <Select
@@ -54,6 +48,7 @@ export default function TicketComponent({ ticket }: Props) {
             className='ticket-status-select'
             // label="Ticket Status"
             onChange={handleSelectChange}
+            sx={{ marginTop: 2 }}
           >
             {ticket_status_enum.map(item => {
               return <MenuItem value={item}>{item}</MenuItem>
@@ -64,7 +59,7 @@ export default function TicketComponent({ ticket }: Props) {
           {isDisabled ?
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
-            <Button onClick={handleSubmit} color="default" variant="contained" className='submit-ticket-changes' fullWidth type="submit">
+            <Button onClick={handleSubmit} variant='contained' color='success' fullWidth type="submit">
               {isLoading ? <CircularProgress /> : 'SUBMIT CHANGES'}
             </Button>
           }

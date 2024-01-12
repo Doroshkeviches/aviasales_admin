@@ -31,9 +31,6 @@ export default function UserTicketsComponent({ ticket }: Props) {
     <>
       <Card className='ticket-card'>
         <CardContent>
-          <Typography variant='h2' >
-            TICKET HOLDER:
-          </Typography>
           <Typography variant='h2' > 
           {ticket.holder_first_name} {ticket.holder_last_name}
           </Typography>
@@ -62,7 +59,7 @@ export default function UserTicketsComponent({ ticket }: Props) {
           {isDisabled ?
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
-            <Button onClick={handleSubmit} className='flight-purchace' variant="contained" fullWidth type="submit">
+            <Button onClick={handleSubmit} variant='contained' color='success' fullWidth type="submit">
               {isLoading ? <CircularProgress /> : 'SUBMIT'}
             </Button>
           }
