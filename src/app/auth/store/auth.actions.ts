@@ -10,6 +10,7 @@ import { ResetPassword } from "../types/ResetPassword.type";
 const baseUrl = process.env.REACT_APP_API_URL
 export const signin = createAsyncThunk<tokens, LogIn>("POST/signin", async (body, { rejectWithValue }) => {
   try {
+    localStorage.setItem('device_id', '39020a95-ab6f-4220-baaf-832b286c4039');
     const device_id = localStorage.getItem('device_id')
     const response = await axios.post(baseUrl + "/auth/admin/signin", { ...body, device_id });
     sessionStorage.setItem('access-token', response.data.access_token)
