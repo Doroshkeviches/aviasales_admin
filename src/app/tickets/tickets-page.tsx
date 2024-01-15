@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getTickets } from './store/tickets.action'
 import { ticketsErrorsSelector, ticketsPendingSelector, ticketsSelector } from './store/tickets.selector'
 import TicketComponent from './components/ticket.component'
-import { Container, Stack, Typography } from '@mui/material'
+import { CircularProgress, Container, Stack, Typography } from '@mui/material'
 import AlertMessage from '../auth/components/alert-message'
 
 export default function TicketPage() {
@@ -20,9 +20,13 @@ export default function TicketPage() {
             <Stack className='tickets-search-stack'>
                 <Typography variant='h1' color={'whitesmoke'}>TICKETS</Typography>
                 <Stack direction='column' className='users-stack'>
-                    {tickets.map(ticket => {
+                    {pending ? <CircularProgress sx={{position: 'absolute'}}/> : null}
+                    {tickets.length ? tickets?.map(ticket => {
                         return <TicketComponent ticket={ticket} />
-                    })}
+                    })
+                    : 
+                    <div>No tickets</div>
+                    }
                 </Stack>
             </Stack>
             {errors ? <AlertMessage errorMessage={errors} /> : null}

@@ -1,31 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, getUsers, getUsersBySearch, updateUser } from "./users.action";
+import { getUser, getUserDevices, getUsers, getUsersBySearch, updateUser } from "./users.action";
 import { User } from "../types/User.type";
+import { Device } from "../types/Device.type";
 
 interface AuthState {
     users: User[],
     user: User | null
+    devices: Device[]
     pending: {
         users: boolean,
-        user: boolean
+        user: boolean,
+        devices: boolean
     },
     errors: {
         users: null | string,
         user: null | string,
-
+        devices: null | string
     }
 }
 
 const initialState: AuthState = {
     users: [],
     user: null,
+    devices: [],
     pending: {
         users: false,
-        user: false
+        user: false,
+        devices: false,
     },
     errors: {
         users: null,
-        user: null
+        user: null,
+        devices: null
     }
 };
 
@@ -92,6 +98,20 @@ export const usersSlice = createSlice({
                 state.errors.user = payload.response.data.message
                 state.user = null
                 state.pending.user = false;
+            })
+
+            .addCase(getUserDevices.pending, (state) => {
+                state.pending.devices = true;
+                state.errors.devices = null;
+            })
+            .addCase(getUserDevices.fulfilled, (state, { payload }) => {
+                state.devices = payload
+                state.pending.devices = false;
+            })
+            .addCase(getUserDevices.rejected, (state, { payload }: any) => {
+                state.errors.devices = payload.response.data.message
+                state.devices = []
+                state.pending.devices = false;
             })
     },
 });

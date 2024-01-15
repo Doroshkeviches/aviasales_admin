@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import repository from "src/repository";
 import { User } from "../types/User.type";
 import UpdateUser from "../types/UpdateUser.type";
+import { Device } from "../types/Device.type";
 
 
 export const getUsers = createAsyncThunk<User[], number>("Get/users", async (page, { rejectWithValue }) => {
@@ -40,3 +41,12 @@ export const updateUser = createAsyncThunk<User, UpdateUser>("Post/updateUser", 
     }
 });
 
+
+export const getUserDevices = createAsyncThunk<Device[], string>("GET/user-devices", async (id, { rejectWithValue }) => {
+    try {
+        const response = await repository.get(`/devices/${id}`);
+        return response.data
+    } catch (error: any) {
+        return rejectWithValue(error);
+    }
+});

@@ -1,3 +1,4 @@
+import { Device } from "./Device.type";
 import { Ticket } from "./Ticket.type";
 
 export interface User {
@@ -6,4 +7,5 @@ export interface User {
     last_name: string,
     email: string,
     tickets: Ticket[]
+    devices: Device[]
 }

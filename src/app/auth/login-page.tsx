@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signout } from 'src/utils/signout';
 import AlertMessage from './components/alert-message';
+import { LoadingButton } from '@mui/lab';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState<boolean>()
@@ -113,9 +114,9 @@ export default function LoginPage() {
                         }}
                     />
                     <Typography variant='h6' className='forget-password' onClick={navigateToForgotPassword}>Forgot password?</Typography>
-                    <Button variant="contained" fullWidth type="submit">
-                        {pending ? <CircularProgress /> : 'SIGN IN'}
-                    </Button>
+                    <LoadingButton loading={pending} loadingIndicator={<CircularProgress />}  variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
+                        SIGN IN
+                    </LoadingButton>
                 </form>
                 {errors ? <AlertMessage errorMessage={errors} /> : null}
             </Stack>

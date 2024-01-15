@@ -30,7 +30,7 @@ const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
       </Suspense>
     </>
   ) : (
-    <Navigate to={"/admin/auth/signup"} />
+    <Navigate to={"/admin/auth/signin"} />
   );
 };
 

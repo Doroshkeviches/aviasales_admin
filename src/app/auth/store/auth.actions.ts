@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SithUpForm } from "src/app/auth/types/SignUpForm";
-import { LogIn } from "src/app/auth/types/LogInForm";
+import { LogIn } from "src/app/auth/types/LogIn.type";
 import { tokens } from "src/app/auth/types/tokens.type";
 import { ResetToken } from "../types/ResetToken.type";
 import { ForgotPassword } from "../types/ForgotPassword.type";

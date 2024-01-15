@@ -1,4 +1,4 @@
-import { Ticket } from "./ticket.type";
+import { Ticket } from "./Ticket.type";
 
 export interface User {
     id: string,

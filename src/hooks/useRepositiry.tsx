@@ -16,6 +16,7 @@ export default function useRepository() {
             })
             setData(result)
             setIsLoading(false)
+            return result
         } catch (error: any) {
             setErrors(error)
         }

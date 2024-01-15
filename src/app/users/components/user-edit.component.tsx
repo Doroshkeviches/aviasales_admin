@@ -35,6 +35,7 @@ export default function UserEdit({ user }: Props) {
       setIsDisabled(true)
     },
   });
+  console.log(user)
   return (
     <>
       <form onSubmit={formik.handleSubmit} style={{
@@ -94,7 +95,7 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button  variant='contained' color='success' fullWidth type="submit">
+          <Button variant='contained' color='success' fullWidth type="submit">
             {false ? <CircularProgress /> : 'SUBMIT'}
           </Button>
         }

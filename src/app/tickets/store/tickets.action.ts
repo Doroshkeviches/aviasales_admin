@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import repository from "src/repository";
-import { Ticket } from "../types/ticket.type";
+import { Ticket } from "../types/Ticket.type";
 
 
 export const getTickets = createAsyncThunk<Ticket[]>("Get/tickets", async (_, { rejectWithValue }) => {
