@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+
+// ======= helpers ======= //
+import useDebounce from 'src/hooks/useDebounce'
+
+// ======= store ======= //
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getUsers, getUsersBySearch } from './store/users.action'
 import { usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
-import UserCard from './components/user-card.component'
+
+// ======= mui ======= //
 import { Container, Stack, TextField, Typography } from '@mui/material'
-import useDebounce from 'src/hooks/useDebounce'
+
+// ======= components ======= //
+import UserCard from './components/user-card.component'
 import AlertMessage from '../../components/alert-message'
 
 export default function UsersPage() {
@@ -12,9 +20,11 @@ export default function UsersPage() {
     const errors = useAppSelector(usersErrorsSelector)
     const pending = useAppSelector(usersPendingSelector)
     const dispatch = useAppDispatch()
+
     useEffect(() => {
         dispatch(getUsers(1))
     }, [])
+
     const handleInput = (value: string) => {
         dispatch(getUsersBySearch(value))
     }

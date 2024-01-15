@@ -1,11 +1,18 @@
 import { useFormik } from 'formik';
+import * as Yup from 'yup'
+import { useNavigate } from 'react-router';
+
+// ======= store ======= //
 import { forgotPassword } from './store/auth.actions';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import * as Yup from 'yup'
 import { resetTokenErrorsSelector, resetTokenPendingSelector } from './store/auth.selector';
+
+// ======= mui ======= //
 import { Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material';
-import { useNavigate } from 'react-router';
+
+// ======= components ======= //
 import AlertMessage from '../../components/alert-message';
+
 
 export default function ForgorPasswordPage() {
     const navigate = useNavigate()

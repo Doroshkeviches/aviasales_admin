@@ -1,13 +1,19 @@
-import { TextField, CircularProgress, IconButton, Stack, Typography, Container } from '@mui/material';
-import { useFormik } from 'formik';
 import { useState } from 'react'
+import { useFormik } from 'formik';
+import * as Yup from 'yup'
+import { useNavigate } from 'react-router';
+
+// ======= store ======= //
 import { resetPassword } from './store/auth.actions';
 import { sessionErrorsSelector, sessionPendingSelector } from './store/auth.selector';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import * as Yup from 'yup'
-import { useNavigate } from 'react-router';
+
+// ======= mui ======= //
+import { TextField, CircularProgress, IconButton, Stack, Typography, Container } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
+
+// ======= components ======= //
 import AlertMessage from '../../components/alert-message';
 
 export default function ResetPasswordPage() {

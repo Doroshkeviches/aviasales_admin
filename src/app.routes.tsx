@@ -1,11 +1,11 @@
 import React, { FC, Suspense } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 // import PageHeaderComp from "./components/page-header.comp";
-import { useAppDispatch, useAppSelector } from "src/storeTypes";
+import { useAppSelector } from "src/storeTypes";
 import { sessionSelector } from "./app/auth/store/auth.selector";
 import { Container } from "@mui/material";
 
-// ======= private route ======= //
+// ======= admin private route ======= //
 const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session?.role_type === "Admin" ? (
@@ -19,6 +19,7 @@ const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
     <Navigate to={"/admin/flights"} />
   );
 };
+
 // ======= private route ======= //
 const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
@@ -56,10 +57,12 @@ const AppRoutes = () => {
       <Routes>
         {/* PUBLIC */}
         <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-        <Route path='/admin/flights/*' element={<PrivateRoute element={FlightsRoutes} />} />
 
         {/* PRIVATE */}
+        <Route path='/admin/flights/*' element={<PrivateRoute element={FlightsRoutes} />} />
         <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
+
+        {/* ADMIN PRIVATE */}
         <Route path='/admin/users/*' element={<AdminPrivateRoute element={UsersRoutes} />} />
 
         {/* DEFAULT */}
