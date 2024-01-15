@@ -15,6 +15,7 @@ import { LoadingButton } from '@mui/lab';
 
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
+import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
 
 export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +51,7 @@ export default function ResetPasswordPage() {
     onSubmit: async (value) => {
       const result = await dispatch(resetPassword(value)).unwrap()
       if (result) {
-        navigate('/admin/flights')
+        navigate(RoutesConstant.flights)
       }
     },
   });

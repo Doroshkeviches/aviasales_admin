@@ -4,19 +4,22 @@ import { Navigate, Routes, Route } from "react-router-dom";
 import { useAppSelector } from "src/storeTypes";
 import { sessionSelector } from "./app/auth/store/auth.selector";
 import { Container } from "@mui/material";
+import AdminHeaderComp from "./components/admin-header.comp";
+import ManagerHeaderComp from "./components/manager-header.component";
+import { RoutesConstant } from "./constants/RoutesConstants.enum";
 
 // ======= admin private route ======= //
 const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session?.role_type === "Admin" ? (
     <>
-      {/* <PageHeaderComp /> */}
+      <AdminHeaderComp />
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>
     </>
   ) : (
-    <Navigate to={"/admin/flights"} />
+    <Navigate to={RoutesConstant.flights} />
   );
 };
 
@@ -25,20 +28,19 @@ const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session ? (
     <>
-      {/* <PageHeaderComp /> */}
+      <ManagerHeaderComp />
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>
     </>
   ) : (
-    <Navigate to={"/admin/auth/signin"} />
+    <Navigate to={RoutesConstant.sign_in} />
   );
 };
 
 // ======= public route ======= //
 const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
   <>
-    {/* <PageHeaderComp /> */}
     <Suspense fallback={<div />}>
       <Element />
     </Suspense>

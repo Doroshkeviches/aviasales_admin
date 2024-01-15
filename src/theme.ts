@@ -636,7 +636,6 @@ export const theme = createTheme({
         root: {
           backgroundColor: colors.lightGrey,
           maxWidth: 'false',
-          display: 'flex',
           minHeight: '100vh',
           minWidth: '100%',
           justifyContent: 'center',

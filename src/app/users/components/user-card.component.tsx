@@ -5,15 +5,13 @@ import { User } from '../types/User.type'
 
 // ======= mui ======= //
 import { Card, CardContent, Typography, CardActions } from '@mui/material'
+import { RoutesConstant } from 'src/constants/RoutesConstants.enum'
+import { NavLink } from 'react-router-dom'
 interface Props {
   user: User
 }
 export default function UserCard({ user }: Props) {
   const navigate = useNavigate()
-
-  const navigateToPersonalInfo = () => {
-    navigate(`${user.id}`)
-  }
   return (
     <>
       <Card className='user-card'>
@@ -29,9 +27,9 @@ export default function UserCard({ user }: Props) {
           </Typography>
         </CardContent>
         <CardActions sx={{ padding: "16px" }}>
-          <Typography variant='h5' className='personal-info' onClick={navigateToPersonalInfo} sx={{ cursor: 'pointer' }}>
+          <NavLink to={RoutesConstant.user_id} className='personal-info'>
             Watch Personal Info
-          </Typography>
+          </NavLink>
         </CardActions>
       </Card>
     </>

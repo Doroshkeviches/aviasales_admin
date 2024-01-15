@@ -16,6 +16,8 @@ import { LoadingButton } from '@mui/lab';
 
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
+import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
+import { NavLink } from 'react-router-dom';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -53,7 +55,7 @@ export default function LoginPage() {
         onSubmit: async (value) => {
             const result = await dispatch(signin(value)).unwrap()
             if (result) {
-                navigate('/admin/flights')
+                navigate(RoutesConstant.flights)
             }
         },
     });
@@ -118,7 +120,7 @@ export default function LoginPage() {
                             </IconButton>,
                         }}
                     />
-                    <Typography variant='h6' className='forget-password' onClick={navigateToForgotPassword}>Forgot password?</Typography>
+                    <NavLink to={RoutesConstant.forget_password} className='forget-password' >Forgot password?</NavLink>
                     <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
                         SIGN IN
                     </LoadingButton>

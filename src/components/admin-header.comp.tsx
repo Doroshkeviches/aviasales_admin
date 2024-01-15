@@ -1,27 +1,29 @@
 import { MenuItem, Typography } from "@mui/material";
 import { FC } from "react";
+import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { RoutesConstant } from "src/constants/RoutesConstants.enum";
 
-const PageHeaderComp: FC = () => {
+const AdminHeaderComp: FC = () => {
   return (
     <header style={{ display: 'flex' }}>
       <MenuItem >
-        <Link to={'/admin/flights'}>
+        <NavLink to={RoutesConstant.flights}>
           <Typography textAlign="center">Flights</Typography>
-        </Link>
+        </NavLink>
       </MenuItem>
       <MenuItem >
-        <Link to={'/admin/users'}>
+        <NavLink to={RoutesConstant.users}>
           <Typography textAlign="center">Users</Typography>
-        </Link>
+        </NavLink>
       </MenuItem>
       <MenuItem >
-        <Link to={'/admin/tickets'}>
+        <NavLink to={RoutesConstant.tickets}>
           <Typography textAlign="center">Tickets</Typography>
-        </Link>
+        </NavLink>
       </MenuItem>
     </header>
   );
 };
 
-export default PageHeaderComp;
+export default AdminHeaderComp;

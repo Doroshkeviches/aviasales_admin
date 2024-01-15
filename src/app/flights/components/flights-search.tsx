@@ -15,7 +15,7 @@ import { Autocomplete, TextField, Button, FormControl, CircularProgress, Typogra
 // ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
 
-const searchByOptions = ['Price', 'Time']
+const searchByOptions = ['Price', 'Time'] // TODO CREATE new file with this array
 
 export default function FlightsSearch() {
     const [startDate, setStartDate] = useState<Date | null>(null)

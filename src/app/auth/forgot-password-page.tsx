@@ -12,6 +12,7 @@ import { Button, CircularProgress, Container, Stack, TextField, Typography } fro
 
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
+import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
 
 
 export default function ForgorPasswordPage() {
@@ -33,7 +34,7 @@ export default function ForgorPasswordPage() {
             const result = await dispatch(forgotPassword(value)).unwrap()
             if (result) {
                 sessionStorage.setItem('reset-token', result.token)
-                navigate('/admin/auth/reset-password')
+                navigate(RoutesConstant.reset_password)
             }
         },
     });
