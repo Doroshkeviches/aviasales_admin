@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, getUserDevices, getUsers, getUsersBySearch, updateUser } from "./users.action";
+import { getUser, getUsers, getUsersBySearch, updateUser } from "./users.action";
 import { User } from "../types/User.type";
 import { Device } from "../types/Device.type";
 
@@ -98,20 +98,6 @@ export const usersSlice = createSlice({
                 state.errors.user = payload.response.data.message
                 state.user = null
                 state.pending.user = false;
-            })
-
-            .addCase(getUserDevices.pending, (state) => {
-                state.pending.devices = true;
-                state.errors.devices = null;
-            })
-            .addCase(getUserDevices.fulfilled, (state, { payload }) => {
-                state.devices = payload
-                state.pending.devices = false;
-            })
-            .addCase(getUserDevices.rejected, (state, { payload }: any) => {
-                state.errors.devices = payload.response.data.message
-                state.devices = []
-                state.pending.devices = false;
             })
     },
 });
