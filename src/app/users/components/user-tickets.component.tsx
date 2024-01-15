@@ -6,7 +6,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
 import { baseUrl } from 'src/constants';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
-import AlertMessage from 'src/app/auth/components/alert-message';
+import AlertMessage from 'src/components/alert-message';
 
 interface Props {
   ticket: Ticket

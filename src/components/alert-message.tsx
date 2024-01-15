@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert';
 
@@ -7,17 +7,14 @@ interface Props {
 }
 
 export default function AlertMessage({ errorMessage }: Props) {
-    const [open, setOpen] = React.useState<boolean>(true);
+    const [open, setOpen] = useState<boolean>(true);
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    const handleClose = () => {
         setOpen(false);
     };
 
     return (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'center'
         }}>

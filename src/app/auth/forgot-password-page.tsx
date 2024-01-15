@@ -1,19 +1,18 @@
 import { useFormik } from 'formik';
-import React from 'react'
-import { forgotPassword, signin } from './store/auth.actions';
+import { forgotPassword } from './store/auth.actions';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import * as Yup from 'yup'
-import { resetTokenErrorsSelector, resetTokenPendingSelector, resetTokenSelector } from './store/auth.selector';
+import { resetTokenErrorsSelector, resetTokenPendingSelector } from './store/auth.selector';
 import { Button, CircularProgress, Container, Stack, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-import AlertMessage from './components/alert-message';
+import AlertMessage from '../../components/alert-message';
 
 export default function ForgorPasswordPage() {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const token = useAppSelector(resetTokenSelector)
     const pending = useAppSelector(resetTokenPendingSelector)
     const errors = useAppSelector(resetTokenErrorsSelector)
+
     const SigninSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email').required('Required'),
     });
@@ -32,14 +31,10 @@ export default function ForgorPasswordPage() {
         },
     });
 
-    const handleNavigate = () => {
-        navigate('/admin/auth/reset-password')
-    }
-
 
     return (
         <Container className='auth'>
-            <Stack direction="column" gap={2} className='auth-stack'>
+            <Stack className='auth-stack'>
                 <form onSubmit={formik.handleSubmit}
                     style={{
                         display: 'flex',
@@ -50,7 +45,7 @@ export default function ForgorPasswordPage() {
                         textAlign: 'center',
                         gap: '10px'
                     }}>
-                    <Typography variant='h1' color='whitesmoke'>ENTER YOUR EMAIL</Typography>
+                    <Typography variant='h1' className='main'>ENTER YOUR EMAIL</Typography>
                     <TextField
                         fullWidth
                         id="email"
@@ -64,7 +59,7 @@ export default function ForgorPasswordPage() {
                         error={formik.touched.email && Boolean(formik.errors.email)}
                         helperText={formik.touched.email && formik.errors.email}
                     />
-                    <Button color="primary" variant="contained" fullWidth type="submit" onClick={handleNavigate}>
+                    <Button color="primary" variant="contained" fullWidth type="submit">
                         {pending ? <CircularProgress /> : 'CONTINUE'}
                     </Button>
                     {errors ? <AlertMessage errorMessage={errors} /> : null}

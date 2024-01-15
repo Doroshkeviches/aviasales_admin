@@ -1,11 +1,11 @@
-import React from 'react'
 import { useAppSelector } from 'src/storeTypes'
 import { flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
-import { Alert, AlertTitle, CircularProgress, Stack } from '@mui/material'
+import { CircularProgress, Stack } from '@mui/material'
 import FlightList from './flights-list'
+import AlertMessage from 'src/components/alert-message'
 
 export default function PathsList() {
-    // const errors_flights = useAppSelector(flightsErrorsSelector)
+    const errors_flights = useAppSelector(flightsErrorsSelector)
     const pending_flights = useAppSelector(flightsPendingSelector)
     const flights = useAppSelector(flightsSelector)
 
@@ -14,8 +14,8 @@ export default function PathsList() {
     }
     return (
         <>
-            {/* {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null} */}
-            <Stack direction='column' className='paths-stack'>
+            {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null}
+            <Stack className='paths-stack'>
                 {flights.map((flightList) => {
                     return <FlightList key={flightList.id} flightList={flightList} />
                 })}

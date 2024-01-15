@@ -1,24 +1,20 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Autocomplete, TextField, Button, Checkbox, FormControlLabel, FormControl, CircularProgress, Box, Typography, Stack } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Autocomplete, TextField, Button, FormControl, CircularProgress, Typography, Stack } from '@mui/material'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getCities, getFlights } from '../store/flghts.action'
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
-import AlertMessage from 'src/app/auth/components/alert-message';
+import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector } from '../store/flights.selector'
+import AlertMessage from 'src/components/alert-message';
 
 export default function FlightsSearch() {
     const [startDate, setStartDate] = useState<Date | null>(null)
     const [returnDate, setReturnDate] = useState<Date | null>(null)
-    const [isReturn, setIsReturn] = useState<boolean>(false)
     const [from_city, setFrom_city] = useState<string | null>(null)
     const [to_city, setTo_city] = useState<string | null>(null)
     const [validationErrors, setValidationErrors] = useState<string | null>(null)
-    const [isDisabled, setIsDisabled] = useState<boolean>(true)
 
     const dispatch = useAppDispatch()
     const errors_city = useAppSelector(citiesErrorsSelector)
@@ -26,11 +22,11 @@ export default function FlightsSearch() {
     const cities = useAppSelector(citiesSelector)
     const errors_flights = useAppSelector(flightsErrorsSelector)
     const tomorrow = dayjs().add(1, 'day');
-    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getCities())
     }, [])
+
     if (pending_city) {
         return <CircularProgress />
     }
@@ -49,17 +45,18 @@ export default function FlightsSearch() {
             setValidationErrors('start city cannot be same as end city')
             return false
         }
-        if (isReturn && !returnDate) {
-            setValidationErrors('return date is required')
-            return false
-        }
         return true
     }
     const handleGetPath = () => {
+        let isReturn = false
+        if (returnDate) {
+            isReturn = true
+        }
         const isValid = validateSeatch()
         if (!isValid) {
             return
         }
+
         const body = {
             from_city: from_city!,
             to_city: to_city!,
@@ -110,15 +107,12 @@ export default function FlightsSearch() {
                             onChange={(newValue: Date | null) => setStartDate(newValue)}
                             slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: 'Pick start date' } }} />
                         <DatePicker
-                            disabled={isReturn}
                             label="Return Date"
                             value={returnDate}
                             onChange={(newValue: Date | null) => setReturnDate(newValue)}
                             slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: 'Pick end date' } }} />
                     </Stack>
                 </LocalizationProvider>
-
-                {/* <FormControlLabel control={<Checkbox onClick={() => setIsReturn(prev => !prev)} />} label="Return" /> */}
 
                 <Button
                     onClick={handleGetPath} fullWidth sx={{ marginTop: 4 }}

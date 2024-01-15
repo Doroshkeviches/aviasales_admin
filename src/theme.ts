@@ -319,16 +319,6 @@ export const theme = createTheme({
         },
       },
     },
-    MuiFormControlLabel: {
-      styleOverrides: {
-        root: {
-          color: colors.whitesmoke,
-          '& .MuiCheckbox-root': {
-            color: colors.whitesmoke,
-          },
-        },
-      },
-    },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
@@ -465,6 +455,7 @@ export const theme = createTheme({
             flexWrap: 'wrap',
           },
           '&.paths-stack': {
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             padding: '40px',
@@ -489,6 +480,7 @@ export const theme = createTheme({
             minWidth: '10%',
             padding: 10,
             gap: 10,
+            flexDirection: 'column',
 
             '@media (max-width: 460px)': {
               padding: 5,
@@ -543,22 +535,22 @@ export const theme = createTheme({
             width: '100%',
           },
           '&.users-stack': {
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             flexWrap: 'wrap',
             width: '100%',
-            paddingTop: 20,
-            paddingBottom: 20,
+            padding: '20px 0',
             gap: 20,
           },
           '&.auth-stack': {
+            flexDirection: 'column',
             borderRadius: '24px',
             backgroundImage: `url(${image})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             padding: '30px 10px 100px',
             width: '25vw',
-            maxWidth: '25vw',
             minHeight: '45vh',
           },
           '&.users-search-stack': {
@@ -588,7 +580,7 @@ export const theme = createTheme({
             alignItems: 'center',
             textAlign: 'center',
             backgroundColor: colors.grey,
-            padding: '20px 20px',
+            padding: 20,
           },
         },
       },
@@ -602,14 +594,14 @@ export const theme = createTheme({
           '&.user-card': {
             backgroundColor: colors.whitesmoke,
             width: '35%',
-            '@media (max-width: 1000px)': {
+            '@media (max-width: 1100px)': {
               width: '60%',
             },
           },
           '&.ticket-card': {
             backgroundColor: colors.whitesmoke,
             width: '35%',
-            '@media (max-width: 1000px)': {
+            '@media (max-width: 1100px)': {
               width: '60%',
             },
           },
@@ -659,9 +651,6 @@ export const theme = createTheme({
           },
           '@media (min-width: 600px)': {
             padding: 0,
-          },
-          '@media (min-height: 600px)': {
-            minHeight: '100vh',
           },
         },
       },

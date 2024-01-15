@@ -5,7 +5,7 @@ import { usersErrorsSelector, usersPendingSelector, usersSelector } from './stor
 import UserCard from './components/user-card.component'
 import { Container, Stack, TextField, Typography } from '@mui/material'
 import useDebounce from 'src/hooks/useDebounce'
-import AlertMessage from '../auth/components/alert-message'
+import AlertMessage from '../../components/alert-message'
 
 export default function UsersPage() {
     const users = useAppSelector(usersSelector)

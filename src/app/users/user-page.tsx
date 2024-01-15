@@ -7,7 +7,7 @@ import { Typography, Button, CircularProgress, Container, Stack } from '@mui/mat
 import { useNavigate } from 'react-router'
 import UserEdit from './components/user-edit.component'
 import UserTicketsComponent from './components/user-tickets.component'
-import AlertMessage from '../auth/components/alert-message'
+import AlertMessage from '../../components/alert-message'
 import { Device } from './types/Device.type'
 import useRepository from 'src/hooks/useRepositiry'
 
@@ -43,7 +43,6 @@ export default function UserPage() {
     return (
         <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
             {user ? <><Stack className='user-edit-stack'>
-                <Button variant='contained' color='success' onClick={navigateBackToUsers} sx={{ marginLeft: 'auto' }}>Back to all users</Button>
                 <Typography variant='h1' color={'whitesmoke'}>USER: {user.first_name} {user.last_name}</Typography>
                 <UserEdit user={user} />
             </Stack>

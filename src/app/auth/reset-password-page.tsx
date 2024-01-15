@@ -1,11 +1,14 @@
-import { TextField, Button, CircularProgress, IconButton, Stack, Typography, Container } from '@mui/material';
+import { TextField, CircularProgress, IconButton, Stack, Typography, Container } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { useState } from 'react'
-import { forgotPassword, resetPassword } from './store/auth.actions';
-import { useAppDispatch } from 'src/storeTypes';
+import { useState } from 'react'
+import { resetPassword } from './store/auth.actions';
+import { sessionErrorsSelector, sessionPendingSelector } from './store/auth.selector';
+import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
+import AlertMessage from '../../components/alert-message';
 
 export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +16,9 @@ export default function ResetPasswordPage() {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const errors = useAppSelector(sessionErrorsSelector)
+  const pending = useAppSelector(sessionPendingSelector)
+
   const SigninSchema = Yup.object().shape({
     password: Yup.string()
       .required('Password is required')
@@ -38,7 +44,7 @@ export default function ResetPasswordPage() {
     onSubmit: async (value) => {
       const result = await dispatch(resetPassword(value)).unwrap()
       if (result) {
-        navigate('/admin/auth/reset-password')
+        navigate('/admin/flights')
       }
     },
   });
@@ -51,7 +57,7 @@ export default function ResetPasswordPage() {
 
   return (
     <Container className='auth'>
-      <Stack direction="column" gap={2} className='auth-stack'>
+      <Stack className='auth-stack'>
         <form onSubmit={formik.handleSubmit}
           style={{
             display: 'flex',
@@ -61,8 +67,9 @@ export default function ResetPasswordPage() {
             padding: '20px 20px',
             textAlign: 'center',
             gap: '10px'
-          }}>
-          <Typography variant='h1' color='whitesmoke'>RESET PASSWORD</Typography>
+          }}
+        >
+          <Typography variant='h1' className='main'>RESET PASSWORD</Typography>
           <TextField
             fullWidth
             id="password"
@@ -78,7 +85,6 @@ export default function ResetPasswordPage() {
             type={showPassword ? 'text' : 'password'}
             InputProps={{
               endAdornment: <IconButton
-                sx={{ color: 'whitesmoke' }}
                 aria-label="toggle password visibility"
                 onClick={handleShowPassword}
                 edge="end"
@@ -102,7 +108,6 @@ export default function ResetPasswordPage() {
             type={showConfirmPassword ? 'text' : 'password'}
             InputProps={{
               endAdornment: <IconButton
-                sx={{ color: 'whitesmoke' }}
                 aria-label="toggle password visibility"
                 onClick={handleShowConfirmPassword}
                 edge="end"
@@ -111,11 +116,11 @@ export default function ResetPasswordPage() {
               </IconButton>,
             }}
           />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            {false ? <CircularProgress /> : 'SIGN IN'}
-          </Button>
+          <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
+            SIGN IN
+          </LoadingButton>
         </form>
-        {/* {errors ? <AlertMessage errorMessage={errors}/> : null} */}
+        {errors ? <AlertMessage errorMessage={errors} /> : null}
       </Stack>
     </Container>
   )

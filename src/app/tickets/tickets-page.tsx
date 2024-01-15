@@ -4,7 +4,7 @@ import { getTickets } from './store/tickets.action'
 import { ticketsErrorsSelector, ticketsPendingSelector, ticketsSelector } from './store/tickets.selector'
 import TicketComponent from './components/ticket.component'
 import { CircularProgress, Container, Stack, Typography } from '@mui/material'
-import AlertMessage from '../auth/components/alert-message'
+import AlertMessage from '../../components/alert-message'
 
 export default function TicketPage() {
     const tickets = useAppSelector(ticketsSelector)
@@ -18,11 +18,11 @@ export default function TicketPage() {
     return (
         <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
             <Stack className='tickets-search-stack'>
-                <Typography variant='h1' color={'whitesmoke'}>TICKETS</Typography>
-                <Stack direction='column' className='users-stack'>
+                <Typography variant='h1' className='main'>TICKETS</Typography>
+                <Stack className='users-stack'>
                     {pending ? <CircularProgress sx={{position: 'absolute'}}/> : null}
                     {tickets.length ? tickets?.map(ticket => {
-                        return <TicketComponent ticket={ticket} />
+                        return <TicketComponent key={ticket.id} ticket={ticket} />
                     })
                     : 
                     <div>No tickets</div>

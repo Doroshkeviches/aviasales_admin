@@ -63,7 +63,7 @@ const AppRoutes = () => {
         <Route path='/admin/users/*' element={<AdminPrivateRoute element={UsersRoutes} />} />
 
         {/* DEFAULT */}
-        <Route path='/*' element={<Navigate to="/admin/auth/signin" />} />
+        <Route path='/*' element={<Navigate to="/admin/flights" />} />
       </Routes>
     </Container>
   );

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
-import AlertMessage from 'src/app/auth/components/alert-message';
+import AlertMessage from 'src/components/alert-message';
 
 interface Props {
   ticket: Ticket
@@ -13,17 +13,19 @@ export default function TicketComponent({ ticket }: Props) {
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
-  const [isLoading, errors, data, fetchData] = useRepository()
+  const [isLoading, errors, fetchData] = useRepository()
 
   const handleSubmit = async () => {
     const body = { id: ticket.id, status: selectItem }
-    const tickets = await fetchData('/ticket/updateStatus', 'put', body)
-    setTicketItem(data)
+    const updatedTicket = await fetchData('/ticket/updateStatus', 'put', body)
+    setTicketItem(updatedTicket)
     setIsDisabled(true)
   }
+
   const handleSelectChange = (e: SelectChangeEvent) => {
     setSelectItem(e.target.value)
   }
+
   return (
     <>
       <Card className='ticket-card'>
@@ -50,7 +52,7 @@ export default function TicketComponent({ ticket }: Props) {
             sx={{ marginTop: 2 }}
           >
             {ticket_status_enum.map(item => {
-              return <MenuItem value={item}>{item}</MenuItem>
+              return <MenuItem key={item} value={item}>{item}</MenuItem>
             })}
           </Select>
         </CardContent>

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { signin } from './store/auth.actions';
 import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
@@ -8,11 +8,11 @@ import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'src/storeTypes';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { signout } from 'src/utils/signout';
-import AlertMessage from './components/alert-message';
+import AlertMessage from '../../components/alert-message';
 import { LoadingButton } from '@mui/lab';
 
 export default function LoginPage() {
-    const [showPassword, setShowPassword] = useState<boolean>()
+    const [showPassword, setShowPassword] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const errors = useAppSelector(sessionErrorsSelector)
     const pending = useAppSelector(sessionPendingSelector)
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
     return (
         <Container className='auth'>
-            <Stack direction="column" gap={2} className='auth-stack'>
+            <Stack className='auth-stack'>
                 <form onSubmit={formik.handleSubmit}
                     style={{
                         display: 'flex',
@@ -73,7 +73,7 @@ export default function LoginPage() {
                         textAlign: 'center',
                         gap: '10px'
                     }}>
-                    <Typography variant='h1' color='whitesmoke'>SIGN IN</Typography>
+                    <Typography variant='h1' className='main'>SIGN IN</Typography>
                     <TextField
                         variant='outlined'
                         fullWidth
@@ -104,7 +104,6 @@ export default function LoginPage() {
                         helperText={formik.touched.password && formik.errors.password}
                         InputProps={{
                             endAdornment: <IconButton
-                                sx={{ color: 'whitesmoke' }}
                                 aria-label="toggle password visibility"
                                 onClick={handleShowPassword}
                                 edge="end"
@@ -114,7 +113,7 @@ export default function LoginPage() {
                         }}
                     />
                     <Typography variant='h6' className='forget-password' onClick={navigateToForgotPassword}>Forgot password?</Typography>
-                    <LoadingButton loading={pending} loadingIndicator={<CircularProgress />}  variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
+                    <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
                         SIGN IN
                     </LoadingButton>
                 </form>
