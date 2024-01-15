@@ -1,31 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUser, getUsers, getUsersBySearch, updateUser } from "./users.action";
 import { User } from "../types/User.type";
+import { Device } from "../types/Device.type";
 
 interface AuthState {
     users: User[],
     user: User | null
+    devices: Device[]
     pending: {
         users: boolean,
-        user: boolean
+        user: boolean,
+        devices: boolean
     },
     errors: {
         users: null | string,
         user: null | string,
-
+        devices: null | string
     }
 }
 
 const initialState: AuthState = {
     users: [],
     user: null,
+    devices: [],
     pending: {
         users: false,
-        user: false
+        user: false,
+        devices: false,
     },
     errors: {
         users: null,
-        user: null
+        user: null,
+        devices: null
     }
 };
 

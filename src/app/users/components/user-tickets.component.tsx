@@ -6,6 +6,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import useRepository from 'src/hooks/useRepositiry';
 import { baseUrl } from 'src/constants';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
+import AlertMessage from 'src/components/alert-message';
 
 interface Props {
   ticket: Ticket
@@ -28,47 +29,43 @@ export default function UserTicketsComponent({ ticket }: Props) {
   }
   return (
     <>
-      <Card sx={{ minWidth: 275 }}>
+      <Card className='ticket-card'>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            HOLDER NAME {ticket.holder_first_name}
-            HOLDER LASTNAME {ticket.holder_last_name}
+          <Typography variant='h2' > 
+          {ticket.holder_first_name} {ticket.holder_last_name}
+          </Typography>
+          <Typography variant='h5' sx={{marginTop: 2}}>
+            FROM: {ticket.flight.from_city.title} TO: {ticket.flight.to_city.title}
+          </Typography>
+          <Typography variant="h5">
+            PRICE: {ticket.flight.price} $
           </Typography>
           <Select
             disabled={isDisabled}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={selectItem}
-            label="Age"
+            className='ticket-status-select'
+            // label="Ticket Status"
+            sx={{marginTop: 2}}
             onChange={handleSelectChange}
           >
             {ticket_status_enum.map(item => {
               return <MenuItem value={item}>{item}</MenuItem>
             })}
           </Select>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            FROM {ticket.flight.from_city.title}
-            TO {ticket.flight.to_city.title}
-          </Typography>
-          <Typography variant="body2">
-            PRICE {ticket.flight.price}
-          </Typography>
         </CardContent>
         <CardActions>
           {isDisabled ?
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
-            <Button onClick={handleSubmit} color="primary" variant="contained" fullWidth type="submit">
-              {isLoading ? <CircularProgress /> : 'submit'}
+            <Button onClick={handleSubmit} variant='contained' color='success' fullWidth type="submit">
+              {isLoading ? <CircularProgress /> : 'SUBMIT'}
             </Button>
           }
         </CardActions>
       </Card>
-      {errors ?
-        <Alert severity="error">{errors}</Alert>
-        :
-        null
-      }
+      {errors ? <AlertMessage errorMessage={errors} /> : null}
     </>
   )
 }

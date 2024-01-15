@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 const Suspended: FC<PropsWithChildren & { element: any }> = ({ element: Element }) => {
   return (
-    true ? //TODO поверка на роль
+    // true ? //TODO поверка на роль
     <Suspense fallback={<div />}>
       <Element />
     </Suspense>
-    : 
-    <Navigate to={"/admin/auth/signup"} />
+    // : 
+    // <Navigate to={"/admin/auth/signup"} />
 
   );
 };

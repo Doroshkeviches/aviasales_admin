@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { User } from '../types/User.type';
-import { TextField, Button, CircularProgress, Alert } from '@mui/material';
+import { TextField, Button, CircularProgress, Alert, Box } from '@mui/material';
 import { isDisabled } from '@testing-library/user-event/dist/utils';
 import { useFormik } from 'formik';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -30,16 +30,29 @@ export default function UserEdit({ user }: Props) {
     },
     validationSchema: SigninSchema,
     onSubmit: async (value) => {
-      const body =  { ...user, ...value }
+      const body = { ...user, ...value }
       dispatch(updateUser(body))
       setIsDisabled(true)
-
     },
   });
+  console.log(user)
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        width: '40%',
+        alignItems: 'center',
+        // marginTop: '40px',
+        padding: '0px 10px',
+        textAlign: 'center',
+        gap: '10px'
+      }}>
         <TextField
+          className='edit'
+          variant='outlined'
           fullWidth
           id="email"
           name="email"
@@ -52,10 +65,11 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
+          className='edit'
           fullWidth
           id="first_name"
           name="first_name"
-          label="first_name"
+          label="First Name"
           type="first_name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
@@ -65,10 +79,11 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.first_name && formik.errors.first_name}
         />
         <TextField
+          className='edit'
           fullWidth
           id="last_name"
           name="last_name"
-          label="last_name"
+          label="Last Name"
           type="last_name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
@@ -80,8 +95,8 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            {false ? <CircularProgress /> : 'submit'}
+          <Button variant='contained' color='success' fullWidth type="submit">
+            {false ? <CircularProgress /> : 'SUBMIT'}
           </Button>
         }
       </form>

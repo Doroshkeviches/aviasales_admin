@@ -1,15 +1,16 @@
-import React, { FC, Suspense, useEffect } from "react";
+import React, { FC, Suspense } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
-import PageHeaderComp from "./components/page-header.comp";
+// import PageHeaderComp from "./components/page-header.comp";
 import { useAppDispatch, useAppSelector } from "src/storeTypes";
 import { sessionSelector } from "./app/auth/store/auth.selector";
+import { Container } from "@mui/material";
 
 // ======= private route ======= //
 const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session?.role_type === "Admin" ? (
     <>
-      <PageHeaderComp />
+      {/* <PageHeaderComp /> */}
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>
@@ -23,20 +24,20 @@ const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session ? (
     <>
-      <PageHeaderComp />
+      {/* <PageHeaderComp /> */}
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>
     </>
   ) : (
-    <Navigate to={"/admin/auth/signup"} />
+    <Navigate to={"/admin/auth/signin"} />
   );
 };
 
 // ======= public route ======= //
 const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
   <>
-    <PageHeaderComp />
+    {/* <PageHeaderComp /> */}
     <Suspense fallback={<div />}>
       <Element />
     </Suspense>
@@ -47,20 +48,24 @@ const PublicRoute: FC<{ element: any }> = ({ element: Element }) => (
 const AuthRoutes = React.lazy(() => import("./app/auth/index"))
 const TicketRoutes = React.lazy(() => import("./app/tickets/index"))
 const UsersRoutes = React.lazy(() => import("./app/users/index"))
-const FlightsRoutes = React.lazy(() => import("./app/flights/flights.routes"))
-
-
+const FlightsRoutes = React.lazy(() => import("./app/flights/index"))
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
-      <Route path='/admin/tickets/*' element={<PublicRoute element={TicketRoutes} />} />
-      <Route path='/admin/flights/*' element={<PublicRoute element={FlightsRoutes} />} />
-      <Route path='/admin/users/*' element={<AdminPrivateRoute element={UsersRoutes} />} />
+    <Container>
+      <Routes>
+        {/* PUBLIC */}
+        <Route path='/admin/auth/*' element={<PublicRoute element={AuthRoutes} />} />
+        <Route path='/admin/flights/*' element={<PrivateRoute element={FlightsRoutes} />} />
 
-      <Route path='/*' element={<PublicRoute element={() => <div>NO SUCH ROUTE</div>} />} />
-    </Routes>
+        {/* PRIVATE */}
+        <Route path='/admin/tickets/*' element={<PrivateRoute element={TicketRoutes} />} />
+        <Route path='/admin/users/*' element={<AdminPrivateRoute element={UsersRoutes} />} />
+
+        {/* DEFAULT */}
+        <Route path='/*' element={<Navigate to="/admin/flights" />} />
+      </Routes>
+    </Container>
   );
 };
 

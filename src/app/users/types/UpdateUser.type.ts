@@ -1,3 +1,4 @@
+import { Device } from "./Device.type";
 import { Ticket } from "./Ticket.type";
 
 export default interface UpdateUser {
