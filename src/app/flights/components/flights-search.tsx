@@ -9,12 +9,15 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector } from '../store/flights.selector'
 import AlertMessage from 'src/components/alert-message';
 
+const searchByOptions = ['Price', 'Time']
+
 export default function FlightsSearch() {
     const [startDate, setStartDate] = useState<Date | null>(null)
     const [returnDate, setReturnDate] = useState<Date | null>(null)
     const [from_city, setFrom_city] = useState<string | null>(null)
     const [to_city, setTo_city] = useState<string | null>(null)
     const [validationErrors, setValidationErrors] = useState<string | null>(null)
+    const [sortedBy, setSortedBy] = useState<string | null>(searchByOptions[0])
 
     const dispatch = useAppDispatch()
     const errors_city = useAppSelector(citiesErrorsSelector)
@@ -62,7 +65,8 @@ export default function FlightsSearch() {
             to_city: to_city!,
             start_flight_date: startDate!,
             isReturn,
-            return_flight_date: returnDate
+            return_flight_date: returnDate,
+            sortedBy
         }
         dispatch(getFlights(body))
     }
@@ -107,10 +111,23 @@ export default function FlightsSearch() {
                             onChange={(newValue: Date | null) => setStartDate(newValue)}
                             slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: 'Pick start date' } }} />
                         <DatePicker
-                            label="Return Date"
+                            label="Finish date"
                             value={returnDate}
                             onChange={(newValue: Date | null) => setReturnDate(newValue)}
-                            slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: 'Pick end date' } }} />
+                            slotProps={{ textField: { InputLabelProps: { shrink: true } } }} />
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={searchByOptions}
+                            renderInput={(params) => <TextField {...params}
+                                label="Search by"
+                                placeholder='Pick your search parameter'
+                                InputLabelProps={{ shrink: true }} />}
+                            value={sortedBy}
+                            onChange={(event: any, newValue: string | null) => {
+                                setSortedBy(newValue);
+                            }}
+                        />
                     </Stack>
                 </LocalizationProvider>
 
