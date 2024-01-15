@@ -13,7 +13,7 @@ export default function TicketComponent({ ticket }: Props) {
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
-  const [isLoading, errors, fetchData] = useRepository()
+  const [isLoading, errors, data, fetchData] = useRepository()
 
   const handleSubmit = async () => {
     const body = { id: ticket.id, status: selectItem }
