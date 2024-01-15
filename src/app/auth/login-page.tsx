@@ -1,15 +1,21 @@
-import { CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { signin } from './store/auth.actions';
-import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { signout } from 'src/utils/signout';
-import AlertMessage from '../../components/alert-message';
+
+// ======= store ======= //
+import { signin } from './store/auth.actions';
+import { sessionErrorsSelector, sessionPendingSelector, sessionSelector } from './store/auth.selector';
+import { useAppDispatch, useAppSelector } from 'src/storeTypes';
+
+// ======= mui ======= //
+import { CircularProgress, Container, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
+
+// ======= components ======= //
+import AlertMessage from '../../components/alert-message';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState<boolean>(false)

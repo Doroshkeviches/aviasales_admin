@@ -1,12 +1,18 @@
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Autocomplete, TextField, Button, FormControl, CircularProgress, Typography, Stack } from '@mui/material'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
+
+// ======= store ======= //
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getCities, getFlights } from '../store/flghts.action'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { citiesErrorsSelector, citiesPendingSelector, citiesSelector, flightsErrorsSelector } from '../store/flights.selector'
+
+// ======= mui ======= //
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Autocomplete, TextField, Button, FormControl, CircularProgress, Typography, Stack } from '@mui/material'
+
+// ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
 
 const searchByOptions = ['Price', 'Time']

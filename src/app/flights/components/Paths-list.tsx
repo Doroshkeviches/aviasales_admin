@@ -1,6 +1,11 @@
+// ======= store ======= //
 import { useAppSelector } from 'src/storeTypes'
 import { flightsErrorsSelector, flightsPendingSelector, flightsSelector } from '../store/flights.selector'
+
+// ======= mui ======= //
 import { CircularProgress, Stack } from '@mui/material'
+
+// ======= components ======= //
 import FlightList from './flights-list'
 import AlertMessage from 'src/components/alert-message'
 

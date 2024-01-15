@@ -1,28 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-import axios from "axios";
-import { baseUrl } from "src/constants";
-import { JwtPayload, jwtDecode } from "jwt-decode";
-import { forgotPassword, resetPassword, signin } from "./auth.actions";
-import { DecodedUser } from "../types/DecodedUser.type";
+import { createSlice } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
+import { forgotPassword, resetPassword, signin } from './auth.actions';
+import { DecodedUser } from '../types/DecodedUser.type';
 
 interface AuthState {
-  session: DecodedUser | null
-  reset_token: string | null
+  session: DecodedUser | null;
+  reset_token: string | null;
   pending: {
-    session: boolean
-    reset_token: boolean
-  },
+    session: boolean;
+    reset_token: boolean;
+  };
   errors: {
-    session: null | string
-    reset_token: string | null
-  }
+    session: null | string;
+    reset_token: string | null;
+  };
 }
 
 function decode_user_from_token(token: string | null) {
-  if (!token) return null
+  if (!token) return null;
   const decoded = jwtDecode(token) as DecodedUser;
-  return decoded
+  return decoded;
 }
 
 const initialState: AuthState = {
@@ -30,12 +27,12 @@ const initialState: AuthState = {
   reset_token: null,
   pending: {
     session: false,
-    reset_token: false
+    reset_token: false,
   },
   errors: {
     session: null,
-    reset_token: null
-  }
+    reset_token: null,
+  },
 };
 
 export const authSlice = createSlice({
@@ -43,8 +40,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setSession: (state, { payload }) => {
-      state.session = payload
-    }
+      state.session = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -57,7 +54,7 @@ export const authSlice = createSlice({
         state.pending.session = false;
       })
       .addCase(signin.rejected, (state, { payload }: any) => {
-        state.errors.session = payload.response.data.message
+        state.errors.session = payload.response.data.message;
         state.pending.session = false;
       })
 
@@ -70,7 +67,7 @@ export const authSlice = createSlice({
         state.pending.reset_token = false;
       })
       .addCase(forgotPassword.rejected, (state, { payload }: any) => {
-        state.errors.reset_token = payload.response.data.message
+        state.errors.reset_token = payload.response.data.message;
         state.pending.reset_token = false;
       })
 
@@ -83,10 +80,10 @@ export const authSlice = createSlice({
         state.pending.session = false;
       })
       .addCase(resetPassword.rejected, (state, { payload }: any) => {
-        state.errors.session = payload.response.data.message
+        state.errors.session = payload.response.data.message;
         state.pending.session = false;
-      })
+      });
   },
 });
 
-export const { setSession } = authSlice.actions
+export const { setSession } = authSlice.actions;

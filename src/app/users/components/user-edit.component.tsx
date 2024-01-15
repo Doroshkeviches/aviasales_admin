@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
-import { User } from '../types/User.type';
-import { TextField, Button, CircularProgress, Alert, Box } from '@mui/material';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
+import { useState } from 'react'
 import { useFormik } from 'formik';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-
 import * as Yup from 'yup'
-import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import { userErrorsSelector } from '../store/users.selector';
+
+// ======= store ======= //
+import { useAppDispatch } from 'src/storeTypes';
 import { updateUser } from '../store/users.action';
+
+// ======= utils, types ======= //
+import { User } from '../types/User.type';
+
+// ======= mui ======= //
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { TextField, Button, CircularProgress } from '@mui/material';
+
 interface Props {
   user: User | null
 }
@@ -45,7 +49,6 @@ export default function UserEdit({ user }: Props) {
         flexWrap: 'wrap',
         width: '40%',
         alignItems: 'center',
-        // marginTop: '40px',
         padding: '0px 10px',
         textAlign: 'center',
         gap: '10px'

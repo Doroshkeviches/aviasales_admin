@@ -1,9 +1,15 @@
-import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { Ticket } from '../types/Ticket.type'
 import { useState } from 'react'
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+
+// ======= utils, types ======= //
+import { Ticket } from '../types/Ticket.type'
 import useRepository from 'src/hooks/useRepositiry';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
+
+// ======= mui ======= //
+import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+
+// ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
 
 interface Props {

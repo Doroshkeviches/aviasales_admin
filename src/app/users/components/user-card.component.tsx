@@ -1,7 +1,10 @@
-import React from 'react'
-import { User } from '../types/User.type'
-import { Card, CardContent, Typography, CardActions } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+
+// ======= utils, types ======= //
+import { User } from '../types/User.type'
+
+// ======= mui ======= //
+import { Card, CardContent, Typography, CardActions } from '@mui/material'
 interface Props {
   user: User
 }

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getTickets } from "./tickets.action";
+
+// ======= types ======= //
 import { Ticket } from "../types/Ticket.type";
 
 interface AuthState {

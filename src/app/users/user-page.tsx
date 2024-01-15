@@ -1,9 +1,15 @@
 import { useEffect } from 'react'
+import { useParams } from 'react-router'
+
+// ======= store ======= //
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getUser } from './store/users.action'
 import { userErrorsSelector, userPendingSelector, userSelector } from './store/users.selector'
-import { useParams } from 'react-router'
+
+// ======= mui ======= //
 import { Typography, CircularProgress, Container, Stack } from '@mui/material'
+
+// ======= components ======= //
 import UserEdit from './components/user-edit.component'
 import UserTicketsComponent from './components/user-tickets.component'
 import AlertMessage from '../../components/alert-message'
@@ -17,8 +23,9 @@ export default function UserPage() {
 
     useEffect(() => {
         dispatch(getUser(id!))
-        
+
     }, [])
+
     if (user_pending) {
         return <CircularProgress />
     }

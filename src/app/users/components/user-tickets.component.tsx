@@ -1,11 +1,15 @@
-import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent, Alert } from '@mui/material'
-import { Link } from 'react-router-dom'
-import { Ticket } from '../types/Ticket.type'
 import { useState } from 'react'
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+
+// ======= utils, types ======= //
+import { Ticket } from '../types/Ticket.type'
 import useRepository from 'src/hooks/useRepositiry';
-import { baseUrl } from 'src/constants';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
+
+// ======= mui ======= //
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
+
+// ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
 
 interface Props {
@@ -13,7 +17,6 @@ interface Props {
 }
 export default function UserTicketsComponent({ ticket }: Props) {
   const [ticketItem, setTicketItem] = useState<Ticket>(ticket)
-
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
   const [isLoading, errors, data, fetchData] = useRepository()
@@ -31,10 +34,10 @@ export default function UserTicketsComponent({ ticket }: Props) {
     <>
       <Card className='ticket-card'>
         <CardContent>
-          <Typography variant='h2' > 
-          {ticket.holder_first_name} {ticket.holder_last_name}
+          <Typography variant='h2' >
+            {ticket.holder_first_name} {ticket.holder_last_name}
           </Typography>
-          <Typography variant='h5' sx={{marginTop: 2}}>
+          <Typography variant='h5' sx={{ marginTop: 2 }}>
             FROM: {ticket.flight.from_city.title} TO: {ticket.flight.to_city.title}
           </Typography>
           <Typography variant="h5">
@@ -46,8 +49,7 @@ export default function UserTicketsComponent({ ticket }: Props) {
             id="demo-simple-select"
             value={selectItem}
             className='ticket-status-select'
-            // label="Ticket Status"
-            sx={{marginTop: 2}}
+            sx={{ marginTop: 2 }}
             onChange={handleSelectChange}
           >
             {ticket_status_enum.map(item => {

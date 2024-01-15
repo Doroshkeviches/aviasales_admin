@@ -1,10 +1,15 @@
+// ======= utils, types ======= //
 import { Flight } from '../types/Flight.type'
-import FlightItem from './flight-item'
-import { Button, Stack, Typography } from '@mui/material'
 import { Paths } from '../types/Paths.type'
 import transformDate from 'src/utils/transform-date'
+
+// ======= mui ======= //
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import FlightLandIcon from '@mui/icons-material/FlightLand';
+import { Button, Stack, Typography } from '@mui/material'
+
+// ======= components ======= //
+import FlightItem from './flight-item'
 interface Props {
     flightList: Paths
 }
