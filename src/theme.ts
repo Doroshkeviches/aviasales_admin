@@ -225,8 +225,14 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '&.forget-password': {
+        color: colors.whitesmoke,
+        cursor: CursorType.Pointer,
+        marginLeft: 'auto',
+      },
       '&.personal-info': {
         fontWeight: FontWeight.SemiBold,
+        cursor: CursorType.Pointer,
         color: colors.primaryPressed,
       },
       '@media (max-width: 1100px)': {

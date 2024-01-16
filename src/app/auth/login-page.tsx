@@ -17,7 +17,6 @@ import { LoadingButton } from '@mui/lab';
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
-import { NavLink } from 'react-router-dom';
 import FormWrapper from './components/form-wrapper';
 
 export default function LoginPage() {
@@ -65,6 +64,10 @@ export default function LoginPage() {
         setShowPassword(prev => !prev)
     }
 
+    const handleNavigate = () => {
+        navigate(RoutesConstant.forget_password)
+    }
+
     return (
         <Container className='auth'>
             <Stack className='auth-stack'>
@@ -108,9 +111,7 @@ export default function LoginPage() {
                             </IconButton>,
                         }}
                     />
-                    <NavLink to={RoutesConstant.forget_password} className='forget-password'>
-                        <Typography variant="h5" className='main'>Forgot password?</Typography>
-                    </NavLink>
+                    <Typography variant="h5" className='forget-password' onClick={handleNavigate}>Forgot password?</Typography>
                     <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
                         SIGN IN
                     </LoadingButton>

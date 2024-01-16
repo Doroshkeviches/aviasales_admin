@@ -1,14 +1,21 @@
 // ======= utils, types ======= //
 import { User } from '../types/User.type'
+import { useNavigate } from 'react-router'
 
 // ======= mui ======= //
 import { Card, CardContent, Typography, CardActions } from '@mui/material'
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum'
-import { NavLink } from 'react-router-dom'
 interface Props {
   user: User
 }
+
 export default function UserCard({ user }: Props) {
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate(RoutesConstant.user_id)
+  }
+
   return (
     <>
       <Card className='user-card'>
@@ -24,9 +31,9 @@ export default function UserCard({ user }: Props) {
           </Typography>
         </CardContent>
         <CardActions sx={{ padding: "16px" }}>
-          <NavLink to={RoutesConstant.user_id} className='personal-info'>
+          <Typography variant="h5" className='personal-info' onClick={handleNavigate}>
             Watch Personal Info
-          </NavLink>
+          </Typography>
         </CardActions>
       </Card>
     </>
