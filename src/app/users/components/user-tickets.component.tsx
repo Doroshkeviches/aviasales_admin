@@ -23,8 +23,8 @@ export default function UserTicketsComponent({ ticket }: Props) {
 
   const handleSubmit = async () => {
     const body = { id: ticket.id, status: selectItem }
-    const tickets = await fetchData('/ticket/updateStatus', 'put', body)
-    setTicketItem(data)
+    const updatedTicket = await fetchData('/ticket/updateStatus', 'put', body)
+    setTicketItem(updatedTicket)
     setIsDisabled(true)
   }
   const handleSelectChange = (e: SelectChangeEvent) => {

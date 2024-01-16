@@ -6,7 +6,7 @@ import transformDate from 'src/utils/transform-date'
 // ======= mui ======= //
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import FlightLandIcon from '@mui/icons-material/FlightLand';
-import { Button, Stack, Typography } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 
 // ======= components ======= //
 import FlightItem from './flight-item'
@@ -22,7 +22,7 @@ export default function FlightsList({ flightList }: Props) {
             <Stack direction='row' className='flights-element-stack'>
                 <Stack className='price-stack' gap={3}>
                     <Typography variant='h1'>{flightList.totalPrice} $</Typography>
-                    <Button variant='contained' color='success'>BUY</Button>
+                    {/* <Button variant='contained' color='success'>BUY</Button> */}
                 </Stack>
                 <Stack direction='row' className='path-stack'>
                     <Stack alignItems={'center'}>

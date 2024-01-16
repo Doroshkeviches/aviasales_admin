@@ -178,6 +178,10 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '&.navlink': {
+        fontWeight: 500,
+        color: colors.black,
+      },
     },
     h5: {
       fontSize: 16,
@@ -423,7 +427,7 @@ export const theme = createTheme({
               fontSize: 12,
             },
             '@media (max-width: 360px)': {
-              padding: '3px 8px',
+              padding: '3px 6px',
               lineHeight: '1',
               fontSize: 10,
             },
@@ -436,6 +440,31 @@ export const theme = createTheme({
             '&:disabled': {
               color: colors.white,
               backgroundColor: colors.primaryDisabled,
+            },
+          },
+        },
+        {
+          props: {
+            variant: 'contained',
+            color: 'error',
+          },
+          style: {
+            padding: '4px 8px',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            color: colors.whitesmoke,
+            backgroundColor: colors.errorBlend,
+
+            '&:hover': {
+              backgroundColor: colors.error,
+            },
+
+            '&:active': {
+              backgroundColor: colors.error,
+            },
+            '&:disabled': {
+              color: colors.white,
+              backgroundColor: colors.error,
             },
           },
         },
@@ -517,6 +546,7 @@ export const theme = createTheme({
             padding: '0px',
             backgroundColor: colors.black,
             borderRadius: '0px',
+            cursor: 'pointer',
           },
           '&.path-transfers-stack': {
             borderTop: `1px solid ${colors.black}`,
@@ -635,13 +665,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.lightGrey,
-          maxWidth: 'false',
-          minHeight: '100vh',
-          minWidth: '100%',
-          justifyContent: 'center',
+          // maxWidth: 'false',
+          // minHeight: '100vh',
+          // minWidth: '100%',
+          // justifyContent: 'center',
           padding: 0,
 
           '.auth': {
+            display: 'flex',
+            minHeight: '100vh',
+            minWidth: '100%',
+            justifyContent: 'center',
+            padding: 0,
             alignItems: 'center',
           },
 
@@ -665,6 +700,11 @@ export const theme = createTheme({
           '@media (max-width: 460px)': {},
           '@media (max-width: 360px)': {},
         },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {},
       },
     },
   },

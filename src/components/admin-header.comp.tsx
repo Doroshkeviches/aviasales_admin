@@ -1,27 +1,34 @@
-import { MenuItem, Typography } from "@mui/material";
+import { Button, MenuItem, Typography } from "@mui/material";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { RoutesConstant } from "src/constants/RoutesConstants.enum";
+import { useAppDispatch } from "src/storeTypes";
+import { signout } from "src/utils/signout";
 
 const AdminHeaderComp: FC = () => {
+  const dispatch = useAppDispatch()
+  const handleClickSignOut = () => {
+    signout(dispatch)
+  }
+
   return (
-    <header style={{ display: 'flex' }}>
+    <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
       <MenuItem >
         <NavLink to={RoutesConstant.flights}>
-          <Typography textAlign="center">Flights</Typography>
+          <Typography textAlign="center" variant="h4" className="navlink">Flights</Typography>
         </NavLink>
       </MenuItem>
       <MenuItem >
         <NavLink to={RoutesConstant.users}>
-          <Typography textAlign="center">Users</Typography>
+          <Typography textAlign="center" variant="h4" className="navlink">Users</Typography>
         </NavLink>
       </MenuItem>
       <MenuItem >
         <NavLink to={RoutesConstant.tickets}>
-          <Typography textAlign="center">Tickets</Typography>
+          <Typography textAlign="center" variant="h4" className="navlink">Tickets</Typography>
         </NavLink>
       </MenuItem>
+      <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
     </header>
   );
 };

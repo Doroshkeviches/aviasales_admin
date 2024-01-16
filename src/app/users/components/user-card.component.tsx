@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom'
-
 // ======= utils, types ======= //
 import { User } from '../types/User.type'
 
@@ -11,7 +9,6 @@ interface Props {
   user: User
 }
 export default function UserCard({ user }: Props) {
-  const navigate = useNavigate()
   return (
     <>
       <Card className='user-card'>

@@ -18,6 +18,7 @@ import { LoadingButton } from '@mui/lab';
 import AlertMessage from '../../components/alert-message';
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
 import { NavLink } from 'react-router-dom';
+import FormWrapper from './components/form-wrapper';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -64,23 +65,10 @@ export default function LoginPage() {
         setShowPassword(prev => !prev)
     }
 
-    const navigateToForgotPassword = () => {
-        navigate('/admin/auth/forgot-password')
-    }
-
     return (
         <Container className='auth'>
             <Stack className='auth-stack'>
-                <form onSubmit={formik.handleSubmit}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: '20px 20px',
-                        textAlign: 'center',
-                        gap: '10px'
-                    }}>
+                <FormWrapper onSubmit={formik.handleSubmit}>
                     <Typography variant='h1' className='main'>SIGN IN</Typography>
                     <TextField
                         variant='outlined'
@@ -120,11 +108,13 @@ export default function LoginPage() {
                             </IconButton>,
                         }}
                     />
-                    <NavLink to={RoutesConstant.forget_password} className='forget-password' >Forgot password?</NavLink>
+                    <NavLink to={RoutesConstant.forget_password} className='forget-password'>
+                        <Typography variant="h5" className='main'>Forgot password?</Typography>
+                    </NavLink>
                     <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
                         SIGN IN
                     </LoadingButton>
-                </form>
+                </FormWrapper>
                 {errors ? <AlertMessage errorMessage={errors} /> : null}
             </Stack>
         </Container>

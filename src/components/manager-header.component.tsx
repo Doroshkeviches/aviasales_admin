@@ -11,18 +11,18 @@ const ManagerHeaderComp: FC = () => {
         signout(dispatch)
     }
     return (
-        <header style={{ display: 'flex' }}>
+        <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
             <MenuItem >
-                <NavLink to={RoutesConstant.flights}>
-                    <Typography textAlign="center">Flights</Typography>
+                <NavLink to={RoutesConstant.flights} >
+                    <Typography textAlign="center" variant="h4" className="navlink">Flights</Typography>
                 </NavLink>
             </MenuItem>
             <MenuItem >
                 <NavLink to={RoutesConstant.tickets}>
-                    <Typography textAlign="center">Tickets</Typography>
+                    <Typography textAlign="center" variant="h4" className="navlink">Tickets</Typography>
                 </NavLink>
             </MenuItem>
-            <Button onClick={handleClickSignOut}>Sign out</Button>
+            <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
         </header>
     );
 };
