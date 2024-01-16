@@ -103,113 +103,148 @@ export const colors = {
   whitesmoke: '#F5F5F5',
 };
 
-export const fonts = {
-  primary: 'Quicksand, sans-serif',
-  secondary: 'Oswald, sans-serif',
-};
+enum Fonts {
+  primary = 'Quicksand, sans-serif',
+  secondary = 'Oswald, sans-serif',
+}
+
+enum CursorType {
+  Auto = 'auto',
+  Default = 'default',
+  None = 'none',
+  ContextMenu = 'context-menu',
+  Help = 'help',
+  Pointer = 'pointer',
+  Progress = 'progress',
+}
+
+enum FontSize {
+  H1 = 30,
+  H2 = 24,
+  H3 = 20,
+  H4 = 18,
+  H5 = 16,
+  H6 = 14,
+  T1 = 16,
+  T2 = 16,
+  T3 = 16,
+  T4 = 16,
+  T5 = 14,
+  T6 = 12,
+  T7 = 10,
+}
+
+enum FontWeight {
+  Normal = 'normal',
+  Lighter = 'lighter',
+  Bold = 'bold',
+  Bolder = 'bolder',
+  Medium = 'medium',
+  SemiBold = '500',
+}
 
 export const theme = createTheme({
   typography: {
     allVariants: {
-      cursor: 'default',
-      fontFamily: fonts.primary,
+      cursor: CursorType.Default,
+      fontFamily: Fonts.primary,
     },
 
     h1: {
-      fontSize: 30,
-      fontWeight: 'normal',
+      fontSize: FontSize.H1,
+      fontWeight: FontWeight.Normal,
       lineHeight: '2.167',
       '&.main': {
         color: colors.whitesmoke,
       },
       '@media (max-width: 785px)': {
         lineHeight: '1.6',
-        fontSize: 24,
+        fontSize: FontSize.H2,
       },
       '@media (max-width: 520px)': {
         lineHeight: '1.4',
-        fontSize: 20,
+        fontSize: FontSize.H3,
       },
       '@media (max-width: 460px)': {
         lineHeight: '1.2',
-        fontSize: 18,
+        fontSize: FontSize.H4,
       },
       '@media (max-width: 360px)': {
         lineHeight: '1',
-        fontSize: 16,
+        fontSize: FontSize.H6,
       },
     },
     h2: {
-      fontSize: 24,
-      fontWeight: 'normal',
+      fontSize: FontSize.H2,
+      fontWeight: FontWeight.Normal,
       lineHeight: '1.6',
       '&.main': {
         color: colors.whitesmoke,
       },
       '@media (max-width: 785px)': {
         lineHeight: '1.5',
-        fontSize: 20,
+        fontSize: FontSize.H3,
       },
       '@media (max-width: 520px)': {
         lineHeight: '1.3',
-        fontSize: 18,
+        fontSize: FontSize.H4,
       },
       '@media (max-width: 460px)': {
         lineHeight: '1.2',
-        fontSize: 16,
+        fontSize: FontSize.H5,
       },
       '@media (max-width: 360px)': {
         lineHeight: '1',
-        fontSize: 14,
+        fontSize: FontSize.H6,
       },
     },
     h3: {
-      fontSize: 20,
-      fontWeight: 'normal',
+      fontSize: FontSize.H3,
+      fontWeight: FontWeight.Normal,
       lineHeight: '1.5',
       '&.main': {
         color: colors.whitesmoke,
       },
     },
     h4: {
-      fontSize: 18,
-      fontWeight: 'normal',
+      fontSize: FontSize.H4,
+      fontWeight: FontWeight.Normal,
       lineHeight: '1.428571',
       '&.main': {
         color: colors.whitesmoke,
       },
       '&.navlink': {
-        fontWeight: 500,
+        fontWeight: FontWeight.SemiBold,
         color: colors.black,
       },
     },
     h5: {
-      fontSize: 16,
+      fontSize: FontSize.H5,
       fontWeight: 'normal',
       lineHeight: '1.4',
       '&.main': {
         color: colors.whitesmoke,
       },
       '&.personal-info': {
-        fontWeight: 500,
+        fontWeight: FontWeight.SemiBold,
         color: colors.primaryPressed,
       },
       '@media (max-width: 1100px)': {
         lineHeight: '1.2',
-        fontSize: 14,
+        fontSize: FontSize.H6,
       },
       '@media (max-width: 785px)': {
         lineHeight: '1.2',
-        fontSize: 12,
+        fontSize: FontSize.T6,
       },
       '@media (max-width: 460px)': {
         lineHeight: '1',
-        fontSize: 10,
+        fontSize: FontSize.T7,
       },
     },
     h6: {
-      fontSize: 14,
-      fontWeight: 'lighter',
+      fontSize: FontSize.H6,
+      fontWeight: FontWeight.Lighter,
       lineHeight: '1.3333',
       '&.main': {
         color: colors.whitesmoke,
@@ -217,40 +252,34 @@ export const theme = createTheme({
       '&.forget-password': {
         marginLeft: 'auto',
         cursor: 'pointer',
-        fontWeight: 500,
+        fontWeight: FontWeight.SemiBold,
         color: colors.whitesmoke,
       },
     },
-    // t1: {
-    // fontFamily: 'Source Sans 3',
-    //   fontSize: '16px',
-    //   fontWeight: 'bold',
-    // },
-    // t2: {
-    //   fontFamily: 'Source Sans 3',
-    //   fontSize: '16px',
-    //   fontWeight: 600,
-    // },
-    // t3: {
-    //   fontFamily: 'Source Sans 3',
-    //   fontSize: '16px',
-    //   fontWeight: 'normal',
-    // },
-    // t4: {
-    //   fontFamily: 'Source Sans 3',
-    //   fontSize: '14px',
-    //   fontWeight: 600,
-    // },
-    // t5: {
-    //   fontFamily: 'Source Sans 3',
-    //   fontSize: '14px',
-    //   fontWeight: 'normal',
-    // },
-    // t6: {
-    //   fontFamily: 'Source Sans 3',
-    //   fontSize: '12px',
-    //   fontWeight: 'normal',
-    // },
+    t1: {
+      fontSize: FontSize.T1,
+      fontWeight: FontWeight.Bold,
+    },
+    t2: {
+      fontSize: FontSize.T2,
+      fontWeight: FontWeight.SemiBold,
+    },
+    t3: {
+      fontSize: FontSize.T3,
+      fontWeight: FontWeight.Normal,
+    },
+    t4: {
+      fontSize: FontSize.T4,
+      fontWeight: FontWeight.SemiBold,
+    },
+    t5: {
+      fontSize: FontSize.T5,
+      fontWeight: FontWeight.Normal,
+    },
+    t6: {
+      fontSize: FontSize.T6,
+      fontWeight: FontWeight.Normal,
+    },
   },
   palette: {
     primary: {
@@ -280,7 +309,7 @@ export const theme = createTheme({
             color: colors.whitesmoke,
           },
           '& .MuiInputLabel-root': {
-            fontFamily: fonts.primary,
+            fontFamily: Fonts.primary,
             color: `${colors.whitesmoke} !important`, // Цвет текста label
             borderColor: colors.whitesmoke,
           },
@@ -292,17 +321,17 @@ export const theme = createTheme({
               borderColor: colors.whitesmoke, // Цвет рамки
             },
             '&:hover fieldset': {
-              cursor: 'pointer',
+              cursor: CursorType.Pointer,
               borderColor: colors.whitesmoke, // Цвет рамки
             },
             '&.Mui-focused fieldset': {
               borderColor: colors.whitesmoke, // Цвет рамки при фокусе (нажатии)
             },
             '& input': {
-              cursor: 'pointer',
+              cursor: CursorType.Pointer,
               maxWidth: '100%',
               color: colors.whitesmoke, // Цвет текста внутри input
-              fontFamily: fonts.primary,
+              fontFamily: Fonts.primary,
             },
           },
         },
@@ -335,10 +364,7 @@ export const theme = createTheme({
     },
     MuiAutocomplete: {
       styleOverrides: {
-        root: {
-          // minWidth: '70%',
-          // maxWidth: '70%',
-        },
+        root: {},
       },
     },
     MuiButton: {
@@ -348,8 +374,8 @@ export const theme = createTheme({
           style: {
             borderRadius: '8px',
             fontSize: '16px',
-            fontWeight: 'normal',
-            fontFamily: fonts.primary,
+            fontWeight: FontWeight.Normal,
+            fontFamily: Fonts.primary,
             color: colors.whitesmoke,
             backgroundColor: colors.primary,
           },
@@ -487,26 +513,43 @@ export const theme = createTheme({
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '40px',
+            padding: 40,
             gap: 20,
+            '@media (max-width: 785px)': {
+              padding: 25,
+            },
+            '@media (max-width: 460px)': {
+              padding: 20,
+            },
           },
           '&.flights-element-stack': {
             backgroundColor: colors.whitesmoke,
             justifyContent: 'space-between',
-            minHeight: '100px',
-            padding: '20px',
-            borderRadius: '8px',
+            height: '20%',
+            padding: 20,
+            borderRadius: 8,
+            width: '55%',
+
+            '@media (max-width: 1100px)': {
+              width: '65%',
+            },
 
             '@media (max-width: 785px)': {
-              padding: '10px',
+              padding: 10,
+              width: '75%',
             },
             '@media (max-width: 460px)': {
               padding: 5,
+              width: '85%',
+            },
+            '@media (max-width: 360px)': {
+              padding: 2,
+              width: '95%',
             },
           },
           '&.price-stack': {
             alignItems: 'center',
-            minWidth: '10%',
+            width: '15%',
             padding: 10,
             gap: 10,
             flexDirection: 'column',
@@ -537,21 +580,21 @@ export const theme = createTheme({
           '&.transfer-path': {
             width: '100%',
             borderTop: `1px solid ${colors.black}`,
-            padding: '0px',
-            borderRadius: '0px',
+            padding: 0,
+            borderRadius: 0,
           },
           '&.elem-transfer-path': {
             width: '100%',
             height: '3px',
-            padding: '0px',
+            padding: 0,
             backgroundColor: colors.black,
-            borderRadius: '0px',
-            cursor: 'pointer',
+            borderRadius: 0,
+            cursor: CursorType.Pointer,
           },
           '&.path-transfers-stack': {
             borderTop: `1px solid ${colors.black}`,
             justifyContent: 'space-between',
-            gap: '20%',
+            gap: '15%',
 
             '@media (max-width: 785px)': {
               gap: '10%',
@@ -575,7 +618,7 @@ export const theme = createTheme({
           },
           '&.auth-stack': {
             flexDirection: 'column',
-            borderRadius: '24px',
+            borderRadius: 24,
             backgroundImage: `url(${image})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',

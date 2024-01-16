@@ -10,22 +10,24 @@ import { Stack, Typography } from '@mui/material'
 
 // ======= components ======= //
 import FlightItem from './flight-item'
+import transformPrice from 'src/utils/transform-price';
 interface Props {
     flightList: Paths
 }
 
 export default function FlightsList({ flightList }: Props) {
     const [start_date, start_time, end_date, end_time] = transformDate(flightList)
+    const totalPrice = transformPrice(flightList.totalPrice)
 
     return (
         <>
             <Stack direction='row' className='flights-element-stack'>
                 <Stack className='price-stack' gap={3}>
-                    <Typography variant='h1'>{flightList.totalPrice} $</Typography>
+                    <Typography variant='h1'>{totalPrice}</Typography>
                     {/* <Button variant='contained' color='success'>BUY</Button> */}
                 </Stack>
                 <Stack direction='row' className='path-stack'>
-                    <Stack alignItems={'center'}>
+                    <Stack alignItems={'center'} textAlign={'center'}>
                         <Typography variant='h2'>{start_time}</Typography>
                         <Typography variant='h5'>{start_date}</Typography>
                         <Typography variant='h5'>{flightList.from_city}</Typography>
@@ -41,7 +43,7 @@ export default function FlightsList({ flightList }: Props) {
                             })}
                         </Stack>
                     </Stack>
-                    <Stack alignItems={'center'}>
+                    <Stack alignItems={'center'} textAlign={'center'}>
                         <Typography variant='h2'>{end_time}</Typography>
                         <Typography variant='h5'>{end_date}</Typography>
                         <Typography variant='h5'>{flightList.to_city}</Typography>

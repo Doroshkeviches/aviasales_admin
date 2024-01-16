@@ -35,7 +35,7 @@ export default function ForgorPasswordPage() {
             const result = await dispatch(forgotPassword(value)).unwrap()
             if (result) {
                 sessionStorage.setItem('reset-token', result.token)
-                navigate(RoutesConstant.reset_password)
+                navigate(RoutesConstant.reset_link)
             }
         },
     });
