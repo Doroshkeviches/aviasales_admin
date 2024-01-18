@@ -1,11 +1,18 @@
 import React, { FC, Suspense } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
-// import PageHeaderComp from "./components/page-header.comp";
+
+// ======= store ======= //
 import { useAppSelector } from "src/storeTypes";
 import { sessionSelector } from "./app/auth/store/auth.selector";
+
+// ======= mui ======= //
 import { Container } from "@mui/material";
+
+// ======= components ======= //
 import AdminHeaderComp from "./components/admin-header.comp";
 import ManagerHeaderComp from "./components/manager-header.component";
+
+// ======= helpers ======= //
 import { RoutesConstant } from "./constants/RoutesConstants.enum";
 
 // ======= admin private route ======= //

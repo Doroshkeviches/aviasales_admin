@@ -16,6 +16,7 @@ import { LoadingButton } from '@mui/lab';
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
+import FormWrapper from './components/form-wrapper';
 
 export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,17 +66,7 @@ export default function ResetPasswordPage() {
   return (
     <Container className='auth'>
       <Stack className='auth-stack'>
-        <form onSubmit={formik.handleSubmit}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '20px 20px',
-            textAlign: 'center',
-            gap: '10px'
-          }}
-        >
+        <FormWrapper onSubmit={formik.handleSubmit}>
           <Typography variant='h1' className='main'>RESET PASSWORD</Typography>
           <TextField
             fullWidth
@@ -126,7 +117,7 @@ export default function ResetPasswordPage() {
           <LoadingButton loading={pending} loadingIndicator={<CircularProgress />} variant="contained" fullWidth type="submit" sx={{ height: 50 }}>
             SIGN IN
           </LoadingButton>
-        </form>
+        </FormWrapper>
         {errors ? <AlertMessage errorMessage={errors} /> : null}
       </Stack>
     </Container>

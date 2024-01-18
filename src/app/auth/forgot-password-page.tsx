@@ -13,6 +13,7 @@ import { Button, CircularProgress, Container, Stack, TextField, Typography } fro
 // ======= components ======= //
 import AlertMessage from '../../components/alert-message';
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum';
+import FormWrapper from './components/form-wrapper';
 
 
 export default function ForgorPasswordPage() {
@@ -34,7 +35,7 @@ export default function ForgorPasswordPage() {
             const result = await dispatch(forgotPassword(value)).unwrap()
             if (result) {
                 sessionStorage.setItem('reset-token', result.token)
-                navigate(RoutesConstant.reset_password)
+                navigate(RoutesConstant.reset_link)
             }
         },
     });
@@ -43,16 +44,7 @@ export default function ForgorPasswordPage() {
     return (
         <Container className='auth'>
             <Stack className='auth-stack'>
-                <form onSubmit={formik.handleSubmit}
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: '20px 20px',
-                        textAlign: 'center',
-                        gap: '10px'
-                    }}>
+                <FormWrapper onSubmit={formik.handleSubmit}>
                     <Typography variant='h1' className='main'>ENTER YOUR EMAIL</Typography>
                     <TextField
                         fullWidth
@@ -71,7 +63,7 @@ export default function ForgorPasswordPage() {
                         {pending ? <CircularProgress /> : 'CONTINUE'}
                     </Button>
                     {errors ? <AlertMessage errorMessage={errors} /> : null}
-                </form>
+                </FormWrapper>
             </Stack>
         </ Container>
     )

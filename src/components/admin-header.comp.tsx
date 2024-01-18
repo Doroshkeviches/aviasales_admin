@@ -1,27 +1,33 @@
-import { MenuItem, Typography } from "@mui/material";
+import { Button, MenuItem, Typography } from "@mui/material";
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RoutesConstant } from "src/constants/RoutesConstants.enum";
+import { useAppDispatch } from "src/storeTypes";
+import { signout } from "src/utils/signout";
 
 const AdminHeaderComp: FC = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const handleClickSignOut = () => {
+    signout(dispatch)
+  }
+  const navToFlights = () => navigate(RoutesConstant.flights)
+  const navToUsers = () => navigate(RoutesConstant.users)
+  const navToTickets = () => navigate(RoutesConstant.tickets)
+
   return (
-    <header style={{ display: 'flex' }}>
+    <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
       <MenuItem >
-        <NavLink to={RoutesConstant.flights}>
-          <Typography textAlign="center">Flights</Typography>
-        </NavLink>
+        <Typography variant="h4" onClick={navToFlights} className="navlink">Flights</Typography>
       </MenuItem>
       <MenuItem >
-        <NavLink to={RoutesConstant.users}>
-          <Typography textAlign="center">Users</Typography>
-        </NavLink>
+        <Typography variant="h4" onClick={navToUsers} className="navlink">Users</Typography>
       </MenuItem>
       <MenuItem >
-        <NavLink to={RoutesConstant.tickets}>
-          <Typography textAlign="center">Tickets</Typography>
-        </NavLink>
+        <Typography variant="h4" onClick={navToTickets} className="navlink">Tickets</Typography>
       </MenuItem>
+      <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
     </header>
   );
 };

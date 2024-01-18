@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Ticket } from '../types/Ticket.type'
 import useRepository from 'src/hooks/useRepositiry';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
+import transformPrice from 'src/utils/transform-price';
 
 // ======= mui ======= //
 import { Card, CardContent, Typography, CardActions, Button, CircularProgress, Select, MenuItem, SelectChangeEvent } from '@mui/material'
@@ -32,6 +33,8 @@ export default function TicketComponent({ ticket }: Props) {
     setSelectItem(e.target.value)
   }
 
+  const totalPrice = transformPrice(ticket.flight.price)
+
   return (
     <>
       <Card className='ticket-card'>
@@ -46,7 +49,7 @@ export default function TicketComponent({ ticket }: Props) {
             TO: {ticket.flight.to_city.title}
           </Typography>
           <Typography variant="h5" paddingTop={'3px'}>
-            PRICE: {ticket.flight.price} $
+            PRICE: {totalPrice}
           </Typography>
           <Select
             disabled={isDisabled}
