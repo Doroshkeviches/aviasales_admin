@@ -9,8 +9,7 @@ import { sessionSelector } from "./app/auth/store/auth.selector";
 import { Container } from "@mui/material";
 
 // ======= components ======= //
-import AdminHeaderComp from "./components/admin-header.comp";
-import ManagerHeaderComp from "./components/manager-header.component";
+import HeaderComp from "./components/header.comp";
 
 // ======= helpers ======= //
 import { RoutesConstant } from "./constants/RoutesConstants.enum";
@@ -20,7 +19,7 @@ const AdminPrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session?.role_type === "Admin" ? (
     <>
-      <AdminHeaderComp />
+      <HeaderComp />
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>
@@ -35,7 +34,7 @@ const PrivateRoute: FC<{ element: any }> = ({ element: Element }) => {
   const session = useAppSelector(sessionSelector)
   return session ? (
     <>
-      <ManagerHeaderComp />
+      <HeaderComp />
       <Suspense fallback={<div />}>
         <Element />
       </Suspense>

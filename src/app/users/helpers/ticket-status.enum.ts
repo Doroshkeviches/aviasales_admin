@@ -1,1 +1,1 @@
-export const ticket_status_enum = ['Fulfilled', 'InCart', 'Canceled'];
+export const ticket_status_enum = ['Fulfilled', 'Canceled', 'Ordered'];

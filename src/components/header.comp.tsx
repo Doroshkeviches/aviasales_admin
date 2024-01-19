@@ -1,13 +1,15 @@
 import { Button, MenuItem, Typography } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { sessionSelector } from "src/app/auth/store/auth.selector";
 import { RoutesConstant } from "src/constants/RoutesConstants.enum";
-import { useAppDispatch } from "src/storeTypes";
+import { useAppDispatch, useAppSelector } from "src/storeTypes";
 import { signout } from "src/utils/signout";
 
-const AdminHeaderComp: FC = () => {
+const HeaderComp: FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const session = useAppSelector(sessionSelector)
 
   const handleClickSignOut = () => {
     signout(dispatch)
@@ -21,9 +23,14 @@ const AdminHeaderComp: FC = () => {
       <MenuItem >
         <Typography variant="h4" onClick={navToFlights} className="navlink">Flights</Typography>
       </MenuItem>
-      <MenuItem >
-        <Typography variant="h4" onClick={navToUsers} className="navlink">Users</Typography>
-      </MenuItem>
+      {
+        session?.role_type === 'Admin' ?
+          <MenuItem >
+            <Typography variant="h4" onClick={navToUsers} className="navlink">Users</Typography>
+          </MenuItem>
+          :
+          null
+      }
       <MenuItem >
         <Typography variant="h4" onClick={navToTickets} className="navlink">Tickets</Typography>
       </MenuItem>
@@ -32,4 +39,4 @@ const AdminHeaderComp: FC = () => {
   );
 };
 
-export default AdminHeaderComp;
+export default HeaderComp;

@@ -2,7 +2,7 @@ export enum RoutesConstant {
     flights = "/admin/flights",
     tickets = "/admin/tickets",
     users = "/admin/users",
-    user_id = "/admin/users/:id",
+    user_id = "/admin/users/",
     forget_password = "/admin/auth/forgot-password",
     reset_link = "/admin/auth/reset-link",
     reset_password = "/admin/auth/reset-password",

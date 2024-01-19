@@ -13,7 +13,7 @@ export default function UserCard({ user }: Props) {
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    navigate(RoutesConstant.user_id)
+    navigate(RoutesConstant.user_id + user.id)
   }
 
   return (
