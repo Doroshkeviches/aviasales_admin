@@ -47,7 +47,7 @@ export default function UsersPage() {
             </Stack>
             <Stack direction='column' className='users-stack'>
                 {users.map(user => {
-                    return <UserCard user={user} />
+                    return <UserCard key={user.id} user={user} />
                 })}
             </Stack>
             {errors ? <AlertMessage errorMessage={errors} /> : null}

@@ -57,7 +57,7 @@ export default function UserTicketsComponent({ ticket }: Props) {
             onChange={handleSelectChange}
           >
             {ticket_status_enum.map(item => {
-              return <MenuItem value={item}>{item}</MenuItem>
+              return <MenuItem key={item} value={item}>{item}</MenuItem>
             })}
           </Select>
         </CardContent>

@@ -38,7 +38,7 @@ export default function UserPage() {
             </Stack>
                 <Stack direction='column' className='users-stack'>
                     {user.tickets.map(ticket => {
-                        return <UserTicketsComponent ticket={ticket} />
+                        return <UserTicketsComponent key={ticket.id} ticket={ticket} />
                     })}
                 </Stack>
             </> : null}
