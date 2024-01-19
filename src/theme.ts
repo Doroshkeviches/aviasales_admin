@@ -217,6 +217,22 @@ export const theme = createTheme({
         fontWeight: FontWeight.SemiBold,
         color: colors.black,
       },
+      '@media (max-width: 785px)': {
+        lineHeight: '1.5',
+        fontSize: FontSize.H5,
+      },
+      '@media (max-width: 520px)': {
+        lineHeight: '1.3',
+        fontSize: FontSize.H6,
+      },
+      '@media (max-width: 460px)': {
+        lineHeight: '1.2',
+        fontSize: FontSize.H6,
+      },
+      '@media (max-width: 360px)': {
+        lineHeight: '1',
+        fontSize: FontSize.H6,
+      },
     },
     h5: {
       fontSize: FontSize.H5,
@@ -487,6 +503,15 @@ export const theme = createTheme({
             color: colors.whitesmoke,
             backgroundColor: colors.errorBlend,
 
+            '@media (max-width: 785px)': {
+              lineHeight: '1.2',
+              fontSize: FontSize.H5,
+              padding: '2px 6px',
+            },
+            '@media (max-width: 520px)': {
+              fontSize: FontSize.H6,
+              padding: '2px 5px',
+            },
             '&:hover': {
               backgroundColor: colors.error,
             },

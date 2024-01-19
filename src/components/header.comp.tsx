@@ -19,7 +19,7 @@ const HeaderComp: FC = () => {
   const navToTickets = () => navigate(RoutesConstant.tickets)
 
   return (
-    <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
+    <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center', }}>
       <MenuItem >
         <Typography variant="h4" onClick={navToFlights} className="navlink">Flights</Typography>
       </MenuItem>
