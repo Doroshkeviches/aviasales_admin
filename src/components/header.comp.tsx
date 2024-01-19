@@ -20,19 +20,19 @@ const HeaderComp: FC = () => {
 
   return (
     <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
-      <MenuItem >
-        <Typography variant="h4" onClick={navToFlights} className="navlink">Flights</Typography>
+      <MenuItem onClick={navToFlights}>
+        <Typography variant="h4"  className="navlink">Flights</Typography>
       </MenuItem>
       {
         session?.role_type === 'Admin' ?
-          <MenuItem >
-            <Typography variant="h4" onClick={navToUsers} className="navlink">Users</Typography>
+          <MenuItem onClick={navToUsers}>
+            <Typography variant="h4"  className="navlink">Users</Typography>
           </MenuItem>
           :
           null
       }
-      <MenuItem >
-        <Typography variant="h4" onClick={navToTickets} className="navlink">Tickets</Typography>
+      <MenuItem onClick={navToTickets}>
+        <Typography variant="h4" className="navlink">Tickets</Typography>
       </MenuItem>
       <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
     </header>
