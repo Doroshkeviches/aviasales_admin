@@ -251,6 +251,15 @@ export const theme = createTheme({
         cursor: CursorType.Pointer,
         color: colors.primaryPressed,
       },
+      '&.blue-text': {
+        color: colors.blue,
+      },
+      '&.red-text': {
+        color: colors.errorBlend,
+      },
+      '&.green-text': {
+        color: colors.successBlend,
+      },
       '@media (max-width: 1100px)': {
         lineHeight: '1.2',
         fontSize: FontSize.H6,
@@ -740,7 +749,7 @@ export const theme = createTheme({
         root: {
           backgroundColor: colors.lightGrey,
           // maxWidth: 'false',
-          // minHeight: '100vh',
+          minHeight: '100vh',
           // minWidth: '100%',
           // justifyContent: 'center',
           padding: 0,
