@@ -801,9 +801,38 @@ export const theme = createTheme({
         },
       },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.lightGrey,
+          padding: '10px 40px',
+
+          '@media (max-width: 620px)': {
+            padding: '5px 20px',
+          },
+          '@media (max-width: 460px)': {
+            padding: '0px 10px',
+          },
+          '@media (max-width: 420px)': {
+            padding: '0px 2px',
+          },
+        },
+      },
+    },
     MuiMenuItem: {
       styleOverrides: {
-        root: {},
+        root: {
+          '&.MuiMenuItem-root': {
+            '@media (max-width: 620px)': {
+              paddingLeft: 2,
+              paddingRight: 10,
+              minHeight: 0,
+            },
+            '@media (max-width: 460px)': {
+              paddingRight: 6,
+            },
+          },
+        },
       },
     },
   },
