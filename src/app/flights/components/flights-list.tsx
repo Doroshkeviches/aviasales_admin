@@ -16,7 +16,8 @@ interface Props {
 }
 
 export default function FlightsList({ flightList }: Props) {
-    const [start_date, start_time, end_date, end_time] = transformDate(flightList)
+    const [start_date, start_time,] = transformDate({ date: flightList.start_date })
+    const [end_date, end_time] = transformDate({ date: flightList.end_date })
     const totalPrice = transformPrice(flightList.totalPrice)
 
     return (
