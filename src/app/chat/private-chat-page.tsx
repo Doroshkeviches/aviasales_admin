@@ -32,6 +32,9 @@ export default function PrivateChatPage() {
     }, [])
 
     const handleSendMessage = () => {
+        if (!value) {
+            return
+        }
         const body = {
             message: value,
             first_name: 'asd',
