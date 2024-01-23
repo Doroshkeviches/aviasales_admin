@@ -20,7 +20,6 @@ export default function PrivateChatPage() {
     const session = useAppSelector(sessionSelector)
 
     const { id } = useParams()
-    console.log(id)
     useEffect(() => {
         socket.emit('join-room', { room_id: id })
         socket.emit('get-messages', { room_id: id })
@@ -28,9 +27,7 @@ export default function PrivateChatPage() {
             setMessages(messages)
         })
         socket.on('message', (message) => {
-
             setMessages(prev => [...prev, message])
-            console.log(message, 'new message')
         })
     }, [])
 
@@ -44,16 +41,10 @@ export default function PrivateChatPage() {
             created_at: Date.now()
         }
         socket.emit('message', body)
+        setValue('')
     }
     const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
     return (
-        // <div>
-        //     <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-        //     <button onClick={handleButtonClick}>send</button>
-        //     {messages.map(message => {
-        //         return <div>{message.message}</div>
-        //     })}
-        // </div>
         <Stack className='chat-stack'>
             <Stack className='messages-stack'>
                 {messages.map(mes => {

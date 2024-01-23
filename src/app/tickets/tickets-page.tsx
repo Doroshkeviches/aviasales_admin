@@ -48,7 +48,6 @@ export default function TicketPage() {
             &&
             tickets.length < totalCount
         ) {
-            console.log(totalCount, tickets.length)
             setScroll(true)
         }
     }
