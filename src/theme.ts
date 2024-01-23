@@ -271,6 +271,9 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '&.message-user': {
+        fontWeight: FontWeight.SemiBold,
+      },
       '&.forget-password': {
         marginLeft: 'auto',
         cursor: 'pointer',
@@ -686,6 +689,25 @@ export const theme = createTheme({
             backgroundColor: colors.grey,
             padding: 20,
           },
+          '&.chat-stack': {
+            backgroundColor: colors.grey,
+            height: '80vh',
+            alignItems: 'center',
+            width: '50%',
+            margin: '10px auto',
+            borderRadius: '24px',
+            padding: '10px 30px',
+          },
+          '&.messages-stack': {
+            '&::-webkit-scrollbar': {
+              width: 0,
+            },
+            display: 'block',
+            overflowY: 'scroll',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative',
+          },
         },
       },
     },
@@ -716,6 +738,9 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: 10,
+          '&.message': {
+            paddingBottom: 10,
+          },
         },
       },
     },
