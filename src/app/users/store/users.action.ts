@@ -1,16 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
- 
+
 // ======= utils, types ======= //
 import repository from 'src/repository';
 import { User } from '../types/User.type';
 import UpdateUser from '../types/UpdateUser.type';
+import { CountingUser } from '../types/CountingUser.type';
 
-export const getUsers = createAsyncThunk<User[], number>(
+export const getUsers = createAsyncThunk<CountingUser, number>(
   'Get/users',
   async (page, { rejectWithValue }) => {
     try {
-      const response = await repository.get(`/user?page=${page}`);
+      const response = await repository.get(`/user?pageNumber=${page}&pageSize=5`);
       return response.data;
+
     } catch (error: any) {
       return rejectWithValue(error);
     }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // ======= helpers ======= //
 import useDebounce from 'src/hooks/useDebounce'
@@ -6,7 +6,7 @@ import useDebounce from 'src/hooks/useDebounce'
 // ======= store ======= //
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
 import { getUsers, getUsersBySearch } from './store/users.action'
-import { usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
+import { usersCountSelector, usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
 
 // ======= mui ======= //
 import { Container, Stack, TextField, Typography } from '@mui/material'
@@ -19,11 +19,41 @@ export default function UsersPage() {
     const users = useAppSelector(usersSelector)
     const errors = useAppSelector(usersErrorsSelector)
     const pending = useAppSelector(usersPendingSelector)
+    const [scroll, setScroll] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const totalCount = useAppSelector(usersCountSelector)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getUsers(1))
+        dispatch(getUsers(currentPage))
+        setCurrentPage(prev => prev + 1)
     }, [])
+
+    useEffect(() => {
+        if (scroll) {
+            dispatch(getUsers(currentPage)).finally(() => {
+                setCurrentPage(prev => prev + 1)
+                setScroll(false)
+            })
+        }
+    }, [scroll])
+
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler)
+        return function () {
+            document.removeEventListener('scroll', scrollHandler)
+        }
+    }, [scroll, users])
+
+    const scrollHandler = (e: any) => {
+        if (
+            (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 10)
+            &&
+            users.length < totalCount
+        ) {
+            setScroll(true)
+        }
+    }
 
     const handleInput = (value: string) => {
         dispatch(getUsersBySearch(value))

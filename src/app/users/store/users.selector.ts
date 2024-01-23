@@ -5,6 +5,8 @@ export const usersErrorsSelector = (state: RootState) =>
   state.users.errors.users;
 export const usersPendingSelector = (state: RootState) =>
   state.users.pending.users;
+export const usersCountSelector = (state: RootState) => state.users.totalUserCount;
+
 
 export const userSelector = (state: RootState) => state.users.user;
 export const userErrorsSelector = (state: RootState) => state.users.errors.user;
