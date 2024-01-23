@@ -13,7 +13,7 @@ const MessageAdmin = ({ message, first_name, last_name, id, created_at }: Props)
         <Card sx={{ marginRight: 'auto', marginBottom: 1, width: '45%' }}>
             <CardContent className='message'>
                 <Typography variant='h6'  className='message-user' >
-                    {id}
+                    {first_name}
                 </Typography>
                 <Typography variant='h6' >
                     {message}

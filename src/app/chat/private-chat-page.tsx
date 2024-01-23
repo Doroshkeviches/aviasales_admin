@@ -4,6 +4,8 @@ import { useParams } from 'react-router'
 import { io } from 'socket.io-client';
 import MessageAdmin from './components/message-admin';
 import MessageClient from './components/message-client';
+import { useAppSelector } from 'src/storeTypes';
+import { sessionSelector } from '../auth/store/auth.selector';
 
 const URL = 'http://localhost:4444';
 const token = localStorage.getItem('refresh-token')
@@ -15,6 +17,7 @@ const socket = io(URL, {
 export default function PrivateChatPage() {
     const [messages, setMessages] = useState<any[]>([])
     const [value, setValue] = useState('')
+    const session = useAppSelector(sessionSelector)
 
     const { id } = useParams()
     console.log(id)
@@ -25,13 +28,22 @@ export default function PrivateChatPage() {
             setMessages(messages)
         })
         socket.on('message', (message) => {
+
             setMessages(prev => [...prev, message])
             console.log(message, 'new message')
         })
     }, [])
 
     const handleSendMessage = () => {
-        socket.emit('message', { room_id: id, message: value })
+        const body = {
+            message: value,
+            first_name: 'asd',
+            last_name: 'asd',
+            room_id: id,
+            user_id: session?.id,
+            created_at: Date.now()
+        }
+        socket.emit('message', body)
     }
     const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
     return (
@@ -45,7 +57,7 @@ export default function PrivateChatPage() {
         <Stack className='chat-stack'>
             <Stack className='messages-stack'>
                 {messages.map(mes => {
-                    return mes.id === 'Admin' ? <MessageAdmin {...mes} /> : <MessageClient {...mes} />
+                    return mes.user_id === session?.id ? <MessageClient {...mes} key={mes.id} /> : <MessageAdmin {...mes} key={mes.id} />
                 })}
             </Stack>
             <Stack direction={'row'} sx={{ margin: 'auto 0 10px', width: '100%', position: 'static' }}>
