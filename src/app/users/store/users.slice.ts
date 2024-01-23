@@ -12,6 +12,7 @@ import { Device } from '../types/Device.type';
 
 interface AuthState {
   users: User[];
+  totalUserCount: number
   user: User | null;
   devices: Device[];
   pending: {
@@ -28,6 +29,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   users: [],
+  totalUserCount: 0,
   user: null,
   devices: [],
   pending: {
@@ -53,7 +55,8 @@ export const usersSlice = createSlice({
         state.errors.users = null;
       })
       .addCase(getUsers.fulfilled, (state, { payload }) => {
-        state.users = payload;
+        state.totalUserCount = payload.totalUserCount
+        state.users = [...state.users, ...payload.users];
         state.pending.users = false;
       })
       .addCase(getUsers.rejected, (state, { payload }: any) => {
