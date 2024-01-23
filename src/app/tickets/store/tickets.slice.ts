@@ -5,6 +5,7 @@ import { getTickets } from "./tickets.action";
 import { Ticket } from "../types/Ticket.type";
 
 interface AuthState {
+    totalCount: number
     tickets: Ticket[]
     pending: {
         tickets: boolean
@@ -15,6 +16,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
+    totalCount: 0,
     tickets: [],
     pending: {
         tickets: false
@@ -35,7 +37,8 @@ export const ticketsSlice = createSlice({
                 state.errors.tickets = null;
             })
             .addCase(getTickets.fulfilled, (state, { payload }) => {
-                state.tickets = payload
+                state.tickets = payload.tickets;
+                state.totalCount = payload.totalTicketCount
                 state.pending.tickets = false;
             })
             .addCase(getTickets.rejected, (state, { payload }: any) => {
