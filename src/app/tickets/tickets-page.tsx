@@ -9,7 +9,7 @@ import { ticketsErrorsSelector, ticketsPendingSelector, ticketsSelector, tickets
 import { CircularProgress, Container, Stack, Typography } from '@mui/material'
 
 // ======= components ======= //
-import AlertMessage from '../../components/alert-message'
+import AlertMessage from 'src/components/alert-message'
 import TicketComponent from './components/ticket.component'
 
 export default function TicketPage() {
@@ -40,7 +40,7 @@ export default function TicketPage() {
         return function () {
             document.removeEventListener('scroll', scrollHandler)
         }
-    }, [scroll, tickets])
+    }, [scroll, tickets,totalCount])
 
     const scrollHandler = (e: any) => {
         if (
@@ -48,6 +48,7 @@ export default function TicketPage() {
             &&
             tickets.length < totalCount
         ) {
+            console.log(totalCount, tickets.length)
             setScroll(true)
         }
     }

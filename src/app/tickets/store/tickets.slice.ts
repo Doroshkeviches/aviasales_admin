@@ -37,7 +37,7 @@ export const ticketsSlice = createSlice({
                 state.errors.tickets = null;
             })
             .addCase(getTickets.fulfilled, (state, { payload }) => {
-                state.tickets = payload.tickets;
+                state.tickets = [...state.tickets, ...payload.tickets];
                 state.totalCount = payload.totalTicketCount
                 state.pending.tickets = false;
             })

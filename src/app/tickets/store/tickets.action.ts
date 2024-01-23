@@ -9,7 +9,7 @@ export const getTickets = createAsyncThunk<CountingTickets, number>(
   'Get/tickets',
   async (page, { rejectWithValue }) => {
     try {
-      const response = await repository.get(`/ticket?pageNumber=${page}&pageSize=5`);
+      const response = await repository.get(`/ticket?pageNumber=${page}&pageSize=10`);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error);
