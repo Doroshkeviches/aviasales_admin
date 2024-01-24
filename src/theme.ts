@@ -811,12 +811,17 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           minWidth: '20%',
+
           '& .MuiSelect-select': {
-            padding: '4px 8px',
+            padding: '4px 6px',
+
+            '@media (max-width: 520px)': {
+              fontSize: FontSize.H6,
+            },
+            '@media (max-width: 380px)': {
+              fontSize: FontSize.T6,
+            },
           },
-          '@media (max-width: 1000px)': {},
-          '@media (max-width: 460px)': {},
-          '@media (max-width: 360px)': {},
         },
       },
     },
