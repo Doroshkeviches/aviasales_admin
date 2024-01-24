@@ -1,23 +1,18 @@
 import { Stack, TextField, Button } from '@mui/material';
 import { ChangeEvent, useEffect, useState, useRef, FormEvent } from 'react'
 import { useParams } from 'react-router'
-import { io } from 'socket.io-client';
 import MessageAdmin from './components/message-admin';
 import MessageClient from './components/message-client';
 import { useAppSelector } from 'src/storeTypes';
 import { sessionSelector } from '../auth/store/auth.selector';
+import socket from '../../socket';
+import AlertMessage from "src/components/alert-message";
 import { useTranslation } from 'react-i18next';
 
-const URL = 'http://localhost:4444';
-const token = localStorage.getItem('refresh-token')
-const socket = io(URL, {
-    extraHeaders: {
-        Authorization: `Bearer ${token}`
-    }
-});
 export default function PrivateChatPage() {
     const [messages, setMessages] = useState<any[]>([])
     const [value, setValue] = useState('')
+    const [socketErrors, setSocketErrors] = useState('')
     const session = useAppSelector(sessionSelector)
     const chatRef = useRef<HTMLDivElement>(null)
     const { t } = useTranslation();
@@ -31,6 +26,9 @@ export default function PrivateChatPage() {
         })
         socket.on('message', (message) => {
             setMessages(prev => [...prev, message])
+        })
+        socket.on('exception', (exception) => {
+            setSocketErrors(exception.message)
         })
         chatRef.current?.scrollIntoView()
     }, [])
@@ -79,6 +77,7 @@ export default function PrivateChatPage() {
                     <Button type='submit' variant='contained' color='primary' sx={{ width: '20%' }}>{t('chat.send_button')}</Button>
                 </Stack>
             </form>
+            {socketErrors ? <AlertMessage errorMessage={socketErrors} /> : null}
         </Stack>
     )
 }

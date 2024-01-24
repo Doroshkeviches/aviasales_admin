@@ -2,18 +2,11 @@ import { Card, CardContent, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { io } from 'socket.io-client';
-const URL = 'http://localhost:4444';
-const token = localStorage.getItem('refresh-token')
-const socket = io(URL, {
-    extraHeaders: {
-        Authorization: `Bearer ${token}`
-    }
-});
+import socket from '../../socket';
+import { Room } from "./types/room.type";
+
 export default function ChatPage() {
-    // const [value, setValue] = useState('')
-    const [rooms, setRooms] = useState<any[]>([]) //TODO ADD ROOM TYPE
-    // const [messages, setMessages] = useState<string[]>([])
+    const [rooms, setRooms] = useState<Room[]>([])
     const navigate = useNavigate()
     const { t } = useTranslation();
 
