@@ -1,5 +1,6 @@
 import { Card, CardContent, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { io } from 'socket.io-client';
 const URL = 'http://localhost:4444';
@@ -14,6 +15,8 @@ export default function ChatPage() {
     const [rooms, setRooms] = useState<any[]>([]) //TODO ADD ROOM TYPE
     // const [messages, setMessages] = useState<string[]>([])
     const navigate = useNavigate()
+    const { t } = useTranslation();
+
     useEffect(() => {
         socket.emit('connect-manager')
         socket.emit("get-rooms")
@@ -34,10 +37,10 @@ export default function ChatPage() {
                 return <Card className='user-card' onClick={() => handleNavigateToPrivateRoom(room.id)} key={room.id}>
                     <CardContent>
                         <Typography variant='h2'>
-                            Client: {room.first_name + ' ' + room.last_name}
+                            {t('room.client')}: {room.first_name + ' ' + room.last_name}
                         </Typography>
                         <Typography variant='h4' paddingTop={'3px'}>
-                            Room: {room.id}
+                            {t('room.room_id')}: {room.id}
                         </Typography>
                     </CardContent>
                 </Card>

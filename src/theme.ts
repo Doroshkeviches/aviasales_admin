@@ -375,6 +375,15 @@ export const theme = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
+          '&.lang': {
+            marginRight: 10,
+            marginLeft: 'auto',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '@media (max-width: 520px)': {
+              marginRight: 3,
+            },
+          },
           '&.form-control-search': {
             display: 'flex',
             flexDirection: 'column',

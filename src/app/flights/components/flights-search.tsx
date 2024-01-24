@@ -14,6 +14,7 @@ import { Autocomplete, TextField, Button, FormControl, CircularProgress, Typogra
 
 // ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
+import { useTranslation } from 'react-i18next';
 
 const searchByOptions = ['Price', 'Time'] // TODO CREATE new file with this array
 
@@ -31,6 +32,7 @@ export default function FlightsSearch() {
     const cities = useAppSelector(citiesSelector)
     const errors_flights = useAppSelector(flightsErrorsSelector)
     const tomorrow = dayjs().add(1, 'day');
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(getCities())
@@ -80,7 +82,7 @@ export default function FlightsSearch() {
         <>
             <FormControl error={!!validationErrors} className='form-control-search'>
                 <Typography variant='h1' className='main'>FLIGHTSSALES</Typography>
-                <Typography variant='h3' className='main'>We are here to help you find tickets</Typography>
+                <Typography variant='h3' className='main'>{t('flights.title')}</Typography>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <Stack className='cities-search-stack'>
@@ -89,8 +91,8 @@ export default function FlightsSearch() {
                             id="combo-box-demo"
                             options={cities}
                             renderInput={(params) => <TextField {...params}
-                                label="Departure City"
-                                placeholder='Pick departure city'
+                            label={t('flights.departure_city')}
+                            placeholder={t('flights.departure_city_placeholder')}
                                 InputLabelProps={{ shrink: true }} />}
                             value={from_city}
                             onChange={(event: any, newValue: string | null) => {
@@ -102,8 +104,8 @@ export default function FlightsSearch() {
                             id="combo-box-demo"
                             options={cities}
                             renderInput={(params) => <TextField {...params}
-                                label="Arrival City"
-                                placeholder='Pick arrival city'
+                            label={t('flights.arrival_city')}
+                            placeholder={t('flights.arrival_city_placeholder')}
                                 InputLabelProps={{ shrink: true }} />}
                             value={to_city}
                             onChange={(event: any, newValue: string | null) => {
@@ -111,13 +113,13 @@ export default function FlightsSearch() {
                             }}
                         />
                         <DatePicker
-                            label="Start Date"
+                            label={t('flights.start_date')}
                             value={startDate}
                             defaultValue={tomorrow.toDate()}
                             onChange={(newValue: Date | null) => setStartDate(newValue)}
-                            slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: 'Pick start date' } }} />
+                            slotProps={{ textField: { InputLabelProps: { shrink: true }, placeholder: t('flights.start_date_placeholder') } }} />
                         <DatePicker
-                            label="Finish date"
+                            label={t('flights.finish_date')}
                             value={returnDate}
                             onChange={(newValue: Date | null) => setReturnDate(newValue)}
                             slotProps={{ textField: { InputLabelProps: { shrink: true } } }} />
@@ -126,8 +128,8 @@ export default function FlightsSearch() {
                             id="combo-box-demo"
                             options={searchByOptions}
                             renderInput={(params) => <TextField {...params}
-                                label="Search by"
-                                placeholder='Pick your search parameter'
+                            label={t('flights.search_by')}
+                            placeholder={t('flights.search_placeholder')}
                                 InputLabelProps={{ shrink: true }} />}
                             value={sortedBy}
                             onChange={(event: any, newValue: string | null) => {
@@ -141,7 +143,7 @@ export default function FlightsSearch() {
                 <Button
                     onClick={handleGetPath} fullWidth sx={{ marginTop: 4 }}
                     variant='contained' color='primary'
-                    className='flight-search'>SEARCH
+                    className='flight-search'>{t('flights.search_button')}
                 </Button>
 
                 {errors_flights ? <AlertMessage errorMessage={errors_flights} /> : null}

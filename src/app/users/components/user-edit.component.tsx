@@ -12,6 +12,7 @@ import { User } from '../types/User.type';
 // ======= mui ======= //
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { TextField, Button, CircularProgress } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   user: User | null
@@ -19,6 +20,7 @@ interface Props {
 export default function UserEdit({ user }: Props) {
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const dispatch = useAppDispatch()
+  const {t} = useTranslation()
 
   const SigninSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
@@ -58,7 +60,7 @@ export default function UserEdit({ user }: Props) {
           fullWidth
           id="email"
           name="email"
-          label="Email"
+          label={t('users.user_email')}
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -71,7 +73,7 @@ export default function UserEdit({ user }: Props) {
           fullWidth
           id="first_name"
           name="first_name"
-          label="First Name"
+          label={t('users.first_name')}
           type="first_name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
@@ -85,7 +87,7 @@ export default function UserEdit({ user }: Props) {
           fullWidth
           id="last_name"
           name="last_name"
-          label="Last Name"
+          label={t('users.last_name')}
           type="last_name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
@@ -98,7 +100,7 @@ export default function UserEdit({ user }: Props) {
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
           <Button variant='contained' color='success' fullWidth type="submit">
-            {false ? <CircularProgress /> : 'SUBMIT'}
+            {false ? <CircularProgress /> : t('users.submit_button')}
           </Button>
         }
       </form>
