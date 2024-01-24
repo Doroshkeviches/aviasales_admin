@@ -25,7 +25,6 @@ export default function FlightsList({ flightList }: Props) {
             <Stack direction='row' className='flights-element-stack'>
                 <Stack className='price-stack' gap={3}>
                     <Typography variant='h1'>{totalPrice}</Typography>
-                    {/* <Button variant='contained' color='success'>BUY</Button> */}
                 </Stack>
                 <Stack direction='row' className='path-stack'>
                     <Stack alignItems={'center'} textAlign={'center'}>

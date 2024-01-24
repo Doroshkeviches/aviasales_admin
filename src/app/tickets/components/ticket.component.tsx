@@ -12,6 +12,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 // ======= components ======= //
 import AlertMessage from 'src/components/alert-message';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   ticket: Ticket
@@ -21,6 +22,7 @@ export default function TicketComponent({ ticket }: Props) {
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [selectItem, setSelectItem] = useState<string>(ticket.status)
   const [isLoading, errors, data, fetchData] = useRepository()
+  const { t } = useTranslation()
 
   const handleSubmit = async () => {
     const body = { id: ticket.id, status: selectItem }
@@ -43,13 +45,13 @@ export default function TicketComponent({ ticket }: Props) {
             {ticket.holder_first_name} {ticket.holder_last_name}
           </Typography>
           <Typography variant='h5' paddingTop={'3px'}>
-            FROM: {ticket.flight.from_city.title}
+            {t('tickets.from')}: {ticket.flight.from_city.title}
           </Typography>
           <Typography variant='h5' paddingTop={'3px'}>
-            TO: {ticket.flight.to_city.title}
+          {t('tickets.to')}: {ticket.flight.to_city.title}
           </Typography>
           <Typography variant="h5" paddingTop={'3px'}>
-            PRICE: {totalPrice}
+          {t('tickets.price')}: {totalPrice}
           </Typography>
           <Select
             disabled={isDisabled}
@@ -70,7 +72,7 @@ export default function TicketComponent({ ticket }: Props) {
             <ModeEditIcon onClick={() => setIsDisabled(false)} />
             :
             <Button onClick={handleSubmit} variant='contained' color='success' fullWidth type="submit">
-              {isLoading ? <CircularProgress /> : 'SUBMIT'}
+              {isLoading ? <CircularProgress /> : t('tickets.submit_button')}
             </Button>
           }
         </CardActions>

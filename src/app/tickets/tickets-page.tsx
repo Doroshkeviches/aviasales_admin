@@ -11,6 +11,7 @@ import { CircularProgress, Container, Stack, Typography } from '@mui/material'
 // ======= components ======= //
 import AlertMessage from 'src/components/alert-message'
 import TicketComponent from './components/ticket.component'
+import { useTranslation } from 'react-i18next'
 
 export default function TicketPage() {
     const tickets = useAppSelector(ticketsSelector)
@@ -20,6 +21,7 @@ export default function TicketPage() {
     const [scroll, setScroll] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const dispatch = useAppDispatch()
+    const {t} = useTranslation()
 
     useEffect(() => {
         dispatch(getTickets(currentPage))
@@ -55,13 +57,13 @@ export default function TicketPage() {
     return (
         <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
             <Stack className='tickets-search-stack'>
-                <Typography variant='h1' className='main'>TICKETS</Typography>
+                <Typography variant='h1' className='main'>{t('tickets.title')}</Typography>
                 <Stack className='users-stack'>
                     {tickets.length ? tickets?.map(ticket => {
                         return <TicketComponent key={ticket.id} ticket={ticket} />
                     })
                         :
-                        <div>No tickets</div>
+                        <Typography variant='h3' className="main">{t('tickets.no_tickets')}</Typography>
                     }
                     {pending ? <CircularProgress sx={{ position: 'absolute' }} /> : null}
                 </Stack>

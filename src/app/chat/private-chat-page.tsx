@@ -1,5 +1,5 @@
 import { Stack, TextField, Button } from '@mui/material';
-import { ChangeEvent, useEffect, useState, useRef } from 'react'
+import { ChangeEvent, useEffect, useState, useRef, FormEvent } from 'react'
 import { useParams } from 'react-router'
 import MessageAdmin from './components/message-admin';
 import MessageClient from './components/message-client';
@@ -7,6 +7,7 @@ import { useAppSelector } from 'src/storeTypes';
 import { sessionSelector } from '../auth/store/auth.selector';
 import socket from '../../socket';
 import AlertMessage from "src/components/alert-message";
+import { useTranslation } from 'react-i18next';
 
 export default function PrivateChatPage() {
     const [messages, setMessages] = useState<any[]>([])
@@ -14,6 +15,7 @@ export default function PrivateChatPage() {
     const [socketErrors, setSocketErrors] = useState('')
     const session = useAppSelector(sessionSelector)
     const chatRef = useRef<HTMLDivElement>(null)
+    const { t } = useTranslation();
 
     const { id } = useParams()
     useEffect(() => {
@@ -35,7 +37,8 @@ export default function PrivateChatPage() {
         chatRef.current?.scrollIntoView() //прокрутка до нового сообщения типо работает но выглядит не супер )) на невысоких устройствах ваще говно
     }, [messages])
 
-    const handleSendMessage = () => {
+    const handleSendMessage = (e: FormEvent) => {
+        e.preventDefault()
         if (!value) {
             return
         }
@@ -60,18 +63,20 @@ export default function PrivateChatPage() {
                 })}
                 <Stack ref={chatRef}></Stack>
             </Stack>
-            <Stack direction={'row'} sx={{ margin: 'auto 0 10px', width: '100%', position: 'static' }}>
-                <TextField
-                    value={value}
-                    onChange={handleChangeInput}
-                    fullWidth
-                    className='whitesmoke'
-                    id="message"
-                    name="message"
-                    placeholder='Enter your message'
-                />
-                <Button onClick={handleSendMessage} variant='contained' color='primary' sx={{ width: '20%' }}>Send</Button>
-            </Stack>
+            <form onSubmit={handleSendMessage} style={{ margin: 'auto 0 10px', width: '100%', position: 'static' }}>
+                <Stack direction={'row'} >
+                    <TextField
+                        value={value}
+                        onChange={handleChangeInput}
+                        fullWidth
+                        className='whitesmoke'
+                        id="message"
+                        name="message"
+                        placeholder={t('chat.message_placeholder')}
+                    />
+                    <Button type='submit' variant='contained' color='primary' sx={{ width: '20%' }}>{t('chat.send_button')}</Button>
+                </Stack>
+            </form>
             {socketErrors ? <AlertMessage errorMessage={socketErrors} /> : null}
         </Stack>
     )

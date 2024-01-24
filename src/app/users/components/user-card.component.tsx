@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router'
 // ======= mui ======= //
 import { Card, CardContent, Typography, CardActions } from '@mui/material'
 import { RoutesConstant } from 'src/constants/RoutesConstants.enum'
+import { useTranslation } from 'react-i18next'
 interface Props {
   user: User
 }
 
 export default function UserCard({ user }: Props) {
   const navigate = useNavigate()
+  const {t} = useTranslation()
 
   const handleNavigate = () => {
     navigate(RoutesConstant.user_id + user.id)
@@ -24,15 +26,15 @@ export default function UserCard({ user }: Props) {
             {user.last_name} {user.first_name}
           </Typography>
           <Typography variant='h5' paddingTop={'3px'}>
-            Email: {user.email}
+          {t('users.user_email')}: {user.email}
           </Typography>
           <Typography variant="h5" paddingTop={'3px'}>
-            Tickets purchaced: {user.tickets.length}
+          {t('users.user_tickets')}: {user.tickets.length}
           </Typography>
         </CardContent>
         <CardActions sx={{ padding: "16px" }}>
           <Typography variant="h5" className='personal-info' onClick={handleNavigate}>
-            Watch Personal Info
+          {t('users.watch_info')}
           </Typography>
         </CardActions>
       </Card>
