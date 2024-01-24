@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // ======= utils, types ======= //
 import repository from 'src/repository';
-import { Ticket } from '../types/Ticket.type';
+import { Ticket } from '../types/ticket.type';
 import { CountingTickets } from 'src/app/users/types/CountingTickets.type';
 
 export const getTickets = createAsyncThunk<CountingTickets, number>(

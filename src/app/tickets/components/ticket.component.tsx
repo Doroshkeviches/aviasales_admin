@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // ======= utils, types ======= //
-import { Ticket } from '../types/Ticket.type'
+import { Ticket } from '../types/ticket.type'
 import useRepository from 'src/hooks/useRepositiry';
 import { ticket_status_enum } from '../helpers/ticket-status.enum';
 import transformPrice from 'src/utils/transform-price';
