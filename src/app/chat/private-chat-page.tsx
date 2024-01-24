@@ -74,7 +74,7 @@ export default function PrivateChatPage() {
                         name="message"
                         placeholder={t('chat.message_placeholder')}
                     />
-                    <Button type='submit' variant='contained' color='primary' sx={{ width: '20%' }}>{t('chat.send_button')}</Button>
+                    <Button type='submit' variant='contained' color='primary' sx={{ minWidth: '30%' }}>{t('chat.send_button')}</Button>
                 </Stack>
             </form>
             {socketErrors ? <AlertMessage errorMessage={socketErrors} /> : null}
