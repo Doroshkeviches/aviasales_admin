@@ -1,5 +1,5 @@
 import { Stack, TextField, Button } from '@mui/material';
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router'
 import { io } from 'socket.io-client';
 import MessageAdmin from './components/message-admin';
@@ -18,6 +18,7 @@ export default function PrivateChatPage() {
     const [messages, setMessages] = useState<any[]>([])
     const [value, setValue] = useState('')
     const session = useAppSelector(sessionSelector)
+    const chatRef = useRef<HTMLDivElement>(null)
 
     const { id } = useParams()
     useEffect(() => {
@@ -29,7 +30,12 @@ export default function PrivateChatPage() {
         socket.on('message', (message) => {
             setMessages(prev => [...prev, message])
         })
+        chatRef.current?.scrollIntoView()
     }, [])
+
+    useEffect(() => {
+        chatRef.current?.scrollIntoView() //прокрутка до нового сообщения типо работает но выглядит не супер )) на невысоких устройствах ваще говно
+    }, [messages])
 
     const handleSendMessage = () => {
         if (!value) {
@@ -47,12 +53,14 @@ export default function PrivateChatPage() {
         setValue('')
     }
     const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
+
     return (
         <Stack className='chat-stack'>
             <Stack className='messages-stack'>
                 {messages.map(mes => {
                     return mes.user_id === session?.id ? <MessageClient {...mes} key={mes.id} /> : <MessageAdmin {...mes} key={mes.id} />
                 })}
+                <Stack ref={chatRef}></Stack>
             </Stack>
             <Stack direction={'row'} sx={{ margin: 'auto 0 10px', width: '100%', position: 'static' }}>
                 <TextField

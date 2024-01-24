@@ -311,6 +311,7 @@ export const theme = createTheme({
       fontWeight: FontWeight.Normal,
     },
     t6: {
+      fontFamily: Fonts.primary,
       fontSize: FontSize.T6,
       fontWeight: FontWeight.Normal,
     },
