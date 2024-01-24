@@ -5,7 +5,7 @@ import useDebounce from 'src/hooks/useDebounce'
 
 // ======= store ======= //
 import { useAppDispatch, useAppSelector } from 'src/storeTypes'
-import { getUsers, getUsersBySearch } from './store/users.action'
+import {getFirstUsers, getUsers, getUsersBySearch} from './store/users.action'
 import { usersCountSelector, usersErrorsSelector, usersPendingSelector, usersSelector } from './store/users.selector'
 
 // ======= mui ======= //
@@ -27,7 +27,7 @@ export default function UsersPage() {
     const { t } = useTranslation()
 
     useEffect(() => {
-        dispatch(getUsers(currentPage))
+        dispatch(getFirstUsers(currentPage))
         setCurrentPage(prev => prev + 1)
     }, [])
 

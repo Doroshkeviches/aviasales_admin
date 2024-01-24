@@ -19,6 +19,19 @@ export const getUsers = createAsyncThunk<CountingUser, number>(
   }
 );
 
+export const getFirstUsers = createAsyncThunk<CountingUser, number>(
+    'Get/first-users',
+    async (page, { rejectWithValue }) => {
+        try {
+            const response = await repository.get(`/user?pageNumber=${page}&pageSize=5`);
+            return response.data;
+
+        } catch (error: any) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
 export const getUsersBySearch = createAsyncThunk<User[], string>(
   'Get/search_users',
   async (searchString, { rejectWithValue }) => {

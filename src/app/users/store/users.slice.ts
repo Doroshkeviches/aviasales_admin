@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  getFirstUsers,
   getUser,
   getUsers,
   getUsersBySearch,
@@ -64,6 +65,20 @@ export const usersSlice = createSlice({
         state.users = [];
         state.pending.users = false;
       })
+        .addCase(getFirstUsers.pending, (state) => {
+          state.pending.users = true;
+          state.errors.users = null;
+        })
+        .addCase(getFirstUsers.fulfilled, (state, { payload }) => {
+          state.totalUserCount = payload.totalUserCount
+          state.users = payload.users
+          state.pending.users = false;
+        })
+        .addCase(getFirstUsers.rejected, (state, { payload }: any) => {
+          state.errors.users = payload.response.data.message;
+          state.users = [];
+          state.pending.users = false;
+        })
 
       .addCase(getUsersBySearch.pending, (state) => {
         state.pending.users = true;
