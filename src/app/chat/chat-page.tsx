@@ -1,43 +1,47 @@
-import { Button } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import { Card, CardContent, Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 import { io } from 'socket.io-client';
 const URL = 'http://localhost:4444';
-const socket = io(URL);
+const token = localStorage.getItem('refresh-token')
+const socket = io(URL, {
+    extraHeaders: {
+        Authorization: `Bearer ${token}`
+    }
+});
 export default function ChatPage() {
-    const [value, setValue] = useState('')
-    const [room, setRoom] = useState('')
-
-    const [messages, setMessages] = useState<string[]>([])
-
+    // const [value, setValue] = useState('')
+    const [rooms, setRooms] = useState<any[]>([]) //TODO ADD ROOM TYPE
+    // const [messages, setMessages] = useState<string[]>([])
+    const navigate = useNavigate()
     useEffect(() => {
-        socket.on('message', (val) => {
-            console.log('s')
-            setMessages(prev => [...prev, val])
+        socket.emit('connect-manager')
+        socket.emit("get-rooms")
+        socket.on("new-chat", (room) => {
+            setRooms(prev => [...prev, room])
         })
-        console.log("socket")
-
+        socket.on("rooms", (rooms) => {
+            setRooms(rooms)
+        })
     }, [])
-    const handleClick = () => {
-        const data = {
-            room_id: room,
-            message: value,
-        }
-        socket.emit('message', data)
+    const handleNavigateToPrivateRoom = (id: string) => {
+        navigate(id)
     }
-    const handleConnect = () => {
-        socket.emit('join-chat', room)
-    }
+    console.log(rooms[0])
     return (
-        <div>
-            <input type="text" value={room} onChange={(e) => setRoom(e.currentTarget.value)} />
-            <Button onClick={handleConnect}>connect to room</Button>
-
-            <input type="text" value={value} onChange={(e) => setValue(e.currentTarget.value)} />
-            <Button onClick={handleClick}>send message</Button>
-            {messages.map(mes => {
-                return <div>{mes}</div>
+        <Stack direction='row' alignItems='center' gap={3} className='users-stack'>
+            {rooms.map(room => {
+                return <Card className='user-card' onClick={() => handleNavigateToPrivateRoom(room.id)} key={room.id}>
+                    <CardContent>
+                        <Typography variant='h2'>
+                            Client: {room.first_name + ' ' + room.last_name}
+                        </Typography>
+                        <Typography variant='h4' paddingTop={'3px'}>
+                            Room: {room.id}
+                        </Typography>
+                    </CardContent>
+                </Card>
             })}
-        </div>
-
+        </Stack>
     )
 }

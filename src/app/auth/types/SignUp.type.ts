@@ -1,4 +1,4 @@
-export interface SithUpForm {
+export interface SithUp {
     email: string,
     password: string,
     first_name: string

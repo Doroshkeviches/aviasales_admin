@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
-import { User } from '../types/User.type';
-import { TextField, Button, CircularProgress, Alert } from '@mui/material';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
+import { useState } from 'react'
 import { useFormik } from 'formik';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-
 import * as Yup from 'yup'
-import { useAppDispatch, useAppSelector } from 'src/storeTypes';
-import { userErrorsSelector } from '../store/users.selector';
+
+// ======= store ======= //
+import { useAppDispatch } from 'src/storeTypes';
 import { updateUser } from '../store/users.action';
+
+// ======= utils, types ======= //
+import { User } from '../types/User.type';
+
+// ======= mui ======= //
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { TextField, Button, CircularProgress } from '@mui/material';
+
 interface Props {
   user: User | null
 }
@@ -30,16 +34,27 @@ export default function UserEdit({ user }: Props) {
     },
     validationSchema: SigninSchema,
     onSubmit: async (value) => {
-      const body =  { ...user, ...value }
+      const body = { ...user, ...value }
       dispatch(updateUser(body))
       setIsDisabled(true)
-
     },
   });
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        width: '40%',
+        alignItems: 'center',
+        padding: '0px 10px',
+        textAlign: 'center',
+        gap: '10px'
+      }}>
         <TextField
+          className='edit'
+          variant='outlined'
           fullWidth
           id="email"
           name="email"
@@ -52,10 +67,11 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
+          className='edit'
           fullWidth
           id="first_name"
           name="first_name"
-          label="first_name"
+          label="First Name"
           type="first_name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
@@ -65,10 +81,11 @@ export default function UserEdit({ user }: Props) {
           helperText={formik.touched.first_name && formik.errors.first_name}
         />
         <TextField
+          className='edit'
           fullWidth
           id="last_name"
           name="last_name"
-          label="last_name"
+          label="Last Name"
           type="last_name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
@@ -80,8 +97,8 @@ export default function UserEdit({ user }: Props) {
         {isDisabled ?
           <ModeEditIcon onClick={() => setIsDisabled(false)} />
           :
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            {false ? <CircularProgress /> : 'submit'}
+          <Button variant='contained' color='success' fullWidth type="submit">
+            {false ? <CircularProgress /> : 'SUBMIT'}
           </Button>
         }
       </form>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import repository from 'src/repository'
 
 export default function useRepository() {
@@ -16,6 +16,7 @@ export default function useRepository() {
             })
             setData(result)
             setIsLoading(false)
+            return result
         } catch (error: any) {
             setErrors(error)
         }

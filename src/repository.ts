@@ -21,6 +21,7 @@ repository.interceptors.request.use(
   }
 );
 repository.interceptors.response.use((response) => {
+
   return response
 }, async (error) => {
   const originalRequest = error.config;
@@ -33,6 +34,7 @@ repository.interceptors.response.use((response) => {
           Authorization: `Bearer ${refresh_token}`,
         }
       });
+
       if (!tokens) {
         localStorage.removeItem('refresh-token')
         return
@@ -45,6 +47,7 @@ repository.interceptors.response.use((response) => {
     } catch (refreshError) {
       localStorage.removeItem('refresh-token')
       sessionStorage.removeItem('access-token')
+      window.location.replace('http://localhost:3000/admin/auth/signin')
       return Promise.reject(refreshError);
     }
   } else {

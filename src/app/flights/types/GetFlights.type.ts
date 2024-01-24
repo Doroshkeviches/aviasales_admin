@@ -4,4 +4,5 @@ export interface GetFlights {
     start_flight_date: Date,
     isReturn: boolean,
     return_flight_date: Date | null,
+    sortedBy: string | null,
 }

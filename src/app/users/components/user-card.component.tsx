@@ -1,30 +1,39 @@
-import React from 'react'
+// ======= utils, types ======= //
 import { User } from '../types/User.type'
-import { Card, CardContent, Typography, CardActions, Button } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router'
+
+// ======= mui ======= //
+import { Card, CardContent, Typography, CardActions } from '@mui/material'
+import { RoutesConstant } from 'src/constants/RoutesConstants.enum'
 interface Props {
   user: User
 }
+
 export default function UserCard({ user }: Props) {
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate(RoutesConstant.user_id + user.id)
+  }
+
   return (
     <>
-      <Card sx={{ minWidth: 275 }}>
+      <Card className='user-card'>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {user.first_name}
+          <Typography variant='h2'>
+            {user.last_name} {user.first_name}
           </Typography>
-          <Typography variant="h5" component="div">
-            {user.last_name}
+          <Typography variant='h5' paddingTop={'3px'}>
+            Email: {user.email}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {user.email}
-          </Typography>
-          <Typography variant="body2">
-            {user.id}
+          <Typography variant="h5" paddingTop={'3px'}>
+            Tickets purchaced: {user.tickets.length}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Link to={`${user.id}`}>Learn More</Link>
+        <CardActions sx={{ padding: "16px" }}>
+          <Typography variant="h5" className='personal-info' onClick={handleNavigate}>
+            Watch Personal Info
+          </Typography>
         </CardActions>
       </Card>
     </>
