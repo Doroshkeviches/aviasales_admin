@@ -14,6 +14,7 @@ import { Container, Stack, TextField, Typography } from '@mui/material'
 // ======= components ======= //
 import UserCard from './components/user-card.component'
 import AlertMessage from '../../components/alert-message'
+import { useTranslation } from 'react-i18next'
 
 export default function UsersPage() {
     const users = useAppSelector(usersSelector)
@@ -23,6 +24,7 @@ export default function UsersPage() {
     const [currentPage, setCurrentPage] = useState(1)
     const totalCount = useAppSelector(usersCountSelector)
     const dispatch = useAppDispatch()
+    const { t } = useTranslation()
 
     useEffect(() => {
         dispatch(getUsers(currentPage))
@@ -63,11 +65,11 @@ export default function UsersPage() {
     return (
         <Container sx={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
             <Stack className='users-search-stack'>
-                <Typography variant='h1' className='main'>REGISTERED USERS</Typography>
+                <Typography variant='h1' className='main'>{t('users.title')}</Typography>
                 <TextField
                     id="filled-search"
-                    label="Search user"
-                    placeholder='Enter user'
+                    label={t('users.search_users_label')}
+                    placeholder={t('users.search_users_placeholder')}
                     InputLabelProps={{ shrink: true }}
                     type="search"
                     sx={{ color: 'whitesmoke', width: '40%' }}
@@ -76,9 +78,11 @@ export default function UsersPage() {
                 />
             </Stack>
             <Stack direction='column' className='users-stack'>
-                {users.map(user => {
+                {users.length ? users.map(user => {
                     return <UserCard key={user.id} user={user} />
-                })}
+                }) :
+
+                    <Typography variant='h3'>{t('users.no_users')}</Typography>}
             </Stack>
             {errors ? <AlertMessage errorMessage={errors} /> : null}
         </Container>
