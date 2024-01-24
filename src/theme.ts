@@ -280,6 +280,9 @@ export const theme = createTheme({
       '&.main': {
         color: colors.whitesmoke,
       },
+      '&.message-user': {
+        fontWeight: FontWeight.SemiBold,
+      },
       '&.forget-password': {
         marginLeft: 'auto',
         cursor: 'pointer',
@@ -308,6 +311,7 @@ export const theme = createTheme({
       fontWeight: FontWeight.Normal,
     },
     t6: {
+      fontFamily: Fonts.primary,
       fontSize: FontSize.T6,
       fontWeight: FontWeight.Normal,
     },
@@ -695,6 +699,25 @@ export const theme = createTheme({
             backgroundColor: colors.grey,
             padding: 20,
           },
+          '&.chat-stack': {
+            backgroundColor: colors.grey,
+            height: '80vh',
+            alignItems: 'center',
+            width: '50%',
+            margin: '10px auto',
+            borderRadius: '24px',
+            padding: '10px 30px',
+          },
+          '&.messages-stack': {
+            '&::-webkit-scrollbar': {
+              width: 0,
+            },
+            display: 'block',
+            overflowY: 'scroll',
+            alignItems: 'center',
+            width: '100%',
+            position: 'relative',
+          },
         },
       },
     },
@@ -725,6 +748,9 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: 10,
+          '&.message': {
+            paddingBottom: 10,
+          },
         },
       },
     },
@@ -785,9 +811,38 @@ export const theme = createTheme({
         },
       },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.lightGrey,
+          padding: '10px 40px',
+
+          '@media (max-width: 620px)': {
+            padding: '5px 20px',
+          },
+          '@media (max-width: 460px)': {
+            padding: '0px 10px',
+          },
+          '@media (max-width: 420px)': {
+            padding: '0px 2px',
+          },
+        },
+      },
+    },
     MuiMenuItem: {
       styleOverrides: {
-        root: {},
+        root: {
+          '&.MuiMenuItem-root': {
+            '@media (max-width: 620px)': {
+              paddingLeft: 2,
+              paddingRight: 10,
+              minHeight: 0,
+            },
+            '@media (max-width: 460px)': {
+              paddingRight: 6,
+            },
+          },
+        },
       },
     },
   },

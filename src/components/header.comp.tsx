@@ -1,4 +1,4 @@
-import { Button, MenuItem, Typography } from "@mui/material";
+import { AppBar, Button, MenuItem, Toolbar, Typography } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { sessionSelector } from "src/app/auth/store/auth.selector";
@@ -17,25 +17,31 @@ const HeaderComp: FC = () => {
   const navToFlights = () => navigate(RoutesConstant.flights)
   const navToUsers = () => navigate(RoutesConstant.users)
   const navToTickets = () => navigate(RoutesConstant.tickets)
+  const navToChat = () => navigate(RoutesConstant.chat)
 
   return (
-    <header style={{ display: 'flex', padding: '10px 60px', justifyContent: 'center' }}>
-      <MenuItem onClick={navToFlights}>
-        <Typography variant="h4"  className="navlink">Flights</Typography>
-      </MenuItem>
-      {
-        session?.role_type === 'Admin' ?
-          <MenuItem onClick={navToUsers}>
-            <Typography variant="h4"  className="navlink">Users</Typography>
-          </MenuItem>
-          :
-          null
-      }
-      <MenuItem onClick={navToTickets}>
-        <Typography variant="h4" className="navlink">Tickets</Typography>
-      </MenuItem>
-      <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
-    </header>
+    <AppBar position="static" className="header-bar">
+      <Toolbar disableGutters>
+        <MenuItem onClick={navToFlights}>
+          <Typography variant="h4" className="navlink">Flights</Typography>
+        </MenuItem>
+        <MenuItem onClick={navToChat}>
+          <Typography variant="h4" className="navlink">Chat</Typography>
+        </MenuItem>
+        {
+          session?.role_type === 'Admin' ?
+            <MenuItem onClick={navToUsers}>
+              <Typography variant="h4" className="navlink">Users</Typography>
+            </MenuItem>
+            :
+            null
+        }
+        <MenuItem onClick={navToTickets}>
+          <Typography variant="h4" className="navlink">Tickets</Typography>
+        </MenuItem>
+        <Button onClick={handleClickSignOut} variant="contained" color="error" sx={{ marginLeft: 'auto' }}>Sign out</Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 

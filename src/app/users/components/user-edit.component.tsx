@@ -39,7 +39,6 @@ export default function UserEdit({ user }: Props) {
       setIsDisabled(true)
     },
   });
-  console.log(user)
   return (
     <>
       <form onSubmit={formik.handleSubmit} style={{
